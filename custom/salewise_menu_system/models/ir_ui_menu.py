@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, tools
 from odoo.osv import expression
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class IrUiMenu(models.Model):
@@ -41,9 +38,6 @@ class IrUiMenu(models.Model):
         saas_filter = self._get_saas_domain_filter()
         if saas_filter:
             domain = expression.AND([domain, saas_filter])
-            _logger.debug(
-                f"Applied SaaS filter to search for user {self.env.user.login}"
-            )
 
         return super().search(domain, offset=offset, limit=limit, order=order)
 
@@ -60,9 +54,6 @@ class IrUiMenu(models.Model):
         saas_filter = self._get_saas_domain_filter()
         if saas_filter:
             domain = expression.AND([domain, saas_filter])
-            _logger.debug(
-                f"Applied SaaS filter to search_fetch for user {self.env.user.login}"
-            )
 
         return super().search_fetch(
             domain, field_names, offset=offset, limit=limit, order=order
@@ -102,14 +93,15 @@ class IrUiMenu(models.Model):
                 lambda menu: not menu.groups_id
                 or not group_ids.isdisjoint(menu.groups_id._ids)
             )
-            _logger.debug(
-                f"SaaS user {user.login} has {len(menus)} accessible root menus after group filtering"
-            )
 
         return menus
 
     def read(self, fields=None, load="_classic_read"):
         """Override to filter menu records based on user type"""
+        # Make sure we always read is_saas_menu field for filtering
+        if fields and 'is_saas_menu' not in fields:
+            fields = fields + ['is_saas_menu']
+        
         result = super().read(fields, load)
 
         user = self.env.user
