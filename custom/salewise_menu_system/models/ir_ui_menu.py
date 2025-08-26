@@ -2,164 +2,249 @@
 from odoo import models, fields, api, tools
 from odoo.osv import expression
 import logging
-import traceback
 
 _logger = logging.getLogger(__name__)
 
+
 class IrUiMenu(models.Model):
-    _inherit = 'ir.ui.menu'
-    
+    _inherit = "ir.ui.menu"
+
     is_saas_menu = fields.Boolean(
-        string='SaaS Menu',
+        string="SaaS Menu",
         default=False,
-        help='If checked, this menu is only visible to SaaS users'
+        help="If checked, this menu is only visible to SaaS users",
     )
-    
+
+    @api.model
+    def _get_saas_domain_filter(self):
+        """Helper method to get domain filter based on user type.
+        Returns empty list if no filtering needed."""
+        user = self.env.user
+
+        # Check if user has the SaaS field
+        if not hasattr(user, "is_saas_user"):
+            return []
+
+        if user.is_saas_user:
+            return [("is_saas_menu", "=", True)]
+        else:
+            return ["|", ("is_saas_menu", "=", False), ("is_saas_menu", "=", None)]
+
     @api.model
     def search(self, domain, offset=0, limit=None, order=None):
         """Override search to apply SaaS menu filtering"""
-        user = self.env.user
-        
-        # Don't filter if context says to show full list or if user doesn't have is_saas_user field
-        if self._context.get('ir.ui.menu.full_list') or not hasattr(user, 'is_saas_user'):
-            _logger.debug(f"Skipping menu filter: full_list={self._context.get('ir.ui.menu.full_list')}, has_is_saas_user={hasattr(user, 'is_saas_user')}")
+        # Skip filtering if context says so
+        if self._context.get("ir.ui.menu.full_list"):
             return super().search(domain, offset=offset, limit=limit, order=order)
-        
-        # Add filtering based on user type
-        if user.is_saas_user:
-            # SaaS users only see menus with is_saas_menu=True
-            domain = expression.AND([domain, [('is_saas_menu', '=', True)]])
-            _logger.info(f"SaaS user {user.login} searching menus with domain: {domain}")
-        else:
-            # Standard users only see menus with is_saas_menu=False or None
-            domain = expression.AND([domain, ['|', ('is_saas_menu', '=', False), ('is_saas_menu', '=', None)]])
-            _logger.info(f"Standard user {user.login} searching menus with domain: {domain}")
-        
-        result = super().search(domain, offset=offset, limit=limit, order=order)
-        _logger.info(f"Search returned {len(result)} menus for {user.login}")
-        return result
-    
+
+        # Apply SaaS filtering
+        saas_filter = self._get_saas_domain_filter()
+        if saas_filter:
+            domain = expression.AND([domain, saas_filter])
+            _logger.debug(
+                f"Applied SaaS filter to search for user {self.env.user.login}"
+            )
+
+        return super().search(domain, offset=offset, limit=limit, order=order)
+
     @api.model
     def search_fetch(self, domain, field_names, offset=0, limit=None, order=None):
         """Override search_fetch to apply SaaS menu filtering"""
-        user = self.env.user
-        
-        # Don't filter if context says to show full list or if user doesn't have is_saas_user field
-        if self._context.get('ir.ui.menu.full_list') or not hasattr(user, 'is_saas_user'):
-            return super().search_fetch(domain, field_names, offset=offset, limit=limit, order=order)
-        
-        # Add filtering based on user type
-        if user.is_saas_user:
-            # SaaS users only see menus with is_saas_menu=True
-            domain = expression.AND([domain, [('is_saas_menu', '=', True)]])
-            _logger.debug(f"SaaS user {user.login} search_fetch with added filter for is_saas_menu=True")
-        else:
-            # Standard users only see menus with is_saas_menu=False or None
-            domain = expression.AND([domain, ['|', ('is_saas_menu', '=', False), ('is_saas_menu', '=', None)]])
-            _logger.debug(f"Standard user {user.login} search_fetch with added filter for is_saas_menu!=True")
-        
-        return super().search_fetch(domain, field_names, offset=offset, limit=limit, order=order)
-    
-    @api.model
-    @api.returns('self')
-    def get_user_roots(self):
-        """Override to filter root menus based on user type"""
-        user = self.env.user
-        
-        # If user doesn't have the is_saas_user field, use default behavior
-        if not hasattr(user, 'is_saas_user'):
-            return super().get_user_roots()
-        
-        # Build domain based on user type
-        if user.is_saas_user:
-            # SaaS users only see root menus with is_saas_menu=True
-            domain = [('parent_id', '=', False), ('is_saas_menu', '=', True)]
-            _logger.info(f"SaaS user {user.login} getting root menus with domain: {domain}")
-        else:
-            # Standard users only see root menus with is_saas_menu=False or None
-            domain = [('parent_id', '=', False), '|', ('is_saas_menu', '=', False), ('is_saas_menu', '=', None)]
-            _logger.info(f"Standard user {user.login} getting root menus with domain: {domain}")
-        
-        # Use full list context to bypass filtering in search method
-        result = self.with_context({'ir.ui.menu.full_list': True}).search(domain)
-        
-        # For SaaS users, also apply group filtering RIGHT HERE
-        if user.is_saas_user:
-            # Filter by groups - this is what was missing!
-            result = result._filter_visible_menus()
-            _logger.info(f"After group filtering, {user.login} has {len(result)} root menus")
-        else:
-            _logger.info(f"User {user.login} has {len(result)} root menus")
-        
-        return result
-    
-    @api.model
-    @tools.ormcache('frozenset(self.env.user.groups_id.ids)', 'debug')
-    def _visible_menu_ids(self, debug=False):
-        """Override to implement SaaS menu filtering"""
-        user = self.env.user
-        
-        _logger.error(f"!!!!! _visible_menu_ids called for user {user.login} !!!!!")
-        
-        # If user doesn't have is_saas_user field, use standard behavior
-        if not hasattr(user, 'is_saas_user'):
-            return super()._visible_menu_ids(debug)
-        
-        # Get all menus with full list context
-        context = {'ir.ui.menu.full_list': True}
-        menus = self.with_context(context).search_fetch([], ['action', 'parent_id', 'groups_id', 'is_saas_menu']).sudo()
-        
-        # Filter based on user type FIRST
-        if user.is_saas_user:
-            # SaaS users only see SaaS menus
-            menus = menus.filtered(lambda m: m.is_saas_menu)
-            _logger.info(f"SaaS user {user.login} filtered to {len(menus)} SaaS menus")
-        else:
-            # Standard users only see non-SaaS menus
-            menus = menus.filtered(lambda m: not m.is_saas_menu)
-            _logger.info(f"Standard user {user.login} filtered to {len(menus)} standard menus")
-        
-        # Now apply group filtering on the filtered menus
-        group_ids = set(self.env.user._get_group_ids())
-        if not debug:
-            group_ids = group_ids - {self.env['ir.model.data']._xmlid_to_res_id('base.group_no_one', raise_if_not_found=False)}
-        
-        _logger.warning(f"DEBUG: User {user.login} has groups: {group_ids}")
-        
-        # Keep menus that either have no groups OR user has at least one of the groups
-        menus_before_group_filter = menus
-        menus = menus.filtered(
-            lambda menu: not menu.groups_id or not group_ids.isdisjoint(menu.groups_id._ids)
+        # Skip filtering if context says so
+        if self._context.get("ir.ui.menu.full_list"):
+            return super().search_fetch(
+                domain, field_names, offset=offset, limit=limit, order=order
+            )
+
+        # Apply SaaS filtering
+        saas_filter = self._get_saas_domain_filter()
+        if saas_filter:
+            domain = expression.AND([domain, saas_filter])
+            _logger.debug(
+                f"Applied SaaS filter to search_fetch for user {self.env.user.login}"
+            )
+
+        return super().search_fetch(
+            domain, field_names, offset=offset, limit=limit, order=order
         )
-        
-        # DEBUG: Show what was filtered out
-        filtered_out = menus_before_group_filter - menus
-        if filtered_out:
-            _logger.warning(f"DEBUG: Filtered out {len(filtered_out)} menus due to group restrictions:")
-            for m in filtered_out:
-                _logger.warning(f"  - {m.name} requires groups {m.groups_id.ids}, user has {group_ids}")
-        
-        _logger.info(f"After group filtering, {user.login} has {len(menus)} visible menus")
-        
-        # Continue with standard action filtering...
+
+    @api.model
+    @api.returns("self")
+    def get_user_roots(self):
+        """Override to filter root menus based on user type and groups"""
+        user = self.env.user
+
+        # Check if user has is_saas_user field
+        if not hasattr(user, "is_saas_user"):
+            return super().get_user_roots()
+
+        # Build base domain for root menus
+        domain = [("parent_id", "=", False)]
+
+        # Add SaaS filtering
+        if user.is_saas_user:
+            domain.append(("is_saas_menu", "=", True))
+        else:
+            domain.extend(
+                ["|", ("is_saas_menu", "=", False), ("is_saas_menu", "=", None)]
+            )
+
+        # Search with full list context to bypass additional filtering
+        menus = self.with_context({"ir.ui.menu.full_list": True}).search(domain)
+
+        # For SaaS users, we need to apply group filtering here
+        # because load_menus doesn't call _filter_visible_menus on root menus
+        if user.is_saas_user:
+            # Get user's groups
+            group_ids = set(user._get_group_ids())
+            # Filter menus by group access
+            menus = menus.filtered(
+                lambda menu: not menu.groups_id
+                or not group_ids.isdisjoint(menu.groups_id._ids)
+            )
+            _logger.debug(
+                f"SaaS user {user.login} has {len(menus)} accessible root menus after group filtering"
+            )
+
+        return menus
+
+    def read(self, fields=None, load="_classic_read"):
+        """Override to filter menu records based on user type"""
+        result = super().read(fields, load)
+
+        user = self.env.user
+        if not hasattr(user, "is_saas_user"):
+            return result
+
+        # Filter results based on user type
+        filtered_result = []
+        for record_data in result:
+            # Check if this menu should be visible to this user type
+            is_saas_menu = record_data.get("is_saas_menu", False)
+
+            if user.is_saas_user and is_saas_menu:
+                filtered_result.append(record_data)
+            elif not user.is_saas_user and not is_saas_menu:
+                filtered_result.append(record_data)
+
+        return filtered_result
+
+    @api.model
+    def search_read(
+        self, domain=None, fields=None, offset=0, limit=None, order=None, **read_kwargs
+    ):
+        """Override to enforce menu isolation between user types"""
+        user = self.env.user
+
+        # Only apply filtering if user has is_saas_user field
+        if hasattr(user, "is_saas_user"):
+            # Build the filter domain based on user type
+            if user.is_saas_user:
+                filter_domain = [("is_saas_menu", "=", True)]
+            else:
+                filter_domain = [
+                    "|",
+                    ("is_saas_menu", "=", False),
+                    ("is_saas_menu", "=", None),
+                ]
+
+            # Properly combine domains using expression.AND
+            from odoo.osv import expression
+
+            domain = expression.AND([domain or [], filter_domain])
+
+        return super().search_read(domain, fields, offset, limit, order, **read_kwargs)
+
+    @api.model
+    def search_count(self, domain=None, limit=None):
+        """Override to return correct counts with menu isolation"""
+        user = self.env.user
+
+        # Only apply filtering if user has is_saas_user field
+        if hasattr(user, "is_saas_user"):
+            # Build the filter domain based on user type
+            if user.is_saas_user:
+                filter_domain = [("is_saas_menu", "=", True)]
+            else:
+                filter_domain = [
+                    "|",
+                    ("is_saas_menu", "=", False),
+                    ("is_saas_menu", "=", None),
+                ]
+
+            # Properly combine domains using expression.AND
+            from odoo.osv import expression
+
+            domain = expression.AND([domain or [], filter_domain])
+
+        return super().search_count(domain, limit)
+
+    @api.model
+    @tools.ormcache(
+        "frozenset(self.env.user.groups_id.ids)",
+        'self.env.user.is_saas_user if hasattr(self.env.user, "is_saas_user") else False',
+        "debug",
+    )
+    def _visible_menu_ids(self, debug=False):
+        """Override to implement SaaS menu filtering with proper caching"""
+        user = self.env.user
+
+        # If user doesn't have is_saas_user field, use standard behavior
+        if not hasattr(user, "is_saas_user"):
+            return super()._visible_menu_ids(debug)
+
+        # Get all menus efficiently
+        context = {"ir.ui.menu.full_list": True}
+        menus = self.with_context(context).search_fetch(
+            [], ["action", "parent_id", "groups_id", "is_saas_menu"]
+        )
+
+        # Filter based on user type
+        if user.is_saas_user:
+            menus = menus.filtered(lambda m: m.is_saas_menu)
+        else:
+            menus = menus.filtered(lambda m: not m.is_saas_menu)
+
+        # Apply group filtering
+        group_ids = set(user._get_group_ids())
+        if not debug:
+            # Remove debug group
+            debug_group = self.env["ir.model.data"]._xmlid_to_res_id(
+                "base.group_no_one", raise_if_not_found=False
+            )
+            if debug_group:
+                group_ids.discard(debug_group)
+
+        # Keep menus that either have no groups OR user has at least one of the groups
+        menus = menus.filtered(
+            lambda menu: not menu.groups_id
+            or not group_ids.isdisjoint(menu.groups_id._ids)
+        )
+
+        # Filter by action existence
         from collections import defaultdict
+
         actions_by_model = defaultdict(set)
-        for action in menus.mapped('action'):
+        for action in menus.mapped("action"):
             if action:
                 actions_by_model[action._name].add(action.id)
-        
+
         existing_actions = {
             action
             for model_name, action_ids in actions_by_model.items()
             for action in self.env[model_name].browse(action_ids).exists()
         }
-        
-        menus = menus.filtered(lambda menu: not menu.action or menu.action in existing_actions)
-        
-        # Filter out children of hidden menus
+
+        menus = menus.filtered(
+            lambda menu: not menu.action or menu.action in existing_actions
+        )
+
+        # Build visible menu hierarchy
         visible_ids = set(menus.ids)
+
+        # Remove children of hidden menus
         for menu in menus:
             if menu.parent_id and menu.parent_id.id not in visible_ids:
                 visible_ids.discard(menu.id)
-        
+
         return frozenset(visible_ids)
