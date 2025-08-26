@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <!-- Override the AppsMenu template to show full menu hierarchy -->
+  <t t-name="web.NavBar.AppsMenu" t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+    <xpath expr="//t[@t-set-slot='content']" position="replace">
+      <t t-set-slot="content">
+        <!-- Render all apps with their full menu hierarchy -->
+        <t t-foreach="this.menuService.getApps()" t-as="app" t-key="app.id">
+          <!-- Top level app -->
+          <DropdownItem
+            class="{ 'o_app': true, 'o_menu_level_0': true }"
+            onSelected="() => this.onNavBarDropdownItemSelection(app)"
+            attrs="{ 
+              href: getMenuItemHref(app), 
+              'data-menu-xmlid': app.xmlid, 
+              'data-section': app.id,
+              style: this.getMenuItemStyle(0)
+            }"
+          >
+            <strong t-esc="app.name"/>
+          </DropdownItem>
+          
+          <!-- Render all child menus recursively -->
+          <t t-if="this.menuService.getMenuAsTree(app.id).childrenTree">
+            <t t-call="salewise_menu_flatten.MenuLevel">
+              <t t-set="menuItems" t-value="this.menuService.getMenuAsTree(app.id).childrenTree"/>
+              <t t-set="level" t-value="1"/>
+              <t t-set="parentApp" t-value="app"/>
+            </t>
+          </t>
+        </t>
+      </t>
+    </xpath>
+  </t>
+
+  <!-- Recursive template to render menu hierarchy -->
+  <t t-name="salewise_menu_flatten.MenuLevel">
+    <t t-foreach="menuItems" t-as="menuItem" t-key="menuItem.id">
+      <DropdownItem
+        class="{ 
+          'o_menu_item': true,
+          ['o_menu_level_' + level]: true
+        }"
+        onSelected="() => this.selectFlattenedMenu(menuItem, parentApp)"
+        attrs="{
+          'data-menu-xmlid': menuItem.xmlid,
+          'data-section': menuItem.id,
+          'data-parent-app': parentApp.id,
+          style: this.getMenuItemStyle(level)
+        }"
+      >
+        <t t-if="level > 0">
+          <span t-esc="this.getMenuPrefix(level)" style="margin-right: 0.5rem; color: #6c757d;"/>
+        </t>
+        <t t-esc="menuItem.name"/>
+      </DropdownItem>
+      
+      <!-- Recursively render children (with depth limit for performance) -->
+      <t t-if="menuItem.childrenTree and menuItem.childrenTree.length and level lt 10">
+        <t t-call="salewise_menu_flatten.MenuLevel">
+          <t t-set="menuItems" t-value="menuItem.childrenTree"/>
+          <t t-set="level" t-value="level + 1"/>
+          <t t-set="parentApp" t-value="parentApp"/>
+        </t>
+      </t>
+    </t>
+  </t>
+
+  <!-- Hide the sections menu in navbar since everything is in dropdown -->
+  <t t-name="web.NavBar" t-inherit="web.NavBar" t-inherit-mode="extension">
+    <!-- Remove Current App Sections from navbar -->
+    <xpath expr="//t[@t-if='currentAppSections.length']" position="replace"/>
+  </t>
+
+</templates>
