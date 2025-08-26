@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Salewise Menu Flatten',
+    'name': 'Salewise App',
     'version': '18.0.1.0.0',
-    'category': 'Tools/UI',
-    'summary': 'Flatten menu hierarchy in apps dropdown',
+    'category': 'Tools',
+    'summary': 'Salewise complete application with menu system and flattening',
     'description': """
-        This module flattens the menu hierarchy so that all menu levels
-        appear directly in the main apps dropdown (grid icon) instead of
-        being spread across the navbar and nested dropdowns.
+        Complete Salewise application that provides:
+        - SaaS menu system with user type filtering
+        - Flattened menu hierarchy in apps dropdown
+        - Group-based menu access control
+        - Separate user types (SaaS vs Standard)
     """,
     'author': 'Salewise',
     'website': 'https://salewise.com',
     'depends': [
+        'base',
         'web',
-        'salewise_menu_system',  # For SaaS menu filtering
     ],
     'data': [
     ],
@@ -23,17 +25,18 @@
             (
                 'after',
                 'web/static/src/webclient/navbar/navbar.js',
-                'salewise_menu_flatten/static/src/webclient/navbar/navbar.js',
+                'salewise_app/static/src/webclient/navbar/navbar.js',
             ),
             (
                 'after',
                 'web/static/src/webclient/navbar/navbar.xml',
-                'salewise_menu_flatten/static/src/webclient/navbar/navbar.xml',
+                'salewise_app/static/src/webclient/navbar/navbar.xml',
             ),
         ],
     },
+    'post_init_hook': 'post_init_hook',
     'installable': True,
-    'application': False,
+    'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
 }
