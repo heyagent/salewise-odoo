@@ -11,6 +11,31 @@ class IrUiMenu(models.Model):
         default=False,
         help="If checked, this menu is only visible to SaaS users",
     )
+    
+    saas_action_ref = fields.Char(
+        string="SaaS Action Reference",
+        help="Action reference string (e.g., 'contacts.action_contacts')"
+    )
+    
+    saas_views = fields.Char(
+        string="SaaS Views",
+        help="Comma-separated view types (e.g., 'card,list,form')"
+    )
+    
+    @api.model
+    def _resolve_saas_action(self):
+        """Resolve saas_action_ref to actual action and set it"""
+        for menu in self:
+            if menu.saas_action_ref and not menu.action:
+                try:
+                    # Try to resolve the action reference
+                    action = self.env.ref(menu.saas_action_ref, raise_if_not_found=False)
+                    if action:
+                        # Set the action field with proper format
+                        menu.action = f"{action._name},{action.id}"
+                except Exception:
+                    # If resolution fails, skip this menu
+                    pass
 
     @api.model
     def _get_saas_domain_filter(self):
