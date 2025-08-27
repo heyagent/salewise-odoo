@@ -16,8 +16,26 @@
     'depends': [
         'base',
         'web',
+        'contacts',
+        'crm',
+        'sale',
+        'sale_management',
+        'sales_team',
+        'contract',
+        'account',
+        'mail',
+        'product',
+        'hr',
+        'hr_recruitment',
+        'hr_holidays',
+        'hr_expense',
+        'hr_contract',
+        'calendar',
+        'project',
+        'documents',
     ],
     'data': [
+        'data/saas_menus.xml',
     ],
     'assets': {
         'web.assets_backend': [
