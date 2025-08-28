@@ -93,6 +93,7 @@
         # Development packages
         'impersonate_login',
         'salewise_users',
+        'salewise_plans',
     ],
     'data': [],
     'installable': True,
