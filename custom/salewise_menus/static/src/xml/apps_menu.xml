@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<!-- Override the Apps Menu dropdown content -->
+<t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+    <xpath expr="//Dropdown/t[@t-set-slot='content']" position="replace">
+        <t t-set-slot="content">
+            <t t-if="showSaasMenus and salewiseMenus">
+                <!-- Custom Salewise tree menu -->
+                <t t-foreach="salewiseMenus" t-as="app" t-key="app.id">
+                    <!-- App level (no symbol) -->
+                    <div class="o_salewise_app dropdown-header">
+                        <a t-on-click="() => this.onNavBarDropdownItemSelection(app)"
+                           class="o_app_link"
+                           t-att-href="getMenuItemHref(app)"
+                           t-att-data-menu-xmlid="app.xmlid"
+                           t-att-data-section="app.id">
+                            <strong t-esc="app.name"/>
+                        </a>
+                    </div>
+                    
+                    <!-- Level 2 sections -->
+                    <t t-if="app.childrenTree" t-foreach="app.childrenTree" t-as="section" t-key="section.id">
+                        <div class="o_salewise_level_2">
+                            <a t-if="section.actionID"
+                               t-on-click="() => this.onNavBarDropdownItemSelection(section)"
+                               class="dropdown-item"
+                               t-att-href="getMenuItemHref(section)"
+                               t-att-data-menu-xmlid="section.xmlid">
+                                <span>▸ </span><t t-esc="section.name"/>
+                            </a>
+                            <div t-else="" class="dropdown-header">
+                                <span>▸ </span><t t-esc="section.name"/>
+                            </div>
+                            
+                            <!-- Level 3 items -->
+                            <t t-if="section.childrenTree" t-foreach="section.childrenTree" t-as="item" t-key="item.id">
+                                <div class="o_salewise_level_3">
+                                    <a t-on-click="() => this.onNavBarDropdownItemSelection(item)"
+                                       class="dropdown-item"
+                                       t-att-href="getMenuItemHref(item)"
+                                       t-att-data-menu-xmlid="item.xmlid">
+                                        <span>• </span><t t-esc="item.name"/>
+                                    </a>
+                                    
+                                    <!-- Level 4 items if any -->
+                                    <t t-if="item.childrenTree" t-foreach="item.childrenTree" t-as="subitem" t-key="subitem.id">
+                                        <div class="o_salewise_level_4">
+                                            <a t-on-click="() => this.onNavBarDropdownItemSelection(subitem)"
+                                               class="dropdown-item"
+                                               t-att-href="getMenuItemHref(subitem)"
+                                               t-att-data-menu-xmlid="subitem.xmlid">
+                                                <span>◦ </span><t t-esc="subitem.name"/>
+                                            </a>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+            <t t-else="">
+                <!-- Normal Odoo apps menu -->
+                <DropdownItem
+                    t-foreach="apps"
+                    t-as="app"
+                    t-key="app.id"
+                    class="{ 'o_app': true, focus: menuService.getCurrentApp() === app }"
+                    onSelected="() => this.onNavBarDropdownItemSelection(app)"
+                    t-esc="app.name"
+                    attrs="{ href: getMenuItemHref(app), 'data-menu-xmlid': app.xmlid, 'data-section': app.id }"
+                />
+            </t>
+        </t>
+    </xpath>
+</t>
+
+</templates>
