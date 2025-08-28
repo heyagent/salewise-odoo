@@ -1,0 +1,564 @@
+CORE:
+  order: 1
+  Contacts:
+    icon: Contact2
+    order: 1
+    Contacts:
+      order: 1
+      action: contacts.action_contacts
+      search_view_ref: base.view_res_partner_filter
+      model: res.partner
+      views: card,list,form
+      context: '{"default_is_company": true}'
+    Industries:
+      order: 2
+      action: base.res_partner_industry_action
+      search_view_ref: view_res_partner_filter
+      model: res.partner.industry
+      views: list
+      domain: '[]'
+      context: '{}'
+  CRM:
+    icon: Target
+    order: 2
+    Pipeline:
+      order: 1
+      action: crm.action_your_pipeline
+      model: crm.team
+      views: kanban,list,form
+    Forecast:
+      order: 2
+      action: crm.action_opportunity_forecast
+      search_view_ref: crm.view_crm_case_leads_filter
+      model: crm.lead
+      views: kanban,list,form
+      domain: '[''|'', (''type'',''='',''lead''), (''type'',''='',False)]'
+      context: '{"default_duration": 4.0, "default_opportunity_id": "active_id"}'
+    Teams:
+      order: 3
+      action: sales_team.crm_team_action_pipeline
+      model: crm.team
+      views: card,form
+      context: '{"in_sales_app": true}'
+    Configuration:
+      order: 4
+      Pipeline Stages:
+        technical: true
+        action: crm.crm_stage_action
+        model: crm.stage
+        views: list,inline_form
+      Pipeline Lost Reasons:
+        action: crm.crm_lost_reason_action
+        model: crm.lost.reason
+        views: list
+      Teams Members:
+        technical: true
+        action: sales_team.crm_team_member_action
+        model: crm.team.member
+        views: list,inline_form
+      Recurring Plans:
+        action: crm.crm_recurring_plan_action
+        model: crm.recurring.plan
+        views: list
+  Sales:
+    icon: ShoppingCart
+    order: 3
+    Quotations:
+      order: 1
+      action: sale.action_quotations_with_onboarding
+      search_view_ref: sale_order_view_search_inherit_sale
+      model: sale.order
+      views: list,form
+      domain: '[(''state'', ''not in'', (''draft'', ''sent'', ''cancel''))]'
+      context: '{}'
+    Orders:
+      order: 2
+      action: sale.action_orders
+      search_view_ref: sale_order_view_search_inherit_sale
+      model: sale.order
+      views: list,form
+      domain: '[(''state'', ''not in'', (''draft'', ''sent'', ''cancel''))]'
+      context: '{}'
+    Products:
+      order: 3
+      action: sale.product_template_action
+      search_view_ref: product.product_template_search_view
+      model: product.template
+      views: card,list,form
+      context: '{"search_default_filter_to_sell":1, "sale_multi_pricelist_product_template": 1}'
+    Configuration:
+      order: 4
+      Quotation Templates:
+        action: sale_management.sale_order_template_action
+        model: sale.order.template
+        views: list,form
+      Product Categories:
+        action: product.product_category_action_form
+        search_view_ref: product_category_search_view
+        model: product.category
+        views: list
+  Contracts:
+    icon: FileSignature
+    order: 4
+    Contracts:
+      order: 1
+      action: contract.action_customer_contract
+      search_view_ref: contract_contract_search_view
+      model: contract.contract
+      views: list,form
+      domain: '[(''contract_type'', ''='', ''sale'')]'
+      context: "{'is_contract':1,\n                        'search_default_not_finished':1,\n                        'default_contract_type': 'sale'}\n"
+    Templates:
+      order: 2
+      action: contract.contract_template_action
+      search_view_ref: contract_template_search_view
+      model: contract.template
+      views: list,form
+    Termination Reason:
+      order: 3
+      action: contract_termination.contract_terminate_reason_act_window
+      model: contract.terminate.reason
+      views: list
+  Invoicing:
+    icon: Receipt
+    order: 5
+    Invoices:
+      order: 1
+      action: account.action_move_out_invoice
+      search_view_ref: view_account_move_line_filter
+      model: account.move
+      views: card,list,form
+      domain: '[(''display_type'', ''not in'', (''line_section'', ''line_note''))]'
+      context: '{"search_default_account_id": ["active_id"], "search_default_posted": 1}'
+    Payments:
+      order: 2
+      action: account.action_account_payments
+      model: account.payment
+      views: list,form
+      context: "{\n                                'default_payment_type': 'inbound',\n                                'default_partner_type': 'customer',\n                                'search_default_inbound_filter':\
+        \ 1,\n                                'default_move_journal_types': ('bank', 'cash'),\n                                'display_account_trust': True,\n                        }\n"
+    Configuration:
+      order: 3
+      Payment Terms:
+        action: account.action_payment_term_form
+        search_view_ref: view_payment_term_search
+        model: account.payment.term
+        views: card,form
+      Payment Modes:
+        action: account_payment_mode.account_payment_mode_action
+        model: account.payment.mode
+        views: list,form
+MARKETING:
+  order: 2
+  Email:
+    icon: Mail
+    order: 1
+    Emails:
+      order: 1
+      action: mail.action_view_mail_mail
+      search_view_ref: view_mail_search
+      model: mail.mail
+      views: inbox,inline_form
+      context: '{}'
+    Email Templates:
+      order: 2
+      action: mail.action_email_template_tree_all
+      model: mail.template
+      views: list,form
+    Email Blacklist:
+      order: 3
+      action: mail.mail_blacklist_action
+      search_view_ref: mail_blacklist_view_search
+      model: mail.blacklist
+      views: list
+    Outgoing Mail Servers:
+      order: 4
+      technical: true
+      action: base.action_ir_mail_server_list
+      model: ir.mail_server
+      views: list,form
+    Incoming Mail Servers:
+      order: 5
+      technical: true
+      action: mail.action_email_server_tree
+      search_view_ref: view_email_server_search
+      model: fetchmail.server
+      views: list,form
+  Social Marketing:
+    icon: Share2
+    order: 2
+    Posts:
+      order: 1
+      action: social.action_social_post
+      model: social.post
+      views: card,calendar,form
+    Feed:
+      order: 2
+      action: social.action_social_stream_post
+      model: social.stream.post
+      views: kanban
+    Campaigns:
+      order: 3
+      action: social.action_view_utm_campaigns
+      model: utm.campaign
+      views: kanban,inline_form
+    Accounts:
+      order: 4
+      action: social.action_social_account
+      model: social.account
+      views: list
+  Marketing Automation:
+    icon: Zap
+    order: 3
+    Campaigns:
+      order: 1
+      action: marketing_automation.marketing_campaign_action
+      model: marketing.campaign
+      views: kanban,form
+    Participants:
+      order: 2
+      action: marketing_automation.marketing_participants_action_reporting
+      model: marketing.participant
+      views: list
+    Traces:
+      order: 3
+      action: marketing_automation.marketing_trace_action
+      model: marketing.trace
+      views: list,form
+  Link Tracker:
+    icon: Link2
+    order: 4
+    Campaigns:
+      order: 1
+      technical: true
+      action: utm.utm_campaign_action
+      model: utm.campaign
+      views: kanban,inline_form
+    Sources:
+      order: 2
+      technical: true
+      action: utm.utm_source_action
+      model: utm.source
+      views: list
+    Mediums:
+      order: 3
+      technical: true
+      action: utm.utm_medium_action
+      search_view_ref: utm_medium_view_search
+      model: utm.medium
+      views: list
+    Link Tracker:
+      order: 4
+      technical: true
+      action: link_tracker.link_tracker_action
+      model: link.tracker
+      views: list,inline_form
+OPERATIONS:
+  order: 3
+  Project:
+    icon: Kanban
+    order: 1
+    Projects:
+      order: 1
+      action: project.open_view_project_all
+      search_view_ref: view_project_project_filter
+      model: project.project
+      views: card,form
+      domain: '[]'
+      context: "{\n                                'default_composition_mode': 'mass_mail',\n                        }\n"
+    Tasks:
+      order: 2
+      action: project.action_view_all_task
+      search_view_ref: view_task_search_form
+      model: project.task
+      views: list,form,calendar
+      domain: '[(''project_id'', ''='', active_id), (''display_in_project'', ''='', True)]'
+      context: "{\n                                'active_model': 'project.project',\n                                'default_project_id': active_id,\n                                'show_project_update':\
+        \ True,\n                                'search_default_open_tasks': 1,\n                        }\n"
+    Configuration:
+      order: 3
+      Project Stages:
+        action: project.project_project_stage_configure
+        model: project.project.stage
+        views: card,inline_form
+      Task Stages:
+        technical: true
+        action: project.open_task_type_form
+        model: project.task.type
+        views: kanban,inline_form
+        domain: '[(''user_id'', ''='', False)]'
+        context: '{"default_user_id": false}'
+  Activities:
+    icon: CheckCircle2
+    order: 2
+    Activity Overview:
+      order: 1
+      action: mail.mail_activity_action
+      model: mail.activity
+      views: activity,inline_form
+    Activity Plans:
+      order: 2
+      action: mail.mail_activity_plan_action
+      search_view_ref: mail_activity_plan_view_search
+      model: mail.activity.plan
+      views: card,form
+    Activity Types:
+      order: 3
+      action: mail.mail_activity_type_action
+      model: mail.activity.type
+      views: card,form
+  Calendar:
+    icon: CalendarDays
+    order: 3
+    Calendar:
+      order: 1
+      action: calendar.action_calendar_event
+      search_view_ref: view_calendar_event_search
+      model: calendar.event
+      views: calendar,list,form
+    Appointments:
+      order: 2
+      action: appointment.appointment_type_action
+      model: appointment.type
+      views: card,form
+    Shared Links:
+      order: 3
+      action: appointment.appointment_invite_action
+      model: appointment.invite
+      views: list,inline_form
+    Reminders:
+      order: 4
+      action: calendar.action_calendar_alarm
+      model: calendar.alarm
+      views: list,inline_form
+  Documents:
+    icon: Files
+    order: 4
+    Documents:
+      order: 1
+      action: documents.document_action
+      model: documents.document
+      views: card
+HR:
+  order: 4
+  Employees:
+    icon: BadgeCheck
+    order: 1
+    Employees:
+      order: 1
+      action: hr.open_view_employee_list_my
+      search_view_ref: view_employee_filter
+      model: hr.employee
+      views: card,list,form
+      domain: '[(''company_id'', ''in'', allowed_company_ids)]'
+      context: '{"chat_icon": true}'
+    Departments:
+      order: 2
+      action: hr.hr_department_kanban_action
+      search_view_ref: view_department_filter
+      model: hr.department
+      views: card,inline_form
+      domain: '[(''has_read_access'', ''='', True)]'
+    Contracts:
+      order: 3
+      action: hr_contract.action_hr_contract
+      search_view_ref: hr_contract_view_search
+      model: hr.contract
+      views: kanban,list,form
+      domain: '[(''employee_id'', ''!='', False)]'
+      context: '{"search_default_group_by_state": 1}'
+    Skills:
+      order: 4
+      action: hr_skills.hr_employee_skill_report_action
+      search_view_ref: hr_employee_skill_report_view_search
+      model: hr.employee.skill.report
+      views: list
+      context: "{\n                        'search_default_employee': 1,\n                        'search_default_employees_with_skills': 1,\n                }\n"
+    Configuration:
+      order: 5
+      Job Positions:
+        action: hr.action_hr_job
+        search_view_ref: view_job_filter
+        model: hr.job
+        views: list,form
+        context: '{"search_default_Current":1}'
+      Employment Types:
+        action: hr.hr_contract_type_action
+        model: hr.contract.type
+        views: list
+      Working Schedules:
+        action: resource.action_resource_calendar_form
+        search_view_ref: view_resource_calendar_search
+        model: resource.calendar
+        views: list,form
+        domain: '[''|'', (''company_id'', ''='', False), (''company_id'', ''in'', allowed_company_ids)]'
+      Work Locations:
+        action: hr.hr_work_location_action
+        model: hr.work.location
+        views: list,inline_form
+      Skill Types:
+        action: hr_skills.hr_skill_type_action
+        model: hr.skill.type
+        views: list,form
+      Departure Reasons:
+        action: hr.hr_departure_reason_action
+        model: hr.departure.reason
+        views: list
+  Recruitment:
+    icon: UserPlus
+    order: 2
+    Candidates:
+      order: 1
+      action: hr_recruitment.action_hr_candidate
+      model: hr.candidate
+      views: list,form
+      context: '{}'
+    All Applications:
+      order: 2
+      action: hr_recruitment.crm_case_categ0_act_job
+      search_view_ref: hr_applicant_view_search_bis
+      model: hr.applicant
+      views: kanban,form
+      domain: '[(''stage_id.sequence'',''<='',''1'')]'
+      context: '{"search_default_job_id": ["active_id"], "default_job_id": "active_id", "search_default_stage": 1, "dialog_size": "medium", "allow_search_matching_applicants": 1}'
+    Configuration:
+      order: 3
+      Recruitment Stages:
+        technical: true
+        action: hr_recruitment.hr_recruitment_stage_act
+        model: hr.recruitment.stage
+        views: card,inline_form
+        domain: '[]'
+        context: '{}'
+      Refuse Reasons:
+        action: hr_recruitment.hr_applicant_refuse_reason_action
+        model: hr.applicant.refuse.reason
+        views: list
+  Time Off:
+    icon: Palmtree
+    order: 3
+    Time Off:
+      order: 1
+      action: hr_holidays.hr_leave_action_action_approve_department
+      search_view_ref: hr_holidays.hr_leave_view_search_my
+      model: hr.leave
+      views: card,inline_form
+      domain: '[(''user_id'', ''='', uid), (''employee_id.company_id'', ''in'', allowed_company_ids)]'
+      context: '{"short_name": 1, "search_default_year": 1}'
+    Allocations:
+      order: 2
+      action: hr_holidays.hr_leave_allocation_action_approve_department
+      search_view_ref: hr_holidays.hr_leave_allocation_view_search_my
+      model: hr.leave.allocation
+      views: card,inline_form
+      domain: '[(''employee_id.user_id'', ''='', uid)]'
+      context: '{"search_default_year": 1, "is_employee_allocation": true}'
+    Configuration:
+      order: 3
+      Time Off Types:
+        action: hr_holidays.open_view_holiday_status
+        model: hr.leave.type
+        views: card,form
+      Public Holidays:
+        action: hr_holidays.open_view_public_holiday
+        search_view_ref: hr_holidays.resource_calendar_leaves_view_search_inherit
+        model: resource.calendar.leaves
+        views: list
+        domain: '[''&'', (''resource_id'', ''='', False), (''calendar_id'', ''in'', (active_id, False))]'
+        context: "{\n                        'default_calendar_id': active_id,\n                        'search_default_filter_date': True}\n"
+      Mandatory Days:
+        action: hr_holidays.hr_leave_mandatory_day_action
+        search_view_ref: hr_leave_mandatory_day_view_search
+        model: hr.leave.mandatory.day
+        views: list
+        context: '{"search_default_filter_date": true}'
+  Expenses:
+    icon: Wallet
+    order: 4
+    Expense Reports:
+      order: 1
+      action: hr_expense.action_hr_expense_sheet_all
+      search_view_ref: hr_expense_view_search
+      model: hr.expense.sheet
+      views: kanban,form
+      domain: '[(''can_be_expensed'', ''='', True)]'
+      context: '{"search_default_my_expenses": 1}'
+    Expenses Analysis:
+      order: 2
+      action: hr_expense.hr_expense_actions_all
+      search_view_ref: hr_expense_view_search
+      model: hr.expense
+      views: card,form
+    Expense Categories:
+      order: 3
+      action: hr_expense.hr_expense_product
+      search_view_ref: hr_expense_view_search
+      model: product.product
+      views: card,inline_form
+      domain: '[(''can_be_expensed'', ''='', True)]'
+      context: '{"search_default_my_expenses": 1}'
+  Payroll:
+    icon: Banknote
+    order: 5
+    Payslips Batches:
+      order: 1
+      action: payroll.hr_payslip_run_action
+      search_view_ref: hr_payslip_run_view_search
+      model: hr.payslip.run
+      views: list,form
+    Employee Payslips:
+      order: 2
+      action: payroll.hr_payslip_action
+      search_view_ref: hr_payslip_view_search
+      model: hr.payslip
+      views: list,form
+    Salary Structures:
+      order: 3
+      action: payroll.hr_payroll_structure_action
+      model: hr.payroll.structure
+      views: list,form
+    Salary Rules:
+      order: 4
+      action: payroll.action_salary_rule_form
+      search_view_ref: hr_salary_rule_view_search
+      model: hr.salary.rule
+      views: list,form
+      domain: '[(''parent_rule_id'',''='',False)]'
+SYSTEM:
+  order: 5
+  Automation:
+    icon: Workflow
+    order: 1
+    Automation Rules:
+      order: 1
+      action: base_automation.base_automation_act
+      model: base.automation
+      views: card,form
+  Settings:
+    icon: Sliders
+    order: 2
+    General Settings:
+      order: 1
+      action: base_setup.action_general_configuration
+      model: res.config.settings
+      views: form
+      context: '{"module": "general_settings", "bin_size": false}'
+    Users:
+      order: 2
+      action: base.action_res_users
+      search_view_ref: view_users_search
+      model: res.users
+      views: card,form
+      context: '{"search_default_filter_no_share": 1, "ir.ui.menu.full_list": 1}'
+    User Roles:
+      order: 3
+      action: base_user_role.action_res_users_role_tree
+      model: res.users.role
+      views: list,form
+    Languages:
+      order: 4
+      action: base.res_lang_act_window
+      search_view_ref: res_lang_search
+      model: res.lang
+      views: list
+      context: '{"active_test": false}'
