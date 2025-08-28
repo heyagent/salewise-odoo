@@ -55,7 +55,7 @@
         <field name="original_action" ref="hr_contract.action_hr_contract"/>
         <field name="domain">[('employee_id', '!=', False)]</field>
         <field name="context">{"search_default_group_by_state": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr.hr_contract_view_search"/>
+        <field name="search_view_id" ref="hr_contract.hr_contract_view_search"/>
     </record>
 
         <!-- HR_RECRUITMENT Actions -->
@@ -70,9 +70,9 @@
         <field name="res_model">hr.applicant</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="hr_recruitment.crm_case_categ0_act_job"/>
-        <field name="domain">[('stage_id.sequence','<=','1')]</field>
+        <field name="domain">[('stage_id.sequence','&lt;=','1')]</field>
         <field name="context">{"search_default_job_id": ["active_id"], "default_job_id": "active_id", "search_default_stage": 1, "dialog_size": "medium", "allow_search_matching_applicants": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr.hr_applicant_view_search_bis"/>
+        <field name="search_view_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
     </record>
     <record id="salewise_hr_recruitment_hr_recruitment_stage_act" model="ir.actions.act_window">
         <field name="name">Stages</field>
@@ -97,7 +97,7 @@
                         'search_default_employee': 1,
                         'search_default_employees_with_skills': 1,
                 }, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr.hr_employee_skill_report_view_search"/>
+        <field name="search_view_id" ref="hr_skills.hr_employee_skill_report_view_search"/>
     </record>
     <record id="salewise_hr_skills_hr_skill_type_action" model="ir.actions.act_window">
         <field name="name">Skill Types</field>

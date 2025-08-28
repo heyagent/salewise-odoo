@@ -10,7 +10,7 @@
         <field name="original_action" ref="hr_holidays.hr_leave_action_action_approve_department"/>
         <field name="domain">[('user_id', '=', uid), ('employee_id.company_id', 'in', allowed_company_ids)]</field>
         <field name="context">{"short_name": 1, "search_default_year": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr_holidays.hr_leave_view_search_my"/>
+        <field name="search_view_id" ref="hr_holidays.hr_leave_view_search_manager"/>
     </record>
     <record id="salewise_hr_holidays_hr_leave_allocation_action_approve_department" model="ir.actions.act_window">
         <field name="name">Allocations</field>
@@ -19,7 +19,7 @@
         <field name="original_action" ref="hr_holidays.hr_leave_allocation_action_approve_department"/>
         <field name="domain">[('employee_id.user_id', '=', uid)]</field>
         <field name="context">{"search_default_year": 1, "is_employee_allocation": true, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr_holidays.hr_leave_allocation_view_search_my"/>
+        <field name="search_view_id" ref="hr_holidays.hr_leave_allocation_view_search_manager"/>
     </record>
     <record id="salewise_hr_holidays_open_view_holiday_status" model="ir.actions.act_window">
         <field name="name">Time Off Types</field>
@@ -32,11 +32,10 @@
         <field name="res_model">resource.calendar.leaves</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="hr_holidays.open_view_public_holiday"/>
-        <field name="domain">['&', ('resource_id', '=', False), ('calendar_id', 'in', (active_id, False))]</field>
+        <field name="domain">['&amp;', ('resource_id', '=', False), ('calendar_id', 'in', (active_id, False))]</field>
         <field name="context">{
                         'default_calendar_id': active_id,
                         'search_default_filter_date': True}, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr_holidays.resource_calendar_leaves_view_search_inherit"/>
     </record>
     <record id="salewise_hr_holidays_hr_leave_mandatory_day_action" model="ir.actions.act_window">
         <field name="name">Mandatory Days</field>
@@ -44,7 +43,7 @@
         <field name="view_mode">list</field>
         <field name="original_action" ref="hr_holidays.hr_leave_mandatory_day_action"/>
         <field name="context">{"search_default_filter_date": true, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr.hr_leave_mandatory_day_view_search"/>
+        <field name="search_view_id" ref="hr_holidays.hr_leave_mandatory_day_view_search"/>
     </record>
 
         <!-- HR_EXPENSE Actions -->
@@ -55,14 +54,14 @@
         <field name="original_action" ref="hr_expense.action_hr_expense_sheet_all"/>
         <field name="domain">[('can_be_expensed', '=', True)]</field>
         <field name="context">{"search_default_my_expenses": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="hr.hr_expense_view_search"/>
+        <field name="search_view_id" ref="hr_expense.hr_expense_sheet_view_search_with_panel"/>
     </record>
     <record id="salewise_hr_expense_hr_expense_actions_all" model="ir.actions.act_window">
         <field name="name">Expenses Analysis</field>
         <field name="res_model">hr.expense</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="hr_expense.hr_expense_actions_all"/>
-        <field name="search_view_id" ref="hr.hr_expense_view_search"/>
+        <field name="search_view_id" ref="hr_expense.hr_expense_view_search"/>
     </record>
     <record id="salewise_hr_expense_hr_expense_product" model="ir.actions.act_window">
         <field name="name">Expense Categories</field>
@@ -71,7 +70,7 @@
         <field name="original_action" ref="hr_expense.hr_expense_product"/>
         <field name="domain">[('can_be_expensed', '=', True)]</field>
         <field name="context">{"search_default_my_expenses": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="product.hr_expense_view_search"/>
+        <field name="search_view_id" ref="product.product_search_form_view"/>
     </record>
 
     </data>
