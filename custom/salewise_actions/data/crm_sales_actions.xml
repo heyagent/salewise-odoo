@@ -29,7 +29,7 @@
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="sale.action_quotations_with_onboarding"/>
         <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
-        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
     </record>
     <record id="salewise_sale_action_orders" model="ir.actions.act_window">
         <field name="name">Sales Orders</field>
@@ -37,7 +37,7 @@
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="sale.action_orders"/>
         <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
-        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
     </record>
     <record id="salewise_sale_product_template_action" model="ir.actions.act_window">
         <field name="name">Products</field>

@@ -16,7 +16,7 @@
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="mail.action_email_template_tree_all"/>
         <field name="context">{'search_default_base_templates': 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="email.template.search"/>
+        <field name="search_view_id" ref="mail.view_email_template_search"/>
     </record>
     <record id="salewise_mail_mail_blacklist_action" model="ir.actions.act_window">
         <field name="name">Blacklisted Email Addresses</field>
@@ -30,7 +30,7 @@
         <field name="res_model">fetchmail.server</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="mail.action_email_server_tree"/>
-        <field name="search_view_id" ref="fetchmail.view_email_server_search"/>
+        <field name="search_view_id" ref="mail.view_email_server_search"/>
     </record>
     <record id="salewise_mail_mail_activity_action" model="ir.actions.act_window">
         <field name="name">Activity Overview</field>

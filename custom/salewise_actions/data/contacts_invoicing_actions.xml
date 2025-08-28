@@ -20,7 +20,7 @@
         <field name="original_action" ref="account.action_move_out_invoice"/>
         <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
         <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="account.view_account_move_line_filter"/>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
     </record>
     <record id="salewise_account_action_account_payments" model="ir.actions.act_window">
         <field name="name">Customer Payments</field>
