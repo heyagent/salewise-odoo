@@ -1,0 +1,72 @@
+// Salewise Menu Tree Styling
+.o_popover.dropdown-menu {
+    // Salewise app headers
+    .o_salewise_app {
+        padding: 8px 12px;
+        border-bottom: 1px solid #dee2e6;
+        margin-bottom: 4px;
+        
+        .o_app_link {
+            color: #212529;
+            text-decoration: none;
+            display: block;
+            
+            &:hover {
+                color: #0056b3;
+            }
+        }
+    }
+    
+    // Level 2 - Categories with right triangle
+    .o_salewise_level_2 {
+        padding-left: 20px;
+        
+        .dropdown-item, .dropdown-header {
+            padding: 4px 12px;
+            color: #495057;
+            
+            &:hover {
+                background-color: #f8f9fa;
+            }
+        }
+    }
+    
+    // Level 3 - Items with bullet
+    .o_salewise_level_3 {
+        padding-left: 40px;
+        
+        .dropdown-item {
+            padding: 3px 12px;
+            font-size: 0.95rem;
+            color: #6c757d;
+            
+            &:hover {
+                background-color: #f8f9fa;
+                color: #212529;
+            }
+        }
+    }
+    
+    // Level 4 - Sub-items with hollow circle
+    .o_salewise_level_4 {
+        padding-left: 60px;
+        
+        .dropdown-item {
+            padding: 2px 12px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            
+            &:hover {
+                background-color: #f8f9fa;
+                color: #212529;
+            }
+        }
+    }
+    
+    // When in Salewise mode, make dropdown wider to accommodate tree
+    &.o-dropdown--menu {
+        min-width: 350px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
