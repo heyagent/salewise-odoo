@@ -90,6 +90,8 @@
         'web_editor',
         'web_gantt',
         'web_tour',
+        # Development packages
+        'impersonate_login',
     ],
     'data': [],
     'installable': True,
