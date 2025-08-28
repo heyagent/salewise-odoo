@@ -11,49 +11,9 @@
                 <xpath expr="//page[@name='general_info']" position="before">
                     <page string="Subscription Plan" name="subscription_plan">
                         <group>
-                            <group string="Current Plan">
-                                <field name="plan_type" widget="radio"/>
-                            </group>
-                            <group string="Available Features">
-                                <field name="has_sales" readonly="1"/>
-                                <field name="has_invoicing" readonly="1"/>
-                                <field name="has_inventory" readonly="1"/>
-                                <field name="has_manufacturing" readonly="1"/>
-                                <field name="has_hr" readonly="1"/>
-                                <field name="has_projects" readonly="1"/>
-                                <field name="has_marketing" readonly="1"/>
-                                <field name="has_advanced_accounting" readonly="1"/>
-                                <field name="has_reporting" readonly="1"/>
-                                <field name="has_automation" readonly="1"/>
-                            </group>
+                            <field name="plan_type" widget="radio"/>
                         </group>
                     </page>
-                </xpath>
-            </field>
-        </record>
-        
-        <!-- Add plan selector to settings -->
-        <record id="res_config_settings_view_form_inherit_plans" model="ir.ui.view">
-            <field name="name">res.config.settings.view.form.inherit.plans</field>
-            <field name="model">res.config.settings</field>
-            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//div[@id='companies']" position="after">
-                    <h2>Subscription Plan</h2>
-                    <div class="row mt16 o_settings_container" id="subscription_plan">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <label string="Current Plan"/>
-                                <div class="text-muted">
-                                    Select the subscription plan for this database
-                                </div>
-                                <div class="content-group">
-                                    <field name="plan_type" widget="radio_horizontal" class="mt16"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </xpath>
             </field>
         </record>

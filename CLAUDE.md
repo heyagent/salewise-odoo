@@ -1,5 +1,22 @@
 # Development Guidelines for Claude
 
+## Odoo 18 Important Changes
+
+### View Terminology
+- **Tree views are now called List views** in Odoo 18
+- Use `view_type='list'` instead of `view_type='tree'`
+
+### Attribute Changes
+- **Use direct attributes instead of attrs**
+- Old: `attrs="{'invisible': [('field', '=', value)]}"`
+- New: `invisible="field == value"`
+- Applies to: invisible, readonly, required attributes
+
+## Module Installation
+- **Always use curl/JSON-RPC for module installation**
+- Do NOT use command line with -u flag
+- Check logs after installation to verify success
+
 ## Environment Setup
 
 ### Virtual Environment
