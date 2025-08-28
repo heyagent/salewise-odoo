@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- CONTACTS Actions -->
+    <record id="salewise_contacts_action_contacts" model="ir.actions.act_window">
+        <field name="name">Contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="original_action" ref="contacts.action_contacts"/>
+        <field name="context">{"default_is_company": true, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+    </record>
+
+        <!-- ACCOUNT Actions -->
+    <record id="salewise_account_action_move_out_invoice" model="ir.actions.act_window">
+        <field name="name">Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="original_action" ref="account.action_move_out_invoice"/>
+        <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
+        <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="account.view_account_move_line_filter"/>
+    </record>
+    <record id="salewise_account_action_account_payments" model="ir.actions.act_window">
+        <field name="name">Customer Payments</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="account.action_account_payments"/>
+        <field name="context">{
+                                'default_payment_type': 'inbound',
+                                'default_partner_type': 'customer',
+                                'search_default_inbound_filter': 1,
+                                'default_move_journal_types': ('bank', 'cash'),
+                                'display_account_trust': True,
+                        }, 'salewise_mode': True}</field>
+    </record>
+    <record id="salewise_account_action_payment_term_form" model="ir.actions.act_window">
+        <field name="name">Payment Terms</field>
+        <field name="res_model">account.payment.term</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="original_action" ref="account.action_payment_term_form"/>
+        <field name="search_view_id" ref="account.view_payment_term_search"/>
+    </record>
+
+        <!-- ACCOUNT_PAYMENT_MODE Actions -->
+    <record id="salewise_account_payment_mode_account_payment_mode_action" model="ir.actions.act_window">
+        <field name="name">Payment Modes</field>
+        <field name="res_model">account.payment.mode</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="account_payment_mode.account_payment_mode_action"/>
+    </record>
+
+        <!-- CONTRACT Actions -->
+    <record id="salewise_contract_action_customer_contract" model="ir.actions.act_window">
+        <field name="name">Customer Contracts</field>
+        <field name="res_model">contract.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="contract.action_customer_contract"/>
+        <field name="domain">[('contract_type', '=', 'sale')]</field>
+        <field name="context">{'is_contract':1,
+                        'search_default_not_finished':1,
+                        'default_contract_type': 'sale'}, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="contract.contract_contract_search_view"/>
+    </record>
+    <record id="salewise_contract_contract_template_action" model="ir.actions.act_window">
+        <field name="name">Contract Templates</field>
+        <field name="res_model">contract.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="contract.contract_template_action"/>
+        <field name="search_view_id" ref="contract.contract_template_search_view"/>
+    </record>
+
+        <!-- CONTRACT_TERMINATION Actions -->
+    <record id="salewise_contract_termination_contract_terminate_reason_act_window" model="ir.actions.act_window">
+        <field name="name">Contract Termination Reason</field>
+        <field name="res_model">contract.terminate.reason</field>
+        <field name="view_mode">list</field>
+        <field name="original_action" ref="contract_termination.contract_terminate_reason_act_window"/>
+    </record>
+
+    </data>
+</odoo>

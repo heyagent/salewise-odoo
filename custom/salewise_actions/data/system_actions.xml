@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- BASE Actions -->
+    <record id="salewise_base_res_partner_industry_action" model="ir.actions.act_window">
+        <field name="name">Industries</field>
+        <field name="res_model">res.partner.industry</field>
+        <field name="view_mode">list</field>
+        <field name="original_action" ref="base.res_partner_industry_action"/>
+        <field name="search_view_id" ref="res.view_res_partner_filter"/>
+    </record>
+    <record id="salewise_base_action_ir_mail_server_list" model="ir.actions.act_window">
+        <field name="name">Outgoing Mail Servers</field>
+        <field name="res_model">ir.mail_server</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="base.action_ir_mail_server_list"/>
+        <field name="search_view_id" ref="ir.mail_server search"/>
+    </record>
+    <record id="salewise_base_action_res_users" model="ir.actions.act_window">
+        <field name="name">Users</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="original_action" ref="base.action_res_users"/>
+        <field name="context">{"search_default_filter_no_share": 1, "ir.ui.menu.full_list": 1, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="res.view_users_search"/>
+    </record>
+    <record id="salewise_base_res_lang_act_window" model="ir.actions.act_window">
+        <field name="name">Languages</field>
+        <field name="res_model">res.lang</field>
+        <field name="view_mode">list</field>
+        <field name="original_action" ref="base.res_lang_act_window"/>
+        <field name="context">{"active_test": false, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="res.res_lang_search"/>
+    </record>
+
+        <!-- BASE_SETUP Actions -->
+    <record id="salewise_base_setup_action_general_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="original_action" ref="base_setup.action_general_configuration"/>
+        <field name="context">{"module": "general_settings", "bin_size": false, 'salewise_mode': True}</field>
+    </record>
+
+        <!-- BASE_USER_ROLE Actions -->
+    <record id="salewise_base_user_role_action_res_users_role_tree" model="ir.actions.act_window">
+        <field name="name">User Roles</field>
+        <field name="res_model">res.users.role</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="base_user_role.action_res_users_role_tree"/>
+    </record>
+
+        <!-- BASE_AUTOMATION Actions -->
+    <record id="salewise_base_automation_base_automation_act" model="ir.actions.act_window">
+        <field name="name">Automation Rules</field>
+        <field name="res_model">base.automation</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="original_action" ref="base_automation.base_automation_act"/>
+        <field name="context">{'active_test': False, 'salewise_mode': True}</field>
+    </record>
+
+        <!-- PRODUCT Actions -->
+    <record id="salewise_product_product_category_action_form" model="ir.actions.act_window">
+        <field name="name">Product Categories</field>
+        <field name="res_model">product.category</field>
+        <field name="view_mode">list</field>
+        <field name="original_action" ref="product.product_category_action_form"/>
+        <field name="search_view_id" ref="product.product_category_search_view"/>
+    </record>
+
+    </data>
+</odoo>

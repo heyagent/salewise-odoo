@@ -5,6 +5,7 @@
     'depends': [
         'base',
         'web',
+        'salewise_actions',  # Custom actions module
         'account',
         'account_payment_mode',
         'appointment',
@@ -37,7 +38,11 @@
         'utm',
     ],
     'data': [
-        'data/menus_data.xml',
+        'data/core_menus.xml',
+        'data/marketing_menus.xml',
+        'data/operations_menus.xml',
+        'data/hr_menus.xml',
+        'data/system_menus.xml',
     ],
     'assets': {
         'web.assets_backend': [

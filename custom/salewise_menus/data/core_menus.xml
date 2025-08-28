@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- CORE Menus -->
+        <record id="menu_saas_core" model="ir.ui.menu">
+            <field name="name">CORE</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="menu_saas_core_contacts" model="ir.ui.menu">
+            <field name="name">Contacts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core" />
+            <field name="sequence">10</field>
+            <field name="lucide_icon">Contact2</field>
+        </record>
+        <record id="menu_saas_core_contacts_contacts" model="ir.ui.menu">
+            <field name="name">Contacts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contacts" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_contacts_action_contacts" />
+            <field name="original_menu_id" ref="contacts.res_partner_menu_contacts" />
+        </record>
+        <record id="menu_saas_core_contacts_industries" model="ir.ui.menu">
+            <field name="name">Industries</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contacts" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_base_res_partner_industry_action" />
+            <field name="original_menu_id" ref="contacts.res_partner_industry_menu" />
+        </record>
+        <record id="menu_saas_core_crm" model="ir.ui.menu">
+            <field name="name">CRM</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core" />
+            <field name="sequence">20</field>
+            <field name="lucide_icon">Target</field>
+        </record>
+        <record id="menu_saas_core_crm_pipeline" model="ir.ui.menu">
+            <field name="name">Pipeline</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_crm_action_your_pipeline" />
+            <field name="original_menu_id" ref="crm.menu_crm_opportunities" />
+        </record>
+        <record id="menu_saas_core_crm_forecast" model="ir.ui.menu">
+            <field name="name">Forecast</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_crm_action_opportunity_forecast" />
+            <field name="original_menu_id" ref="crm.crm_menu_forecast" />
+        </record>
+        <record id="menu_saas_core_crm_teams" model="ir.ui.menu">
+            <field name="name">Teams</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_sales_team_crm_team_action_pipeline" />
+            <field name="original_menu_id" ref="crm.sales_team_menu_team_pipeline" />
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]" />
+        </record>
+        <record id="menu_saas_core_crm_configuration" model="ir.ui.menu">
+            <field name="name">Configuration</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm" />
+            <field name="sequence">40</field>
+        </record>
+        <record id="menu_saas_core_crm_configuration_pipeline_stages" model="ir.ui.menu">
+            <field name="name">Pipeline Stages</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_crm_crm_stage_action" />
+            <field name="original_menu_id" ref="crm.menu_crm_lead_stage_act" />
+            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+        </record>
+        <record id="menu_saas_core_crm_configuration_pipeline_lost_reasons" model="ir.ui.menu">
+            <field name="name">Pipeline Lost Reasons</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_crm_crm_lost_reason_action" />
+            <field name="original_menu_id" ref="crm.menu_crm_lost_reason" />
+        </record>
+        <record id="menu_saas_core_crm_configuration_teams_members" model="ir.ui.menu">
+            <field name="name">Teams Members</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_sales_team_crm_team_member_action" />
+            <field name="original_menu_id" ref="crm.crm_team_member_config" />
+            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+        </record>
+        <record id="menu_saas_core_crm_configuration_recurring_plans" model="ir.ui.menu">
+            <field name="name">Recurring Plans</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_crm_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_crm_crm_recurring_plan_action" />
+            <field name="original_menu_id" ref="crm.crm_recurring_plan_menu_config" />
+            <field name="groups_id" eval="[(4, ref('crm.group_use_recurring_revenues'))]" />
+        </record>
+        <record id="menu_saas_core_sales" model="ir.ui.menu">
+            <field name="name">Sales</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core" />
+            <field name="sequence">30</field>
+            <field name="lucide_icon">ShoppingCart</field>
+        </record>
+        <record id="menu_saas_core_sales_quotations" model="ir.ui.menu">
+            <field name="name">Quotations</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_sale_action_quotations_with_onboarding" />
+            <field name="original_menu_id" ref="sale.menu_sale_quotations" />
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
+        </record>
+        <record id="menu_saas_core_sales_orders" model="ir.ui.menu">
+            <field name="name">Orders</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_sale_action_orders" />
+            <field name="original_menu_id" ref="sale.menu_sale_order" />
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
+        </record>
+        <record id="menu_saas_core_sales_products" model="ir.ui.menu">
+            <field name="name">Products</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_sale_product_template_action" />
+            <field name="original_menu_id" ref="sale.menu_product_template_action" />
+        </record>
+        <record id="menu_saas_core_sales_configuration" model="ir.ui.menu">
+            <field name="name">Configuration</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales" />
+            <field name="sequence">40</field>
+        </record>
+        <record id="menu_saas_core_sales_configuration_quotation_templates" model="ir.ui.menu">
+            <field name="name">Quotation Templates</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_sale_management_sale_order_template_action" />
+            <field name="original_menu_id" ref="sale_management.sale_order_template_menu" />
+            <field name="groups_id" eval="[(4, ref('sale_management.group_sale_order_template'))]" />
+        </record>
+        <record id="menu_saas_core_sales_configuration_product_categories" model="ir.ui.menu">
+            <field name="name">Product Categories</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_sales_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_product_product_category_action_form" />
+            <field name="original_menu_id" ref="stock.menu_product_category_config_stock" />
+        </record>
+        <record id="menu_saas_core_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core" />
+            <field name="sequence">40</field>
+            <field name="lucide_icon">FileSignature</field>
+        </record>
+        <record id="menu_saas_core_contracts_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_contract_action_customer_contract" />
+            <field name="original_menu_id" ref="contract_sale.menu_contract_sale" />
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
+        </record>
+        <record id="menu_saas_core_contracts_templates" model="ir.ui.menu">
+            <field name="name">Templates</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_contract_contract_template_action" />
+            <field name="original_menu_id" ref="contract.contract_template_menu" />
+        </record>
+        <record id="menu_saas_core_contracts_termination_reason" model="ir.ui.menu">
+            <field name="name">Termination Reason</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_contract_termination_contract_terminate_reason_act_window" />
+            <field name="original_menu_id" ref="contract_termination.contract_terminate_reason_menu" />
+        </record>
+        <record id="menu_saas_core_invoicing" model="ir.ui.menu">
+            <field name="name">Invoicing</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core" />
+            <field name="sequence">50</field>
+            <field name="lucide_icon">Receipt</field>
+        </record>
+        <record id="menu_saas_core_invoicing_invoices" model="ir.ui.menu">
+            <field name="name">Invoices</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_invoicing" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_account_action_move_out_invoice" />
+            <field name="original_menu_id" ref="account.menu_action_move_out_invoice_type" />
+        </record>
+        <record id="menu_saas_core_invoicing_payments" model="ir.ui.menu">
+            <field name="name">Payments</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_invoicing" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_account_action_account_payments" />
+            <field name="original_menu_id" ref="account.menu_action_account_payments_receivable" />
+        </record>
+        <record id="menu_saas_core_invoicing_configuration" model="ir.ui.menu">
+            <field name="name">Configuration</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_invoicing" />
+            <field name="sequence">30</field>
+        </record>
+        <record id="menu_saas_core_invoicing_configuration_payment_terms" model="ir.ui.menu">
+            <field name="name">Payment Terms</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_invoicing_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_account_action_payment_term_form" />
+            <field name="original_menu_id" ref="account.menu_action_payment_term_form" />
+        </record>
+        <record id="menu_saas_core_invoicing_configuration_payment_modes" model="ir.ui.menu">
+            <field name="name">Payment Modes</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_invoicing_configuration" />
+            <field name="sequence">100</field>
+            <field name="action" ref="salewise_actions.salewise_account_payment_mode_account_payment_mode_action" />
+            <field name="original_menu_id" ref="account_payment_mode.account_payment_mode_menu" />
+        </record>
+        <record id="menu_saas_operations" model="ir.ui.menu">
+            <field name="name">OPERATIONS</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="menu_saas_hr" model="ir.ui.menu">
+            <field name="name">HR</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">40</field>
+        </record>
+        <record id="menu_saas_hr_employees_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_employees" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_hr_contract_action_hr_contract" />
+            <field name="original_menu_id" ref="hr_contract.menu_hr_employee_contracts" />
+        </record>
+        <record id="menu_saas_system" model="ir.ui.menu">
+            <field name="name">SYSTEM</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">50</field>
+        </record>
+    </data>
+</odoo>

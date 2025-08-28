@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- MAIL Actions -->
+    <record id="salewise_mail_action_view_mail_mail" model="ir.actions.act_window">
+        <field name="name">Emails</field>
+        <field name="res_model">mail.mail</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="mail.action_view_mail_mail"/>
+        <field name="search_view_id" ref="mail.view_mail_search"/>
+    </record>
+    <record id="salewise_mail_action_email_template_tree_all" model="ir.actions.act_window">
+        <field name="name">Email Templates</field>
+        <field name="res_model">mail.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="mail.action_email_template_tree_all"/>
+        <field name="context">{'search_default_base_templates': 1, 'salewise_mode': True}</field>
+        <field name="search_view_id" ref="email.template.search"/>
+    </record>
+    <record id="salewise_mail_mail_blacklist_action" model="ir.actions.act_window">
+        <field name="name">Blacklisted Email Addresses</field>
+        <field name="res_model">mail.blacklist</field>
+        <field name="view_mode">list</field>
+        <field name="original_action" ref="mail.mail_blacklist_action"/>
+        <field name="search_view_id" ref="mail.mail_blacklist_view_search"/>
+    </record>
+    <record id="salewise_mail_action_email_server_tree" model="ir.actions.act_window">
+        <field name="name">Incoming Mail Servers</field>
+        <field name="res_model">fetchmail.server</field>
+        <field name="view_mode">list,form</field>
+        <field name="original_action" ref="mail.action_email_server_tree"/>
+        <field name="search_view_id" ref="fetchmail.view_email_server_search"/>
+    </record>
+    <record id="salewise_mail_mail_activity_action" model="ir.actions.act_window">
+        <field name="name">Activity Overview</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">activity,form</field>
+        <field name="original_action" ref="mail.mail_activity_action"/>
+    </record>
+    <record id="salewise_mail_mail_activity_plan_action" model="ir.actions.act_window">
+        <field name="name">Activity Plans</field>
+        <field name="res_model">mail.activity.plan</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="original_action" ref="mail.mail_activity_plan_action"/>
+        <field name="search_view_id" ref="mail.mail_activity_plan_view_search"/>
+    </record>
+    <record id="salewise_mail_mail_activity_type_action" model="ir.actions.act_window">
+        <field name="name">Activity Types</field>
+        <field name="res_model">mail.activity.type</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="original_action" ref="mail.mail_activity_type_action"/>
+    </record>
+
+    </data>
+</odoo>

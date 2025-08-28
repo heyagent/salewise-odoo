@@ -94,6 +94,8 @@
         'impersonate_login',
         'salewise_users',
         'salewise_plans',
+        'salewise_actions',  # Custom actions for Salewise menus
+        'salewise_menus',    # SaaS menu configuration
     ],
     'data': [],
     'installable': True,
