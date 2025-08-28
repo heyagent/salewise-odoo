@@ -92,6 +92,7 @@
         'web_tour',
         # Development packages
         'impersonate_login',
+        'salewise_users',
     ],
     'data': [],
     'installable': True,
