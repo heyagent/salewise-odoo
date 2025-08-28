@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Super Administrator User -->
+        <record id="user_super_admin" model="res.users">
+            <field name="name">Super Admin Test</field>
+            <field name="login">super_admin</field>
+            <field name="password">super_admin</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_super_administrator'))]"/>
+        </record>
+        
+        <!-- System Administrator User -->
+        <record id="user_sys_admin" model="res.users">
+            <field name="name">System Admin Test</field>
+            <field name="login">sys_admin</field>
+            <field name="password">sys_admin</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_system_administrator'))]"/>
+        </record>
+        
+        <!-- Sales Manager User -->
+        <record id="user_sales_manager" model="res.users">
+            <field name="name">Sales Manager Test</field>
+            <field name="login">sales_manager</field>
+            <field name="password">sales_manager</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_sales_manager'))]"/>
+        </record>
+        
+        <!-- Sales User -->
+        <record id="user_sales_user" model="res.users">
+            <field name="name">Sales User Test</field>
+            <field name="login">sales_user</field>
+            <field name="password">sales_user</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_sales_user'))]"/>
+        </record>
+        
+        <!-- Accountant User -->
+        <record id="user_accountant" model="res.users">
+            <field name="name">Accountant Test</field>
+            <field name="login">accountant</field>
+            <field name="password">accountant</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_accountant'))]"/>
+        </record>
+        
+        <!-- HR Manager User -->
+        <record id="user_hr_manager" model="res.users">
+            <field name="name">HR Manager Test</field>
+            <field name="login">hr_manager</field>
+            <field name="password">hr_manager</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_hr_manager'))]"/>
+        </record>
+        
+        <!-- HR Officer User -->
+        <record id="user_hr_officer" model="res.users">
+            <field name="name">HR Officer Test</field>
+            <field name="login">hr_officer</field>
+            <field name="password">hr_officer</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_hr_officer'))]"/>
+        </record>
+        
+        <!-- Project Manager User -->
+        <record id="user_project_manager" model="res.users">
+            <field name="name">Project Manager Test</field>
+            <field name="login">project_manager</field>
+            <field name="password">project_manager</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_project_manager'))]"/>
+        </record>
+        
+        <!-- Project User -->
+        <record id="user_project_user" model="res.users">
+            <field name="name">Project User Test</field>
+            <field name="login">project_user</field>
+            <field name="password">project_user</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_project_user'))]"/>
+        </record>
+        
+        <!-- Marketing User -->
+        <record id="user_marketing_user" model="res.users">
+            <field name="name">Marketing User Test</field>
+            <field name="login">marketing_user</field>
+            <field name="password">marketing_user</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_marketing_user'))]"/>
+        </record>
+        
+        <!-- Employee User -->
+        <record id="user_employee" model="res.users">
+            <field name="name">Employee Test</field>
+            <field name="login">employee</field>
+            <field name="password">employee</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_employee'))]"/>
+        </record>
+        
+        <!-- Team Lead User -->
+        <record id="user_team_lead" model="res.users">
+            <field name="name">Team Lead Test</field>
+            <field name="login">team_lead</field>
+            <field name="password">team_lead</field>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="role_ids" eval="[(4, ref('salewise_users.role_team_lead'))]"/>
+        </record>
+        
+    </data>
+</odoo>

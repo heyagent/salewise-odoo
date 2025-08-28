@@ -151,9 +151,22 @@ rm script_name.py
 
 ## Database Operations
 
+### Direct Database Access
+Database credentials are in `odoo.conf`:
+- Host: localhost
+- Port: 5432
+- User: salewise
+- Password: salewise
+- Database: salewise
+
+Connect directly:
+```bash
+PGPASSWORD=salewise psql -h localhost -U salewise -d salewise
+```
+
 ### Checking Database Status
 ```bash
-sudo -u postgres psql -c "\l" | grep salewise
+PGPASSWORD=salewise psql -h localhost -U salewise -d salewise -c "\dt" | head -20
 ```
 
 ### Killing Database Connections
@@ -164,6 +177,9 @@ ps aux | grep -E 'odoo|python.*odoo' | grep -v grep
 
 # Kill specific process
 kill -9 [PID]
+
+# Or kill all database connections (requires superuser)
+PGPASSWORD=salewise psql -h localhost -U salewise -d salewise -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'salewise' AND pid <> pg_backend_pid();"
 ```
 
 ## Module Development
