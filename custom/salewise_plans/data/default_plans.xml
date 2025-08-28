@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- Set default plan for the main company -->
-        <function model="res.company" name="search">
-            <value eval="[('id', '=', 1)]"/>
-            <value eval="{'plan_type': 'starter'}"/>
-        </function>
+        <record id="base.main_company" model="res.company">
+            <field name="plan_type">starter</field>
+        </record>
     </data>
 </odoo>
