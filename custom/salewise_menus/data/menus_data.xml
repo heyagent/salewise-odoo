@@ -19,7 +19,7 @@
             <field name="parent_id" ref="menu_saas_core_contacts" />
             <field name="sequence">10</field>
             <field name="action" ref="contacts.action_contacts" />
-            <field name="original_menu_id" eval="122" />
+            <field name="original_menu_id" ref="contacts.res_partner_menu_contacts" />
         </record>
         <record id="menu_saas_core_contacts_industries" model="ir.ui.menu">
             <field name="name">Industries</field>
@@ -27,7 +27,7 @@
             <field name="parent_id" ref="menu_saas_core_contacts" />
             <field name="sequence">20</field>
             <field name="action" ref="base.res_partner_industry_action" />
-            <field name="original_menu_id" eval="126" />
+            <field name="original_menu_id" ref="contacts.res_partner_industry_menu" />
         </record>
         <record id="menu_saas_core_crm" model="ir.ui.menu">
             <field name="name">CRM</field>
@@ -42,7 +42,7 @@
             <field name="parent_id" ref="menu_saas_core_crm" />
             <field name="sequence">10</field>
             <field name="action" ref="crm.action_your_pipeline" />
-            <field name="original_menu_id" eval="226" />
+            <field name="original_menu_id" ref="crm.menu_crm_opportunities" />
         </record>
         <record id="menu_saas_core_crm_forecast" model="ir.ui.menu">
             <field name="name">Forecast</field>
@@ -50,7 +50,7 @@
             <field name="parent_id" ref="menu_saas_core_crm" />
             <field name="sequence">20</field>
             <field name="action" ref="crm.action_opportunity_forecast" />
-            <field name="original_menu_id" eval="232" />
+            <field name="original_menu_id" ref="crm.crm_menu_forecast" />
         </record>
         <record id="menu_saas_core_crm_teams" model="ir.ui.menu">
             <field name="name">Teams</field>
@@ -58,7 +58,7 @@
             <field name="parent_id" ref="menu_saas_core_crm" />
             <field name="sequence">30</field>
             <field name="action" ref="sales_team.crm_team_action_pipeline" />
-            <field name="original_menu_id" eval="228" />
+            <field name="original_menu_id" ref="crm.sales_team_menu_team_pipeline" />
             <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]" />
         </record>
         <record id="menu_saas_core_crm_configuration" model="ir.ui.menu">
@@ -73,7 +73,7 @@
             <field name="parent_id" ref="menu_saas_core_crm_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="crm.crm_stage_action" />
-            <field name="original_menu_id" eval="246" />
+            <field name="original_menu_id" ref="crm.menu_crm_lead_stage_act" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_core_crm_configuration_pipeline_lost_reasons" model="ir.ui.menu">
@@ -82,7 +82,7 @@
             <field name="parent_id" ref="menu_saas_core_crm_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="crm.crm_lost_reason_action" />
-            <field name="original_menu_id" eval="248" />
+            <field name="original_menu_id" ref="crm.menu_crm_lost_reason" />
         </record>
         <record id="menu_saas_core_crm_configuration_teams_members" model="ir.ui.menu">
             <field name="name">Teams Members</field>
@@ -90,7 +90,7 @@
             <field name="parent_id" ref="menu_saas_core_crm_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="sales_team.crm_team_member_action" />
-            <field name="original_menu_id" eval="240" />
+            <field name="original_menu_id" ref="crm.crm_team_member_config" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_core_crm_configuration_recurring_plans" model="ir.ui.menu">
@@ -99,7 +99,7 @@
             <field name="parent_id" ref="menu_saas_core_crm_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="crm.crm_recurring_plan_action" />
-            <field name="original_menu_id" eval="244" />
+            <field name="original_menu_id" ref="crm.crm_recurring_plan_menu_config" />
             <field name="groups_id" eval="[(4, ref('crm.group_use_recurring_revenues'))]" />
         </record>
         <record id="menu_saas_core_sales" model="ir.ui.menu">
@@ -115,7 +115,7 @@
             <field name="parent_id" ref="menu_saas_core_sales" />
             <field name="sequence">10</field>
             <field name="action" ref="sale.action_quotations_with_onboarding" />
-            <field name="original_menu_id" eval="416" />
+            <field name="original_menu_id" ref="sale.menu_sale_quotations" />
             <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
         </record>
         <record id="menu_saas_core_sales_orders" model="ir.ui.menu">
@@ -124,7 +124,7 @@
             <field name="parent_id" ref="menu_saas_core_sales" />
             <field name="sequence">20</field>
             <field name="action" ref="sale.action_orders" />
-            <field name="original_menu_id" eval="417" />
+            <field name="original_menu_id" ref="sale.menu_sale_order" />
             <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
         </record>
         <record id="menu_saas_core_sales_products" model="ir.ui.menu">
@@ -133,7 +133,7 @@
             <field name="parent_id" ref="menu_saas_core_sales" />
             <field name="sequence">30</field>
             <field name="action" ref="sale.product_template_action" />
-            <field name="original_menu_id" eval="424" />
+            <field name="original_menu_id" ref="sale.menu_product_template_action" />
         </record>
         <record id="menu_saas_core_sales_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -147,7 +147,7 @@
             <field name="parent_id" ref="menu_saas_core_sales_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="sale_management.sale_order_template_action" />
-            <field name="original_menu_id" eval="456" />
+            <field name="original_menu_id" ref="sale_management.sale_order_template_menu" />
             <field name="groups_id" eval="[(4, ref('sale_management.group_sale_order_template'))]" />
         </record>
         <record id="menu_saas_core_sales_configuration_product_categories" model="ir.ui.menu">
@@ -156,7 +156,7 @@
             <field name="parent_id" ref="menu_saas_core_sales_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="product.product_category_action_form" />
-            <field name="original_menu_id" eval="467" />
+            <field name="original_menu_id" ref="stock.menu_product_category_config_stock" />
         </record>
         <record id="menu_saas_core_contracts" model="ir.ui.menu">
             <field name="name">Contracts</field>
@@ -171,7 +171,7 @@
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">10</field>
             <field name="action" ref="contract.action_customer_contract" />
-            <field name="original_menu_id" eval="454" />
+            <field name="original_menu_id" ref="contract_sale.menu_contract_sale" />
             <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
         </record>
         <record id="menu_saas_core_contracts_templates" model="ir.ui.menu">
@@ -180,7 +180,7 @@
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">20</field>
             <field name="action" ref="contract.contract_template_action" />
-            <field name="original_menu_id" eval="325" />
+            <field name="original_menu_id" ref="contract.contract_template_menu" />
         </record>
         <record id="menu_saas_core_contracts_termination_reason" model="ir.ui.menu">
             <field name="name">Termination Reason</field>
@@ -188,7 +188,7 @@
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">30</field>
             <field name="action" ref="contract_termination.contract_terminate_reason_act_window" />
-            <field name="original_menu_id" eval="455" />
+            <field name="original_menu_id" ref="contract_termination.contract_terminate_reason_menu" />
         </record>
         <record id="menu_saas_core_invoicing" model="ir.ui.menu">
             <field name="name">Invoicing</field>
@@ -203,7 +203,7 @@
             <field name="parent_id" ref="menu_saas_core_invoicing" />
             <field name="sequence">10</field>
             <field name="action" ref="account.action_move_out_invoice" />
-            <field name="original_menu_id" eval="173" />
+            <field name="original_menu_id" ref="account.menu_action_move_out_invoice_type" />
         </record>
         <record id="menu_saas_core_invoicing_payments" model="ir.ui.menu">
             <field name="name">Payments</field>
@@ -211,7 +211,7 @@
             <field name="parent_id" ref="menu_saas_core_invoicing" />
             <field name="sequence">20</field>
             <field name="action" ref="account.action_account_payments" />
-            <field name="original_menu_id" eval="176" />
+            <field name="original_menu_id" ref="account.menu_action_account_payments_receivable" />
         </record>
         <record id="menu_saas_core_invoicing_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -225,7 +225,7 @@
             <field name="parent_id" ref="menu_saas_core_invoicing_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="account.action_payment_term_form" />
-            <field name="original_menu_id" eval="199" />
+            <field name="original_menu_id" ref="account.menu_action_payment_term_form" />
         </record>
         <record id="menu_saas_core_invoicing_configuration_payment_modes" model="ir.ui.menu">
             <field name="name">Payment Modes</field>
@@ -233,7 +233,7 @@
             <field name="parent_id" ref="menu_saas_core_invoicing_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="account_payment_mode.account_payment_mode_action" />
-            <field name="original_menu_id" eval="320" />
+            <field name="original_menu_id" ref="account_payment_mode.account_payment_mode_menu" />
         </record>
         <record id="menu_saas_marketing" model="ir.ui.menu">
             <field name="name">MARKETING</field>
@@ -253,7 +253,7 @@
             <field name="parent_id" ref="menu_saas_marketing_email" />
             <field name="sequence">10</field>
             <field name="action" ref="mail.action_view_mail_mail" />
-            <field name="original_menu_id" eval="85" />
+            <field name="original_menu_id" ref="mail.menu_mail_mail" />
         </record>
         <record id="menu_saas_marketing_email_email_templates" model="ir.ui.menu">
             <field name="name">Email Templates</field>
@@ -261,7 +261,7 @@
             <field name="parent_id" ref="menu_saas_marketing_email" />
             <field name="sequence">20</field>
             <field name="action" ref="mail.action_email_template_tree_all" />
-            <field name="original_menu_id" eval="89" />
+            <field name="original_menu_id" ref="mail.menu_email_templates" />
         </record>
         <record id="menu_saas_marketing_email_email_blacklist" model="ir.ui.menu">
             <field name="name">Email Blacklist</field>
@@ -269,7 +269,7 @@
             <field name="parent_id" ref="menu_saas_marketing_email" />
             <field name="sequence">30</field>
             <field name="action" ref="mail.mail_blacklist_action" />
-            <field name="original_menu_id" eval="292" />
+            <field name="original_menu_id" ref="mass_mailing.mail_blacklist_mm_menu" />
         </record>
         <record id="menu_saas_marketing_email_outgoing_mail_servers" model="ir.ui.menu">
             <field name="name">Outgoing Mail Servers</field>
@@ -277,7 +277,7 @@
             <field name="parent_id" ref="menu_saas_marketing_email" />
             <field name="sequence">40</field>
             <field name="action" ref="base.action_ir_mail_server_list" />
-            <field name="original_menu_id" eval="31" />
+            <field name="original_menu_id" ref="base.menu_mail_servers" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_marketing_email_incoming_mail_servers" model="ir.ui.menu">
@@ -286,7 +286,7 @@
             <field name="parent_id" ref="menu_saas_marketing_email" />
             <field name="sequence">50</field>
             <field name="action" ref="mail.action_email_server_tree" />
-            <field name="original_menu_id" eval="88" />
+            <field name="original_menu_id" ref="mail.menu_action_fetchmail_server_tree" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_marketing_social_marketing" model="ir.ui.menu">
@@ -302,7 +302,7 @@
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">10</field>
             <field name="action" ref="social.action_social_post" />
-            <field name="original_menu_id" eval="146" />
+            <field name="original_menu_id" ref="social.menu_social_post" />
         </record>
         <record id="menu_saas_marketing_social_marketing_feed" model="ir.ui.menu">
             <field name="name">Feed</field>
@@ -310,7 +310,7 @@
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">20</field>
             <field name="action" ref="social.action_social_stream_post" />
-            <field name="original_menu_id" eval="145" />
+            <field name="original_menu_id" ref="social.menu_social_stream_post" />
         </record>
         <record id="menu_saas_marketing_social_marketing_campaigns" model="ir.ui.menu">
             <field name="name">Campaigns</field>
@@ -318,7 +318,7 @@
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">30</field>
             <field name="action" ref="social.action_view_utm_campaigns" />
-            <field name="original_menu_id" eval="152" />
+            <field name="original_menu_id" ref="social.menu_social_campaign" />
             <field name="groups_id" eval="[(4, ref('social.group_social_user'))]" />
         </record>
         <record id="menu_saas_marketing_social_marketing_accounts" model="ir.ui.menu">
@@ -327,7 +327,7 @@
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">40</field>
             <field name="action" ref="social.action_social_account" />
-            <field name="original_menu_id" eval="150" />
+            <field name="original_menu_id" ref="social.menu_social_account" />
             <field name="groups_id" eval="[(4, ref('social.group_social_manager'))]" />
         </record>
         <record id="menu_saas_marketing_marketing_automation" model="ir.ui.menu">
@@ -343,7 +343,7 @@
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">10</field>
             <field name="action" ref="marketing_automation.marketing_campaign_action" />
-            <field name="original_menu_id" eval="403" />
+            <field name="original_menu_id" ref="marketing_automation.marketing_campaign_menu" />
         </record>
         <record id="menu_saas_marketing_marketing_automation_participants" model="ir.ui.menu">
             <field name="name">Participants</field>
@@ -351,7 +351,7 @@
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">20</field>
             <field name="action" ref="marketing_automation.marketing_participants_action_reporting" />
-            <field name="original_menu_id" eval="401" />
+            <field name="original_menu_id" ref="marketing_automation.marketing_participants_menu" />
             <field name="groups_id" eval="[(4, ref('marketing_automation.group_marketing_automation_user'))]" />
         </record>
         <record id="menu_saas_marketing_marketing_automation_traces" model="ir.ui.menu">
@@ -360,7 +360,7 @@
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">30</field>
             <field name="action" ref="marketing_automation.marketing_trace_action" />
-            <field name="original_menu_id" eval="402" />
+            <field name="original_menu_id" ref="marketing_automation.marketing_trace_menu" />
             <field name="groups_id" eval="[(4, ref('marketing_automation.group_marketing_automation_user'))]" />
         </record>
         <record id="menu_saas_marketing_link_tracker" model="ir.ui.menu">
@@ -376,7 +376,7 @@
             <field name="parent_id" ref="menu_saas_marketing_link_tracker" />
             <field name="sequence">10</field>
             <field name="action" ref="utm.utm_campaign_action" />
-            <field name="original_menu_id" eval="76" />
+            <field name="original_menu_id" ref="utm.menu_utm_campaign_act" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_marketing_link_tracker_sources" model="ir.ui.menu">
@@ -385,7 +385,7 @@
             <field name="parent_id" ref="menu_saas_marketing_link_tracker" />
             <field name="sequence">20</field>
             <field name="action" ref="utm.utm_source_action" />
-            <field name="original_menu_id" eval="78" />
+            <field name="original_menu_id" ref="utm.menu_utm_source" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_marketing_link_tracker_mediums" model="ir.ui.menu">
@@ -394,7 +394,7 @@
             <field name="parent_id" ref="menu_saas_marketing_link_tracker" />
             <field name="sequence">30</field>
             <field name="action" ref="utm.utm_medium_action" />
-            <field name="original_menu_id" eval="77" />
+            <field name="original_menu_id" ref="utm.menu_utm_medium" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_marketing_link_tracker_link_tracker" model="ir.ui.menu">
@@ -403,7 +403,7 @@
             <field name="parent_id" ref="menu_saas_marketing_link_tracker" />
             <field name="sequence">40</field>
             <field name="action" ref="link_tracker.link_tracker_action" />
-            <field name="original_menu_id" eval="135" />
+            <field name="original_menu_id" ref="mass_mailing.link_tracker_menu_mass_mailing" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_operations" model="ir.ui.menu">
@@ -424,7 +424,7 @@
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">10</field>
             <field name="action" ref="project.open_view_project_all" />
-            <field name="original_menu_id" eval="298" />
+            <field name="original_menu_id" ref="project.menu_projects" />
         </record>
         <record id="menu_saas_operations_project_tasks" model="ir.ui.menu">
             <field name="name">Tasks</field>
@@ -432,7 +432,7 @@
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">20</field>
             <field name="action" ref="project.action_view_all_task" />
-            <field name="original_menu_id" eval="302" />
+            <field name="original_menu_id" ref="project.menu_project_management_all_tasks" />
         </record>
         <record id="menu_saas_operations_project_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -446,7 +446,7 @@
             <field name="parent_id" ref="menu_saas_operations_project_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="project.project_project_stage_configure" />
-            <field name="original_menu_id" eval="310" />
+            <field name="original_menu_id" ref="project.menu_project_config_project_stage" />
             <field name="groups_id" eval="[(4, ref('project.group_project_stages'))]" />
         </record>
         <record id="menu_saas_operations_project_configuration_task_stages" model="ir.ui.menu">
@@ -455,7 +455,7 @@
             <field name="parent_id" ref="menu_saas_operations_project_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="project.open_task_type_form" />
-            <field name="original_menu_id" eval="311" />
+            <field name="original_menu_id" ref="project.menu_project_config_project" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_operations_activities" model="ir.ui.menu">
@@ -471,7 +471,7 @@
             <field name="parent_id" ref="menu_saas_operations_activities" />
             <field name="sequence">10</field>
             <field name="action" ref="mail.mail_activity_action" />
-            <field name="original_menu_id" eval="109" />
+            <field name="original_menu_id" ref="mail.menu_mail_activities" />
         </record>
         <record id="menu_saas_operations_activities_activity_plans" model="ir.ui.menu">
             <field name="name">Activity Plans</field>
@@ -479,7 +479,7 @@
             <field name="parent_id" ref="menu_saas_operations_activities" />
             <field name="sequence">20</field>
             <field name="action" ref="mail.mail_activity_plan_action" />
-            <field name="original_menu_id" eval="111" />
+            <field name="original_menu_id" ref="mail.menu_mail_activity_plan" />
         </record>
         <record id="menu_saas_operations_activities_activity_types" model="ir.ui.menu">
             <field name="name">Activity Types</field>
@@ -487,7 +487,7 @@
             <field name="parent_id" ref="menu_saas_operations_activities" />
             <field name="sequence">30</field>
             <field name="action" ref="mail.mail_activity_type_action" />
-            <field name="original_menu_id" eval="110" />
+            <field name="original_menu_id" ref="mail.menu_mail_activity_type" />
         </record>
         <record id="menu_saas_operations_calendar" model="ir.ui.menu">
             <field name="name">Calendar</field>
@@ -502,7 +502,7 @@
             <field name="parent_id" ref="menu_saas_operations_calendar" />
             <field name="sequence">10</field>
             <field name="action" ref="calendar.action_calendar_event" />
-            <field name="original_menu_id" eval="114" />
+            <field name="original_menu_id" ref="calendar.calendar_event_menu" />
             <field name="groups_id" eval="[(4, ref('base.group_user'))]" />
         </record>
         <record id="menu_saas_operations_calendar_appointments" model="ir.ui.menu">
@@ -511,7 +511,7 @@
             <field name="parent_id" ref="menu_saas_operations_calendar" />
             <field name="sequence">20</field>
             <field name="action" ref="appointment.appointment_type_action" />
-            <field name="original_menu_id" eval="153" />
+            <field name="original_menu_id" ref="appointment.main_menu_appointments" />
             <field name="groups_id" eval="[(4, ref('base.group_user'))]" />
         </record>
         <record id="menu_saas_operations_calendar_shared_links" model="ir.ui.menu">
@@ -520,7 +520,7 @@
             <field name="parent_id" ref="menu_saas_operations_calendar" />
             <field name="sequence">30</field>
             <field name="action" ref="appointment.appointment_invite_action" />
-            <field name="original_menu_id" eval="159" />
+            <field name="original_menu_id" ref="appointment.menu_appointment_invite" />
         </record>
         <record id="menu_saas_operations_calendar_reminders" model="ir.ui.menu">
             <field name="name">Reminders</field>
@@ -528,7 +528,7 @@
             <field name="parent_id" ref="menu_saas_operations_calendar" />
             <field name="sequence">40</field>
             <field name="action" ref="calendar.action_calendar_alarm" />
-            <field name="original_menu_id" eval="120" />
+            <field name="original_menu_id" ref="appointment.menu_appointment_reminders" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_operations_documents" model="ir.ui.menu">
@@ -544,7 +544,7 @@
             <field name="parent_id" ref="menu_saas_operations_documents" />
             <field name="sequence">10</field>
             <field name="action" ref="documents.document_action" />
-            <field name="original_menu_id" eval="251" />
+            <field name="original_menu_id" ref="documents.dashboard" />
             <field name="groups_id" eval="[(4, ref('documents.group_documents_user'))]" />
         </record>
         <record id="menu_saas_hr" model="ir.ui.menu">
@@ -565,7 +565,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">10</field>
             <field name="action" ref="hr.open_view_employee_list_my" />
-            <field name="original_menu_id" eval="262" />
+            <field name="original_menu_id" ref="hr.menu_hr_employee_user" />
         </record>
         <record id="menu_saas_hr_employees_departments" model="ir.ui.menu">
             <field name="name">Departments</field>
@@ -573,7 +573,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">20</field>
             <field name="action" ref="hr.hr_department_kanban_action" />
-            <field name="original_menu_id" eval="269" />
+            <field name="original_menu_id" ref="hr.menu_hr_department_kanban" />
             <field name="groups_id" eval="[(4, ref('base.group_user'))]" />
         </record>
         <record id="menu_saas_hr_employees_contracts" model="ir.ui.menu">
@@ -582,7 +582,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">30</field>
             <field name="action" ref="hr_contract.action_hr_contract" />
-            <field name="original_menu_id" eval="333" />
+            <field name="original_menu_id" ref="hr_contract.menu_hr_employee_contracts" />
         </record>
         <record id="menu_saas_hr_employees_skills" model="ir.ui.menu">
             <field name="name">Skills</field>
@@ -590,7 +590,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">40</field>
             <field name="action" ref="hr_skills.hr_employee_skill_report_action" />
-            <field name="original_menu_id" eval="395" />
+            <field name="original_menu_id" ref="hr_skills.hr_employee_skill_report_menu" />
         </record>
         <record id="menu_saas_hr_employees_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -604,7 +604,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr.action_hr_job" />
-            <field name="original_menu_id" eval="275" />
+            <field name="original_menu_id" ref="hr.menu_view_hr_job" />
         </record>
         <record id="menu_saas_hr_employees_configuration_employment_types" model="ir.ui.menu">
             <field name="name">Employment Types</field>
@@ -612,7 +612,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr.hr_contract_type_action" />
-            <field name="original_menu_id" eval="276" />
+            <field name="original_menu_id" ref="hr.menu_view_hr_contract_type" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
         </record>
         <record id="menu_saas_hr_employees_configuration_working_schedules" model="ir.ui.menu">
@@ -621,7 +621,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="resource.action_resource_calendar_form" />
-            <field name="original_menu_id" eval="71" />
+            <field name="original_menu_id" ref="resource.menu_resource_calendar" />
         </record>
         <record id="menu_saas_hr_employees_configuration_work_locations" model="ir.ui.menu">
             <field name="name">Work Locations</field>
@@ -629,7 +629,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr.hr_work_location_action" />
-            <field name="original_menu_id" eval="270" />
+            <field name="original_menu_id" ref="hr.menu_hr_work_location_tree" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
         </record>
         <record id="menu_saas_hr_employees_configuration_skill_types" model="ir.ui.menu">
@@ -638,7 +638,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_skills.hr_skill_type_action" />
-            <field name="original_menu_id" eval="394" />
+            <field name="original_menu_id" ref="hr_skills.hr_skill_type_menu" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
         </record>
         <record id="menu_saas_hr_employees_configuration_departure_reasons" model="ir.ui.menu">
@@ -647,7 +647,7 @@
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr.hr_departure_reason_action" />
-            <field name="original_menu_id" eval="272" />
+            <field name="original_menu_id" ref="hr.menu_hr_departure_reason_tree" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
         </record>
         <record id="menu_saas_hr_recruitment" model="ir.ui.menu">
@@ -663,7 +663,7 @@
             <field name="parent_id" ref="menu_saas_hr_recruitment" />
             <field name="sequence">10</field>
             <field name="action" ref="hr_recruitment.action_hr_candidate" />
-            <field name="original_menu_id" eval="370" />
+            <field name="original_menu_id" ref="hr_recruitment.menu_hr_candidate" />
         </record>
         <record id="menu_saas_hr_recruitment_all_applications" model="ir.ui.menu">
             <field name="name">All Applications</field>
@@ -671,7 +671,7 @@
             <field name="parent_id" ref="menu_saas_hr_recruitment" />
             <field name="sequence">20</field>
             <field name="action" ref="hr_recruitment.crm_case_categ0_act_job" />
-            <field name="original_menu_id" eval="369" />
+            <field name="original_menu_id" ref="hr_recruitment.menu_crm_case_categ_all_app" />
         </record>
         <record id="menu_saas_hr_recruitment_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -685,7 +685,7 @@
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_recruitment.hr_recruitment_stage_act" />
-            <field name="original_menu_id" eval="376" />
+            <field name="original_menu_id" ref="hr_recruitment.menu_hr_recruitment_stage" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_hr_recruitment_configuration_refuse_reasons" model="ir.ui.menu">
@@ -694,7 +694,7 @@
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_recruitment.hr_applicant_refuse_reason_action" />
-            <field name="original_menu_id" eval="383" />
+            <field name="original_menu_id" ref="hr_recruitment.menu_hr_applicant_refuse_reason" />
         </record>
         <record id="menu_saas_hr_time_off" model="ir.ui.menu">
             <field name="name">Time Off</field>
@@ -709,7 +709,7 @@
             <field name="parent_id" ref="menu_saas_hr_time_off" />
             <field name="sequence">10</field>
             <field name="action" ref="hr_holidays.hr_leave_action_action_approve_department" />
-            <field name="original_menu_id" eval="353" />
+            <field name="original_menu_id" ref="hr_holidays.menu_open_department_leave_approve" />
         </record>
         <record id="menu_saas_hr_time_off_allocations" model="ir.ui.menu">
             <field name="name">Allocations</field>
@@ -717,7 +717,7 @@
             <field name="parent_id" ref="menu_saas_hr_time_off" />
             <field name="sequence">20</field>
             <field name="action" ref="hr_holidays.hr_leave_allocation_action_approve_department" />
-            <field name="original_menu_id" eval="354" />
+            <field name="original_menu_id" ref="hr_holidays.hr_holidays_menu_manager_approve_allocations" />
         </record>
         <record id="menu_saas_hr_time_off_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
@@ -731,7 +731,7 @@
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_holidays.open_view_holiday_status" />
-            <field name="original_menu_id" eval="360" />
+            <field name="original_menu_id" ref="hr_holidays.hr_holidays_status_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
         </record>
         <record id="menu_saas_hr_time_off_configuration_public_holidays" model="ir.ui.menu">
@@ -740,7 +740,7 @@
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_holidays.open_view_public_holiday" />
-            <field name="original_menu_id" eval="362" />
+            <field name="original_menu_id" ref="hr_holidays.hr_holidays_public_time_off_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
         </record>
         <record id="menu_saas_hr_time_off_configuration_mandatory_days" model="ir.ui.menu">
@@ -749,7 +749,7 @@
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">100</field>
             <field name="action" ref="hr_holidays.hr_leave_mandatory_day_action" />
-            <field name="original_menu_id" eval="363" />
+            <field name="original_menu_id" ref="hr_holidays.hr_holidays_mandatory_day_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
         </record>
         <record id="menu_saas_hr_expenses" model="ir.ui.menu">
@@ -765,7 +765,7 @@
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">10</field>
             <field name="action" ref="hr_expense.action_hr_expense_sheet_all" />
-            <field name="original_menu_id" eval="338" />
+            <field name="original_menu_id" ref="hr_expense.menu_hr_expense_report" />
             <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user'), ref('hr_expense.group_hr_expense_team_approver')])]" />
         </record>
         <record id="menu_saas_hr_expenses_expenses_analysis" model="ir.ui.menu">
@@ -774,7 +774,7 @@
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">20</field>
             <field name="action" ref="hr_expense.hr_expense_actions_all" />
-            <field name="original_menu_id" eval="340" />
+            <field name="original_menu_id" ref="hr_expense.menu_hr_expense_all_expenses" />
         </record>
         <record id="menu_saas_hr_expenses_expense_categories" model="ir.ui.menu">
             <field name="name">Expense Categories</field>
@@ -782,7 +782,7 @@
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">30</field>
             <field name="action" ref="hr_expense.hr_expense_product" />
-            <field name="original_menu_id" eval="342" />
+            <field name="original_menu_id" ref="hr_expense.menu_hr_product" />
             <field name="groups_id" eval="[(4, ref('hr_expense.group_hr_expense_manager'))]" />
         </record>
         <record id="menu_saas_hr_payroll" model="ir.ui.menu">
@@ -798,7 +798,7 @@
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">10</field>
             <field name="action" ref="payroll.hr_payslip_run_action" />
-            <field name="original_menu_id" eval="412" />
+            <field name="original_menu_id" ref="payroll.hr_payslip_run_menu" />
         </record>
         <record id="menu_saas_hr_payroll_employee_payslips" model="ir.ui.menu">
             <field name="name">Employee Payslips</field>
@@ -806,7 +806,7 @@
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">20</field>
             <field name="action" ref="payroll.hr_payslip_action" />
-            <field name="original_menu_id" eval="411" />
+            <field name="original_menu_id" ref="payroll.hr_payslip_menu" />
             <field name="groups_id" eval="[(4, ref('payroll.group_payroll_user'))]" />
         </record>
         <record id="menu_saas_hr_payroll_salary_structures" model="ir.ui.menu">
@@ -815,7 +815,7 @@
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">30</field>
             <field name="action" ref="payroll.hr_payroll_structure_action" />
-            <field name="original_menu_id" eval="407" />
+            <field name="original_menu_id" ref="payroll.hr_payroll_structure_menu" />
         </record>
         <record id="menu_saas_hr_payroll_salary_rules" model="ir.ui.menu">
             <field name="name">Salary Rules</field>
@@ -823,7 +823,7 @@
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">40</field>
             <field name="action" ref="payroll.action_salary_rule_form" />
-            <field name="original_menu_id" eval="410" />
+            <field name="original_menu_id" ref="payroll.menu_action_hr_salary_rule_form" />
         </record>
         <record id="menu_saas_system" model="ir.ui.menu">
             <field name="name">SYSTEM</field>
@@ -843,7 +843,7 @@
             <field name="parent_id" ref="menu_saas_system_automation" />
             <field name="sequence">10</field>
             <field name="action" ref="base_automation.base_automation_act" />
-            <field name="original_menu_id" eval="223" />
+            <field name="original_menu_id" ref="base_automation.menu_base_automation_form" />
         </record>
         <record id="menu_saas_system_settings" model="ir.ui.menu">
             <field name="name">Settings</field>
@@ -858,7 +858,7 @@
             <field name="parent_id" ref="menu_saas_system_settings" />
             <field name="sequence">10</field>
             <field name="action" ref="base_setup.action_general_configuration" />
-            <field name="original_menu_id" eval="67" />
+            <field name="original_menu_id" ref="base_setup.menu_config" />
             <field name="groups_id" eval="[(4, ref('base.group_system'))]" />
         </record>
         <record id="menu_saas_system_settings_users" model="ir.ui.menu">
@@ -867,7 +867,7 @@
             <field name="parent_id" ref="menu_saas_system_settings" />
             <field name="sequence">20</field>
             <field name="action" ref="base.action_res_users" />
-            <field name="original_menu_id" eval="61" />
+            <field name="original_menu_id" ref="base.menu_action_res_users" />
         </record>
         <record id="menu_saas_system_settings_user_roles" model="ir.ui.menu">
             <field name="name">User Roles</field>
@@ -875,7 +875,7 @@
             <field name="parent_id" ref="menu_saas_system_settings" />
             <field name="sequence">30</field>
             <field name="action" ref="base_user_role.action_res_users_role_tree" />
-            <field name="original_menu_id" eval="66" />
+            <field name="original_menu_id" ref="base_user_role.menu_action_res_users_role_tree" />
         </record>
         <record id="menu_saas_system_settings_languages" model="ir.ui.menu">
             <field name="name">Languages</field>
@@ -883,7 +883,7 @@
             <field name="parent_id" ref="menu_saas_system_settings" />
             <field name="sequence">40</field>
             <field name="action" ref="base.res_lang_act_window" />
-            <field name="original_menu_id" eval="59" />
+            <field name="original_menu_id" ref="base.menu_res_lang_act_window" />
         </record>
     </data>
 </odoo>
