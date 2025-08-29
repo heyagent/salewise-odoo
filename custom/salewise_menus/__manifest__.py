@@ -50,6 +50,7 @@
             'salewise_menus/static/src/js/tour_patch.js',
             'salewise_menus/static/src/js/user_menu.esm.js',
             'salewise_menus/static/src/js/navbar_patch.js',
+            'salewise_menus/static/src/js/favorites_menu_patch.js',
             'salewise_menus/static/src/js/apps_menu_patch.js',
             'salewise_menus/static/src/xml/apps_menu.xml',
             'salewise_menus/static/src/scss/salewise_menu.scss',
