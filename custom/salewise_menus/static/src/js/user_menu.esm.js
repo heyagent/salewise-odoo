@@ -3,12 +3,14 @@
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { session } from "@web/session";
+// Import user_menu_items to ensure menu items are registered before we try to remove them
+import { user_menu_items } from "@web/webclient/user_menu/user_menu_items"; // eslint-disable-line no-unused-vars
 
 export function saasMenuToggleItem(env) {
     return {
         type: "item",
         id: "saas_menu_toggle",
-        description: _t("Toggle Salewise"),
+        description: _t("Switch App"),
         callback: async function () {
             const result = await env.services.orm.call(
                 "res.users",
@@ -23,6 +25,13 @@ export function saasMenuToggleItem(env) {
     };
 }
 
+// Add our custom menu item
 registry
     .category("user_menuitems")
     .add("saas_menu_toggle", saasMenuToggleItem, { force: true });
+
+// Remove unwanted menu items directly
+registry.category("user_menuitems").remove("shortcuts");
+registry.category("user_menuitems").remove("install_pwa");
+registry.category("user_menuitems").remove("separator");
+registry.category("user_menuitems").remove("web_tour.tour_enabled");  // Remove Onboarding

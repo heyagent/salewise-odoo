@@ -92,6 +92,7 @@
         'web_tour',
         # Development packages
         'impersonate_login',
+        'disable_odoo_online',  # Disable Odoo.com bindings
         'salewise_users',
         'salewise_plans',
         'salewise_actions',  # Custom actions for Salewise menus
