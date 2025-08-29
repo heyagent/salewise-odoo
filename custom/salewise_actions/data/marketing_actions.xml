@@ -8,6 +8,7 @@
         <field name="res_model">social.post</field>
         <field name="view_mode">kanban,calendar,form</field>
         <field name="original_action" ref="social.action_social_post"/>
+        <field name="original_view_mode">kanban,calendar,list,form,pivot</field>
         <field name="context">{'search_default_filter_my_posts':1, 'salewise_mode': True}</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('social.social_post_view_kanban')}), (0, 0, {'view_mode': 'calendar', 'view_id': ref('social.social_post_view_calendar')}), (0, 0, {'view_mode': 'form', 'view_id': ref('social.social_post_view_form')})]"/>
     </record>
@@ -16,6 +17,7 @@
         <field name="res_model">social.stream.post</field>
         <field name="view_mode">kanban</field>
         <field name="original_action" ref="social.action_social_stream_post"/>
+        <field name="original_view_mode">kanban</field>
         <field name="context">{'search_default_group_by_stream': 1, 'search_default_search_my_streams': 1, 'salewise_mode': True}</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('social.social_stream_post_view_kanban')})]"/>
     </record>
@@ -24,6 +26,7 @@
         <field name="res_model">utm.campaign</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="social.action_view_utm_campaigns"/>
+        <field name="original_view_mode">kanban,list,form</field>
         <field name="domain">[('is_auto_campaign', '=', False)]</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('utm.utm_campaign_view_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('utm.utm_campaign_view_form')})]"/>
     </record>
@@ -32,6 +35,7 @@
         <field name="res_model">social.account</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="social.action_social_account"/>
+        <field name="original_view_mode">list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('social.social_account_view_list')})]"/>
     </record>
 
@@ -41,6 +45,7 @@
         <field name="res_model">marketing.campaign</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="marketing_automation.marketing_campaign_action"/>
+        <field name="original_view_mode">kanban,list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('marketing_automation.marketing_campaign_view_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('marketing_automation.marketing_campaign_view_form')})]"/>
     </record>
     <record id="salewise_marketing_automation_marketing_participants_action_reporting" model="ir.actions.act_window">
@@ -48,6 +53,7 @@
         <field name="res_model">marketing.participant</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="marketing_automation.marketing_participants_action_reporting"/>
+        <field name="original_view_mode">graph,pivot,list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('marketing_automation.marketing_participant_view_tree')})]"/>
     </record>
     <record id="salewise_marketing_automation_marketing_trace_action" model="ir.actions.act_window">
@@ -55,6 +61,7 @@
         <field name="res_model">marketing.trace</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="marketing_automation.marketing_trace_action"/>
+        <field name="original_view_mode">graph,pivot,list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('marketing_automation.marketing_trace_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('marketing_automation.marketing_trace_view_form')})]"/>
     </record>
 
@@ -64,6 +71,7 @@
         <field name="res_model">utm.campaign</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="utm.utm_campaign_action"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('utm.utm_campaign_view_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('utm.utm_campaign_view_form')})]"/>
     </record>
     <record id="salewise_utm_utm_source_action" model="ir.actions.act_window">
@@ -71,6 +79,7 @@
         <field name="res_model">utm.source</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="utm.utm_source_action"/>
+        <field name="original_view_mode">list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('utm.utm_source_view_tree')})]"/>
     </record>
     <record id="salewise_utm_utm_medium_action" model="ir.actions.act_window">
@@ -78,6 +87,7 @@
         <field name="res_model">utm.medium</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="utm.utm_medium_action"/>
+        <field name="original_view_mode">list,form</field>
         <field name="search_view_id" ref="utm.utm_medium_view_search"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('utm.utm_medium_view_tree')})]"/>
     </record>
@@ -88,6 +98,7 @@
         <field name="res_model">link.tracker</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="link_tracker.link_tracker_action"/>
+        <field name="original_view_mode">list,form,graph</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('link_tracker.link_tracker_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('link_tracker.link_tracker_view_form')})]"/>
     </record>
 
