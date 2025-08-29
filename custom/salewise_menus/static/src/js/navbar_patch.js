@@ -14,6 +14,18 @@ patch(NavBar.prototype, {
         if (this.showSaasMenus) {
             this.currentAppSectionsExtra = [];
         }
+    },
+    
+    // Override systrayItems getter to filter out company switcher in Salewise mode
+    get systrayItems() {
+        const items = super.systrayItems;
+        
+        // Filter out SwitchCompanyMenu when in Salewise mode
+        if (this.showSaasMenus) {
+            return items.filter(item => item.key !== "SwitchCompanyMenu");
+        }
+        
+        return items;
     }
 });
 
