@@ -5,14 +5,22 @@
         padding: 8px 12px;
         border-bottom: 1px solid #dee2e6;
         margin-bottom: 4px;
+        background-color: #f5f5f5;  // Light gray background for top-level items
         
         .o_app_link {
             color: #212529;
             text-decoration: none;
             display: block;
+            pointer-events: none;  // Disable clicking
+            cursor: default;  // Show default cursor instead of pointer
             
             &:hover {
-                color: #0056b3;
+                color: #212529;  // Keep same color on hover (no hover effect)
+            }
+            
+            strong {
+                font-weight: 600;
+                letter-spacing: 0.5px;
             }
         }
     }
