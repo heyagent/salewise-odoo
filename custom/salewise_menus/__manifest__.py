@@ -5,6 +5,7 @@
     'depends': [
         'base',
         'web',
+        'web_tour',  # Added to ensure our patches run after web_tour
         'salewise_actions',  # Custom actions module
         'account',
         'account_payment_mode',
@@ -46,6 +47,7 @@
     ],
     'assets': {
         'web.assets_backend': [
+            'salewise_menus/static/src/js/tour_patch.js',
             'salewise_menus/static/src/js/user_menu.esm.js',
             'salewise_menus/static/src/js/navbar_patch.js',
             'salewise_menus/static/src/js/apps_menu_patch.js',

@@ -25,7 +25,6 @@ export function saasMenuToggleItem(env) {
     };
 }
 
-// Add our custom menu item
 registry
     .category("user_menuitems")
     .add("saas_menu_toggle", saasMenuToggleItem, { force: true });
@@ -34,4 +33,3 @@ registry
 registry.category("user_menuitems").remove("shortcuts");
 registry.category("user_menuitems").remove("install_pwa");
 registry.category("user_menuitems").remove("separator");
-registry.category("user_menuitems").remove("web_tour.tour_enabled");  // Remove Onboarding
