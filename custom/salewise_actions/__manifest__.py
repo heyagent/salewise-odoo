@@ -27,7 +27,6 @@
         'calendar',
         'appointment',
         'mail',
-        'fetchmail',
         'mass_mailing',
         'utm',
         'link_tracker',
