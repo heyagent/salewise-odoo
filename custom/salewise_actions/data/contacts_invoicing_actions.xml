@@ -8,6 +8,7 @@
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="original_action" ref="contacts.action_contacts"/>
+        <field name="original_view_mode">kanban,list,form,activity</field>
         <field name="context">{"default_is_company": true, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="base.view_res_partner_filter"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}), (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_partner_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]"/>
@@ -19,6 +20,7 @@
         <field name="res_model">account.move</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="original_action" ref="account.action_move_out_invoice"/>
+        <field name="original_view_mode">list,kanban,form,activity</field>
         <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
         <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="account.view_account_invoice_filter"/>
@@ -29,6 +31,7 @@
         <field name="res_model">account.payment</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="account.action_account_payments"/>
+        <field name="original_view_mode">list,kanban,form,graph,activity</field>
         <field name="context">{
                                 'default_payment_type': 'inbound',
                                 'default_partner_type': 'customer',
@@ -43,6 +46,7 @@
         <field name="res_model">account.payment.term</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="account.action_payment_term_form"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="account.view_payment_term_search"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('account.view_account_payment_term_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_payment_term_form')})]"/>
     </record>
@@ -53,6 +57,7 @@
         <field name="res_model">account.payment.mode</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="account_payment_mode.account_payment_mode_action"/>
+        <field name="original_view_mode">list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('account_payment_mode.account_payment_mode_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account_payment_mode.account_payment_mode_form')})]"/>
     </record>
 
@@ -62,6 +67,7 @@
         <field name="res_model">contract.contract</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="contract.action_customer_contract"/>
+        <field name="original_view_mode">list,form</field>
         <field name="domain">[('contract_type', '=', 'sale')]</field>
         <field name="context">{'is_contract':1,
                         'search_default_not_finished':1,
@@ -74,6 +80,7 @@
         <field name="res_model">contract.template</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="contract.contract_template_action"/>
+        <field name="original_view_mode">list,form</field>
         <field name="search_view_id" ref="contract.contract_template_search_view"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('contract.contract_template_tree_view')}), (0, 0, {'view_mode': 'form', 'view_id': ref('contract.contract_template_form_view')})]"/>
     </record>
@@ -84,6 +91,7 @@
         <field name="res_model">contract.terminate.reason</field>
         <field name="view_mode">list</field>
         <field name="original_action" ref="contract_termination.contract_terminate_reason_act_window"/>
+        <field name="original_view_mode">list,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('contract_termination.contract_terminate_reason_tree_view')})]"/>
     </record>
 

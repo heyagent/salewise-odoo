@@ -8,6 +8,7 @@
         <field name="res_model">hr.payslip.run</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="payroll.hr_payslip_run_action"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="payroll.hr_payslip_run_view_search"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('payroll.hr_payslip_run_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('payroll.hr_payslip_run_view_form')})]"/>
     </record>
@@ -16,6 +17,7 @@
         <field name="res_model">hr.payslip</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="payroll.hr_payslip_action"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="payroll.hr_payslip_view_search"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('payroll.hr_payslip_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('payroll.hr_payslip_view_form')})]"/>
     </record>
@@ -24,6 +26,7 @@
         <field name="res_model">hr.payroll.structure</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="payroll.hr_payroll_structure_action"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('payroll.hr_payroll_structure_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('payroll.hr_payroll_structure_view_form')})]"/>
     </record>
     <record id="salewise_payroll_action_salary_rule_form" model="ir.actions.act_window">
@@ -31,6 +34,7 @@
         <field name="res_model">hr.salary.rule</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="payroll.action_salary_rule_form"/>
+        <field name="original_view_mode">list,kanban,form</field>
         <field name="domain">[('parent_rule_id','=',False)]</field>
         <field name="search_view_id" ref="payroll.hr_salary_rule_view_search"/>
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('payroll.hr_salary_rule_view_tree_children')}), (0, 0, {'view_mode': 'form', 'view_id': ref('payroll.hr_salary_rule_view_form')})]"/>

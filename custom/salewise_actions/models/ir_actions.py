@@ -10,6 +10,11 @@ class IrActionsActWindow(models.Model):
         string='Original Action',
         help='Reference to the original action this was cloned from'
     )
+    
+    original_view_mode = fields.Char(
+        string='Original View Mode',
+        help='The view_mode string from the original action'
+    )
 
 
 class IrActionsServer(models.Model):
