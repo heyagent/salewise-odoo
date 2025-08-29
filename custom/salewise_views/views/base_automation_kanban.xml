@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_base_automation_kanban" model="ir.ui.view">
+        <field name="name">salewise.base.automation.kanban</field>
+        <field name="model">base.automation</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card">
+                        <field name="id"/>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_account_payment_mode_list" model="ir.ui.view">
+        <field name="name">salewise.account.payment.mode.list</field>
+        <field name="model">account.payment.mode</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

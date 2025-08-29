@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_utm_campaign_search" model="ir.ui.view">
+        <field name="name">salewise.utm.campaign.search</field>
+        <field name="model">utm.campaign</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

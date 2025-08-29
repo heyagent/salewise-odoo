@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_hr_employee_skill_report_search" model="ir.ui.view">
+        <field name="name">salewise.hr.employee.skill.report.search</field>
+        <field name="model">hr.employee.skill.report</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

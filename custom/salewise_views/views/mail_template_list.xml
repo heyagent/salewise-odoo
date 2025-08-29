@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_mail_template_list" model="ir.ui.view">
+        <field name="name">salewise.mail.template.list</field>
+        <field name="model">mail.template</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_hr_leave_mandatory_day_list" model="ir.ui.view">
+        <field name="name">salewise.hr.leave.mandatory.day.list</field>
+        <field name="model">hr.leave.mandatory.day</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

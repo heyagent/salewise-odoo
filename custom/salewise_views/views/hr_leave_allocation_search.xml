@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_hr_leave_allocation_search" model="ir.ui.view">
+        <field name="name">salewise.hr.leave.allocation.search</field>
+        <field name="model">hr.leave.allocation</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

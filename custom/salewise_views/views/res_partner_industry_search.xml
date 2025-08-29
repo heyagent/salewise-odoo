@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_res_partner_industry_search" model="ir.ui.view">
+        <field name="name">salewise.res.partner.industry.search</field>
+        <field name="model">res.partner.industry</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

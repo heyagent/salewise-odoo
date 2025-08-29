@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_marketing_trace_search" model="ir.ui.view">
+        <field name="name">salewise.marketing.trace.search</field>
+        <field name="model">marketing.trace</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>
