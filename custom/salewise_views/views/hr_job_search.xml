@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_hr_job_search" model="ir.ui.view">
+        <field name="name">salewise.hr.job.search</field>
+        <field name="model">hr.job</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

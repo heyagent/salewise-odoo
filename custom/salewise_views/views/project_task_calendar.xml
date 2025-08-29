@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_project_task_calendar" model="ir.ui.view">
+        <field name="name">salewise.project.task.calendar</field>
+        <field name="model">project.task</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_deadline">
+                <field name="id"/>
+            </calendar>
+        </field>
+    </record>
+</odoo>

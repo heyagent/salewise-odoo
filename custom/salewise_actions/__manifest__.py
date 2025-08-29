@@ -12,6 +12,7 @@
     'website': 'https://salewise.com',
     'depends': [
         'base',
+        'salewise_views',  # Must be loaded before salewise_actions
         'contacts',
         'crm',
         'sale',

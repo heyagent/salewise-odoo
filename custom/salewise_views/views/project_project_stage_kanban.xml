@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_project_project_stage_kanban" model="ir.ui.view">
+        <field name="name">salewise.project.project.stage.kanban</field>
+        <field name="model">project.project.stage</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card">
+                        <field name="id"/>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

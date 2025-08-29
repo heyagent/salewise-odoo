@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_utm_source_search" model="ir.ui.view">
+        <field name="name">salewise.utm.source.search</field>
+        <field name="model">utm.source</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id"/>
+            </search>
+        </field>
+    </record>
+</odoo>

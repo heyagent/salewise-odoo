@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_resource_calendar_leaves_list" model="ir.ui.view">
+        <field name="name">salewise.resource.calendar.leaves.list</field>
+        <field name="model">resource.calendar.leaves</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

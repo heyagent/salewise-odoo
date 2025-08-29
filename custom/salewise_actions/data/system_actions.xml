@@ -1,89 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-
-        <!-- BASE Actions -->
-    <record id="salewise_base_res_partner_industry_action" model="ir.actions.act_window">
-        <field name="name">Industries</field>
-        <field name="res_model">res.partner.industry</field>
-        <field name="view_mode">list</field>
-        <field name="original_action" ref="base.res_partner_industry_action"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="search_view_id" ref="base.res_partner_industry_view_search"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.res_partner_industry_view_tree')})]"/>
-    </record>
-    <record id="salewise_base_action_ir_mail_server_list" model="ir.actions.act_window">
-        <field name="name">Outgoing Mail Servers</field>
-        <field name="res_model">ir.mail_server</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="base.action_ir_mail_server_list"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="search_view_id" ref="base.view_ir_mail_server_search"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.ir_mail_server_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.ir_mail_server_form')})]"/>
-    </record>
-    <record id="salewise_base_action_res_users" model="ir.actions.act_window">
-        <field name="name">Users</field>
-        <field name="res_model">res.users</field>
-        <field name="view_mode">kanban,form</field>
-        <field name="original_action" ref="base.action_res_users"/>
-        <field name="original_view_mode">list,kanban,form</field>
-        <field name="context">{"search_default_filter_no_share": 1, "ir.ui.menu.full_list": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="base.view_users_search"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.view_res_users_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_simple_form')})]"/>
-    </record>
-    <record id="salewise_base_res_lang_act_window" model="ir.actions.act_window">
-        <field name="name">Languages</field>
-        <field name="res_model">res.lang</field>
-        <field name="view_mode">list</field>
-        <field name="original_action" ref="base.res_lang_act_window"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="context">{"active_test": false, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="base.res_lang_search"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.res_lang_tree')})]"/>
-    </record>
-
-        <!-- BASE_SETUP Actions -->
-    <record id="salewise_base_setup_action_general_configuration" model="ir.actions.act_window">
-        <field name="name">Settings</field>
-        <field name="res_model">res.config.settings</field>
-        <field name="view_mode">form</field>
-        <field name="original_action" ref="base_setup.action_general_configuration"/>
-        <field name="original_view_mode">form</field>
-        <field name="context">{"module": "general_settings", "bin_size": false, 'salewise_mode': True}</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'form', 'view_id': ref('base.res_config_settings_view_form')})]"/>
-    </record>
-
-        <!-- BASE_USER_ROLE Actions -->
-    <record id="salewise_base_user_role_action_res_users_role_tree" model="ir.actions.act_window">
-        <field name="name">User Roles</field>
-        <field name="res_model">res.users.role</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="base_user_role.action_res_users_role_tree"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base_user_role.view_res_users_role_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base_user_role.view_res_users_role_form')})]"/>
-    </record>
-
-        <!-- BASE_AUTOMATION Actions -->
-    <record id="salewise_base_automation_base_automation_act" model="ir.actions.act_window">
-        <field name="name">Automation Rules</field>
-        <field name="res_model">base.automation</field>
-        <field name="view_mode">kanban,form</field>
-        <field name="original_action" ref="base_automation.base_automation_act"/>
-        <field name="original_view_mode">kanban,list,form</field>
-        <field name="context">{'active_test': False, 'salewise_mode': True}</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base_automation.view_base_automation_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base_automation.view_base_automation_form')})]"/>
-    </record>
-
-        <!-- PRODUCT Actions -->
-    <record id="salewise_product_product_category_action_form" model="ir.actions.act_window">
-        <field name="name">Product Categories</field>
-        <field name="res_model">product.category</field>
-        <field name="view_mode">list</field>
-        <field name="original_action" ref="product.product_category_action_form"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="search_view_id" ref="product.product_category_search_view"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('product.product_category_list_view')})]"/>
-    </record>
-
+        <record id="salewise_base_res_partner_industry_action" model="ir.actions.act_window">
+            <field name="name">Industries</field>
+            <field name="res_model">res.partner.industry</field>
+            <field name="view_mode">list</field>
+            <field name="original_action" ref="base.res_partner_industry_action" />
+            <field name="original_view_mode">list,form</field>
+            <field name="search_view_id" ref="salewise_views.salewise_res_partner_industry_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_res_partner_industry_list')})]" />
+        </record>
+        <record id="salewise_base_action_ir_mail_server_list" model="ir.actions.act_window">
+            <field name="name">Outgoing Mail Servers</field>
+            <field name="res_model">ir.mail_server</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="base.action_ir_mail_server_list" />
+            <field name="original_view_mode">list,form</field>
+            <field name="search_view_id" ref="salewise_views.salewise_ir_mail_server_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_ir_mail_server_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_ir_mail_server_form')})]" />
+        </record>
+        <record id="salewise_base_action_res_users" model="ir.actions.act_window">
+            <field name="name">Users</field>
+            <field name="res_model">res.users</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="original_action" ref="base.action_res_users" />
+            <field name="original_view_mode">list,kanban,form</field>
+            <field name="context">{"search_default_filter_no_share": 1, "ir.ui.menu.full_list": 1, 'salewise_mode': True}</field>
+            <field name="search_view_id" ref="salewise_views.salewise_res_users_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_res_users_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_res_users_form')})]" />
+        </record>
+        <record id="salewise_base_res_lang_act_window" model="ir.actions.act_window">
+            <field name="name">Languages</field>
+            <field name="res_model">res.lang</field>
+            <field name="view_mode">list</field>
+            <field name="original_action" ref="base.res_lang_act_window" />
+            <field name="original_view_mode">list,form</field>
+            <field name="context">{"active_test": false, 'salewise_mode': True}</field>
+            <field name="search_view_id" ref="salewise_views.salewise_res_lang_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_res_lang_list')})]" />
+        </record>
+        <record id="salewise_base_setup_action_general_configuration" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="original_action" ref="base_setup.action_general_configuration" />
+            <field name="original_view_mode">form</field>
+            <field name="context">{"module": "general_settings", "bin_size": false, 'salewise_mode': True}</field>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_res_config_settings_form')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_res_config_settings_search" />
+        </record>
+        <record id="salewise_base_user_role_action_res_users_role_tree" model="ir.actions.act_window">
+            <field name="name">User Roles</field>
+            <field name="res_model">res.users.role</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="base_user_role.action_res_users_role_tree" />
+            <field name="original_view_mode">list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_res_users_role_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_res_users_role_form')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_res_users_role_search" />
+        </record>
+        <record id="salewise_base_automation_base_automation_act" model="ir.actions.act_window">
+            <field name="name">Automation Rules</field>
+            <field name="res_model">base.automation</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="original_action" ref="base_automation.base_automation_act" />
+            <field name="original_view_mode">kanban,list,form</field>
+            <field name="context">{'active_test': False, 'salewise_mode': True}</field>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_base_automation_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_base_automation_form')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_base_automation_search" />
+        </record>
+        <record id="salewise_product_product_category_action_form" model="ir.actions.act_window">
+            <field name="name">Product Categories</field>
+            <field name="res_model">product.category</field>
+            <field name="view_mode">list</field>
+            <field name="original_action" ref="product.product_category_action_form" />
+            <field name="original_view_mode">list,form</field>
+            <field name="search_view_id" ref="salewise_views.salewise_product_category_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_product_category_list')})]" />
+        </record>
     </data>
 </odoo>

@@ -1,99 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-
-        <!-- CONTACTS Actions -->
-    <record id="salewise_contacts_action_contacts" model="ir.actions.act_window">
-        <field name="name">Contacts</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,list,form</field>
-        <field name="original_action" ref="contacts.action_contacts"/>
-        <field name="original_view_mode">kanban,list,form,activity</field>
-        <field name="context">{"default_is_company": true, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="base.view_res_partner_filter"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}), (0, 0, {'view_mode': 'list', 'view_id': ref('base.view_partner_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]"/>
-    </record>
-
-        <!-- ACCOUNT Actions -->
-    <record id="salewise_account_action_move_out_invoice" model="ir.actions.act_window">
-        <field name="name">Invoices</field>
-        <field name="res_model">account.move</field>
-        <field name="view_mode">kanban,list,form</field>
-        <field name="original_action" ref="account.action_move_out_invoice"/>
-        <field name="original_view_mode">list,kanban,form,activity</field>
-        <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
-        <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('account.view_account_move_kanban')}), (0, 0, {'view_mode': 'list', 'view_id': ref('account.view_out_invoice_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_move_form')})]"/>
-    </record>
-    <record id="salewise_account_action_account_payments" model="ir.actions.act_window">
-        <field name="name">Customer Payments</field>
-        <field name="res_model">account.payment</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="account.action_account_payments"/>
-        <field name="original_view_mode">list,kanban,form,graph,activity</field>
-        <field name="context">{
+        <record id="salewise_contacts_action_contacts" model="ir.actions.act_window">
+            <field name="name">Contacts</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="original_action" ref="contacts.action_contacts" />
+            <field name="original_view_mode">kanban,list,form,activity</field>
+            <field name="context">{"default_is_company": true, 'salewise_mode': True}</field>
+            <field name="search_view_id" ref="salewise_views.salewise_res_partner_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_res_partner_kanban')}), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_res_partner_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_res_partner_form')})]" />
+        </record>
+        <record id="salewise_account_action_move_out_invoice" model="ir.actions.act_window">
+            <field name="name">Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="original_action" ref="account.action_move_out_invoice" />
+            <field name="original_view_mode">list,kanban,form,activity</field>
+            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
+            <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
+            <field name="search_view_id" ref="salewise_views.salewise_account_move_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_account_move_kanban')}), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_move_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_move_form')})]" />
+        </record>
+        <record id="salewise_account_action_account_payments" model="ir.actions.act_window">
+            <field name="name">Customer Payments</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="account.action_account_payments" />
+            <field name="original_view_mode">list,kanban,form,graph,activity</field>
+            <field name="context">{
                                 'default_payment_type': 'inbound',
                                 'default_partner_type': 'customer',
                                 'search_default_inbound_filter': 1,
                                 'default_move_journal_types': ('bank', 'cash'),
                                 'display_account_trust': True,
                         }, 'salewise_mode': True}</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('account.view_account_payment_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_account_payment_form')})]"/>
-    </record>
-    <record id="salewise_account_action_payment_term_form" model="ir.actions.act_window">
-        <field name="name">Payment Terms</field>
-        <field name="res_model">account.payment.term</field>
-        <field name="view_mode">kanban,form</field>
-        <field name="original_action" ref="account.action_payment_term_form"/>
-        <field name="original_view_mode">list,kanban,form</field>
-        <field name="search_view_id" ref="account.view_payment_term_search"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('account.view_account_payment_term_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_payment_term_form')})]"/>
-    </record>
-
-        <!-- ACCOUNT_PAYMENT_MODE Actions -->
-    <record id="salewise_account_payment_mode_account_payment_mode_action" model="ir.actions.act_window">
-        <field name="name">Payment Modes</field>
-        <field name="res_model">account.payment.mode</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="account_payment_mode.account_payment_mode_action"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('account_payment_mode.account_payment_mode_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account_payment_mode.account_payment_mode_form')})]"/>
-    </record>
-
-        <!-- CONTRACT Actions -->
-    <record id="salewise_contract_action_customer_contract" model="ir.actions.act_window">
-        <field name="name">Customer Contracts</field>
-        <field name="res_model">contract.contract</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="contract.action_customer_contract"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="domain">[('contract_type', '=', 'sale')]</field>
-        <field name="context">{'is_contract':1,
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_payment_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_form')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_account_payment_search" />
+        </record>
+        <record id="salewise_account_action_payment_term_form" model="ir.actions.act_window">
+            <field name="name">Payment Terms</field>
+            <field name="res_model">account.payment.term</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="original_action" ref="account.action_payment_term_form" />
+            <field name="original_view_mode">list,kanban,form</field>
+            <field name="search_view_id" ref="salewise_views.salewise_account_payment_term_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_account_payment_term_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_term_form')})]" />
+        </record>
+        <record id="salewise_account_payment_mode_account_payment_mode_action" model="ir.actions.act_window">
+            <field name="name">Payment Modes</field>
+            <field name="res_model">account.payment.mode</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="account_payment_mode.account_payment_mode_action" />
+            <field name="original_view_mode">list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_payment_mode_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_mode_form')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_account_payment_mode_search" />
+        </record>
+        <record id="salewise_contract_action_customer_contract" model="ir.actions.act_window">
+            <field name="name">Customer Contracts</field>
+            <field name="res_model">contract.contract</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="contract.action_customer_contract" />
+            <field name="original_view_mode">list,form</field>
+            <field name="domain">[('contract_type', '=', 'sale')]</field>
+            <field name="context">{'is_contract':1,
                         'search_default_not_finished':1,
                         'default_contract_type': 'sale'}, 'salewise_mode': True}</field>
-        <field name="search_view_id" ref="contract.contract_contract_search_view"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('contract.contract_contract_tree_view')}), (0, 0, {'view_mode': 'form', 'view_id': ref('contract.contract_contract_form_view')})]"/>
-    </record>
-    <record id="salewise_contract_contract_template_action" model="ir.actions.act_window">
-        <field name="name">Contract Templates</field>
-        <field name="res_model">contract.template</field>
-        <field name="view_mode">list,form</field>
-        <field name="original_action" ref="contract.contract_template_action"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="search_view_id" ref="contract.contract_template_search_view"/>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('contract.contract_template_tree_view')}), (0, 0, {'view_mode': 'form', 'view_id': ref('contract.contract_template_form_view')})]"/>
-    </record>
-
-        <!-- CONTRACT_TERMINATION Actions -->
-    <record id="salewise_contract_termination_contract_terminate_reason_act_window" model="ir.actions.act_window">
-        <field name="name">Contract Termination Reason</field>
-        <field name="res_model">contract.terminate.reason</field>
-        <field name="view_mode">list</field>
-        <field name="original_action" ref="contract_termination.contract_terminate_reason_act_window"/>
-        <field name="original_view_mode">list,form</field>
-        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('contract_termination.contract_terminate_reason_tree_view')})]"/>
-    </record>
-
+            <field name="search_view_id" ref="salewise_views.salewise_contract_contract_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_contract_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_contract_contract_form')})]" />
+        </record>
+        <record id="salewise_contract_contract_template_action" model="ir.actions.act_window">
+            <field name="name">Contract Templates</field>
+            <field name="res_model">contract.template</field>
+            <field name="view_mode">list,form</field>
+            <field name="original_action" ref="contract.contract_template_action" />
+            <field name="original_view_mode">list,form</field>
+            <field name="search_view_id" ref="salewise_views.salewise_contract_template_search" />
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_template_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_contract_template_form')})]" />
+        </record>
+        <record id="salewise_contract_termination_contract_terminate_reason_act_window" model="ir.actions.act_window">
+            <field name="name">Contract Termination Reason</field>
+            <field name="res_model">contract.terminate.reason</field>
+            <field name="view_mode">list</field>
+            <field name="original_action" ref="contract_termination.contract_terminate_reason_act_window" />
+            <field name="original_view_mode">list,form</field>
+            <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_terminate_reason_list')})]" />
+            <field name="search_view_id" ref="salewise_views.salewise_contract_terminate_reason_search" />
+        </record>
     </data>
 </odoo>

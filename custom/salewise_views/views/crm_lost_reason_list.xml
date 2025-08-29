@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_crm_lost_reason_list" model="ir.ui.view">
+        <field name="name">salewise.crm.lost.reason.list</field>
+        <field name="model">crm.lost.reason</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

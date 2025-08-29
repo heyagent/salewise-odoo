@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salewise_mail_activity_plan_kanban" model="ir.ui.view">
+        <field name="name">salewise.mail.activity.plan.kanban</field>
+        <field name="model">mail.activity.plan</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card">
+                        <field name="id"/>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
