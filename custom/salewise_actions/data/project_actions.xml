@@ -12,6 +12,7 @@
                                 'default_composition_mode': 'mass_mail',
                         }, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="project.view_project_project_filter"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('project.view_project_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('project.project_project_view_form_simplified_footer')})]"/>
     </record>
     <record id="salewise_project_action_view_all_task" model="ir.actions.act_window">
         <field name="name">All Tasks</field>
@@ -26,12 +27,14 @@
                                 'search_default_open_tasks': 1,
                         }, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="project.view_task_search_form"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('project.view_task_tree2')}), (0, 0, {'view_mode': 'form', 'view_id': ref('project.view_task_form2')}), (0, 0, {'view_mode': 'calendar', 'view_id': ref('project.view_task_calendar')})]"/>
     </record>
     <record id="salewise_project_project_project_stage_configure" model="ir.actions.act_window">
         <field name="name">Project Stages</field>
         <field name="res_model">project.project.stage</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="project.project_project_stage_configure"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('project.project_project_stage_view_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('project.project_project_stage_view_form_quick_create')})]"/>
     </record>
     <record id="salewise_project_open_task_type_form" model="ir.actions.act_window">
         <field name="name">Task Stages</field>
@@ -40,6 +43,7 @@
         <field name="original_action" ref="project.open_task_type_form"/>
         <field name="domain">[('user_id', '=', False)]</field>
         <field name="context">{"default_user_id": false, 'salewise_mode': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('project.view_project_task_type_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('project.task_type_edit')})]"/>
     </record>
 
         <!-- DOCUMENTS Actions -->
@@ -48,6 +52,7 @@
         <field name="res_model">documents.document</field>
         <field name="view_mode">kanban</field>
         <field name="original_action" ref="documents.document_action"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('documents.document_view_kanban')})]"/>
     </record>
 
         <!-- CALENDAR Actions -->
@@ -57,12 +62,14 @@
         <field name="view_mode">calendar,list,form</field>
         <field name="original_action" ref="calendar.action_calendar_event"/>
         <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'calendar', 'view_id': ref('calendar.view_calendar_event_calendar')}), (0, 0, {'view_mode': 'list', 'view_id': ref('calendar.view_calendar_event_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('calendar.view_calendar_event_form')})]"/>
     </record>
     <record id="salewise_calendar_action_calendar_alarm" model="ir.actions.act_window">
         <field name="name">Calendar Alarm</field>
         <field name="res_model">calendar.alarm</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="calendar.action_calendar_alarm"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('calendar.view_calendar_alarm_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('calendar.calendar_alarm_view_form')})]"/>
     </record>
 
         <!-- APPOINTMENT Actions -->
@@ -71,13 +78,15 @@
         <field name="res_model">appointment.type</field>
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="appointment.appointment_type_action"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('appointment.appointment_type_view_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('appointment.appointment_type_view_form')})]"/>
     </record>
     <record id="salewise_appointment_appointment_invite_action" model="ir.actions.act_window">
         <field name="name">Share Links</field>
         <field name="res_model">appointment.invite</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="appointment.appointment_invite_action"/>
-        <field name="context">{'search_default_my_book_urls': 1,, 'salewise_mode': True}</field>
+        <field name="context">{'search_default_my_book_urls': 1, 'salewise_mode': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('appointment.appointment_invite_view_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('appointment.appointment_invite_view_form')})]"/>
     </record>
 
     </data>

@@ -9,6 +9,7 @@
         <field name="view_mode">list</field>
         <field name="original_action" ref="base.res_partner_industry_action"/>
         <field name="search_view_id" ref="base.res_partner_industry_view_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.res_partner_industry_view_tree')})]"/>
     </record>
     <record id="salewise_base_action_ir_mail_server_list" model="ir.actions.act_window">
         <field name="name">Outgoing Mail Servers</field>
@@ -16,6 +17,7 @@
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="base.action_ir_mail_server_list"/>
         <field name="search_view_id" ref="base.view_ir_mail_server_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.ir_mail_server_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.ir_mail_server_form')})]"/>
     </record>
     <record id="salewise_base_action_res_users" model="ir.actions.act_window">
         <field name="name">Users</field>
@@ -24,6 +26,7 @@
         <field name="original_action" ref="base.action_res_users"/>
         <field name="context">{"search_default_filter_no_share": 1, "ir.ui.menu.full_list": 1, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="base.view_users_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.view_res_users_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_users_simple_form')})]"/>
     </record>
     <record id="salewise_base_res_lang_act_window" model="ir.actions.act_window">
         <field name="name">Languages</field>
@@ -32,6 +35,7 @@
         <field name="original_action" ref="base.res_lang_act_window"/>
         <field name="context">{"active_test": false, 'salewise_mode': True}</field>
         <field name="search_view_id" ref="base.res_lang_search"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base.res_lang_tree')})]"/>
     </record>
 
         <!-- BASE_SETUP Actions -->
@@ -41,6 +45,7 @@
         <field name="view_mode">form</field>
         <field name="original_action" ref="base_setup.action_general_configuration"/>
         <field name="context">{"module": "general_settings", "bin_size": false, 'salewise_mode': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'form', 'view_id': ref('base.res_config_settings_view_form')})]"/>
     </record>
 
         <!-- BASE_USER_ROLE Actions -->
@@ -49,6 +54,7 @@
         <field name="res_model">res.users.role</field>
         <field name="view_mode">list,form</field>
         <field name="original_action" ref="base_user_role.action_res_users_role_tree"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('base_user_role.view_res_users_role_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base_user_role.view_res_users_role_form')})]"/>
     </record>
 
         <!-- BASE_AUTOMATION Actions -->
@@ -58,6 +64,7 @@
         <field name="view_mode">kanban,form</field>
         <field name="original_action" ref="base_automation.base_automation_act"/>
         <field name="context">{'active_test': False, 'salewise_mode': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('base_automation.view_base_automation_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('base_automation.view_base_automation_form')})]"/>
     </record>
 
         <!-- PRODUCT Actions -->
@@ -67,6 +74,7 @@
         <field name="view_mode">list</field>
         <field name="original_action" ref="product.product_category_action_form"/>
         <field name="search_view_id" ref="product.product_category_search_view"/>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('product.product_category_list_view')})]"/>
     </record>
 
     </data>
