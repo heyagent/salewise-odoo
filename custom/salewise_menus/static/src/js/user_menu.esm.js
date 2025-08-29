@@ -29,7 +29,9 @@ registry
     .category("user_menuitems")
     .add("saas_menu_toggle", saasMenuToggleItem, { force: true });
 
-// Remove unwanted menu items directly
-registry.category("user_menuitems").remove("shortcuts");
-registry.category("user_menuitems").remove("install_pwa");
-registry.category("user_menuitems").remove("separator");
+// Only remove unwanted menu items when in Salewise mode
+if (session.show_saas_menus) {
+    registry.category("user_menuitems").remove("shortcuts");
+    registry.category("user_menuitems").remove("install_pwa");
+    registry.category("user_menuitems").remove("separator");
+}
