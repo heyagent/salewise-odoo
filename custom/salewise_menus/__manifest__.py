@@ -53,6 +53,7 @@
             'salewise_menus/static/src/js/favorites_menu_patch.js',
             'salewise_menus/static/src/js/custom_group_by_patch.js',
             'salewise_menus/static/src/js/custom_filter_patch.js',
+            'salewise_menus/static/src/js/search_autocomplete_patch.js',
             'salewise_menus/static/src/js/apps_menu_patch.js',
             'salewise_menus/static/src/xml/apps_menu.xml',
             'salewise_menus/static/src/xml/search_bar_menu.xml',
