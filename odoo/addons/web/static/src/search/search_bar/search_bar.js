@@ -407,7 +407,9 @@ export class SearchBar extends Component {
      * @param {Object} item
      */
     selectItem(item) {
+        console.log("Odoo log: SearchBar.selectItem() called with item:", item);
         if (item.isAddCustomFilterButton) {
+            console.log("Odoo log: Item is Add Custom Filter button, spawning dialog");
             return this.env.searchModel.spawnCustomFilterDialog();
         }
 
