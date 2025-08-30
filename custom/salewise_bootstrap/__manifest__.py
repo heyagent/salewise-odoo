@@ -97,6 +97,7 @@
         'salewise_plans',
         'salewise_actions',  # Custom actions for Salewise menus
         'salewise_menus',    # SaaS menu configuration
+        'salewise_ui',       # UI customizations for Salewise mode
     ],
     'data': [],
     'installable': True,
