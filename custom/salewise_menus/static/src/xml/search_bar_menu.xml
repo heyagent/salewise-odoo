@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    
+    <!-- Inherit from the SearchBarMenu template to hide Add Custom Filter -->
+    <t t-name="web.SearchBarMenu" t-inherit="web.SearchBarMenu" t-inherit-mode="extension">
+        <!-- Find the Add Custom Filter DropdownItem and wrap it with a conditional -->
+        <!-- Note: DropdownItem uses class="'o_menu_item o_add_custom_filter'" with quotes inside -->
+        <xpath expr="//DropdownItem[contains(@class, 'o_add_custom_filter')]" position="replace">
+            <t t-if="!hideAddCustomFilter">
+                <DropdownItem class="'o_menu_item o_add_custom_filter'" onSelected.bind="onAddCustomFilterClick">Add Custom Filter</DropdownItem>
+            </t>
+        </xpath>
+        
+        <!-- Also conditionally show the separator before it -->
+        <!-- The separator is conditionally shown based on filterItems.length -->
+        <xpath expr="//t[@t-if='filterItems.length']/div[@role='separator']" position="replace">
+            <t t-if="filterItems.length and !hideAddCustomFilter">
+                <div role="separator" class="dropdown-divider"/>
+            </t>
+        </xpath>
+    </t>
+    
+</templates>
