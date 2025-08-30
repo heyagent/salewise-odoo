@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    
+    <!-- Inherit from the SearchBar.Facets template to hide cog icon in Salewise mode -->
+    <t t-name="web.SearchBar.Facets" t-inherit="web.SearchBar.Facets" t-inherit-mode="extension">
+        <!-- Replace the cog icon span to add condition for Salewise mode -->
+        <xpath expr="//span[@t-if='facet.domain']" position="replace">
+            <!-- Only show cog icon if not in Salewise mode -->
+            <span t-if="facet.domain and !hideFilterEdit"
+                class="position-absolute start-0 top-0 bottom-0 end-0 bg-inherit opacity-0 opacity-100-hover"
+                t-att-class="{'px-2 transition-base': !facet.icon}"
+                >
+                <i class="fa fa-fw fa-cog"/>
+            </span>
+        </xpath>
+    </t>
+    
+</templates>
