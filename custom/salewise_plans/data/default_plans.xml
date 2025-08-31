@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="0">
-        <!-- Set default plan for the main company -->
-        <record id="base.main_company" model="res.company">
-            <field name="plan_type">starter</field>
-        </record>
-    </data>
-</odoo>
