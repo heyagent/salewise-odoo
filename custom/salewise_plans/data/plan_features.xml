@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Starter Plan Features -->
+        <record id="feature_starter_1" model="salewise.plan.feature">
+            <field name="name">Basic CRM</field>
+            <field name="plan_id" ref="plan_starter"/>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="feature_starter_2" model="salewise.plan.feature">
+            <field name="name">Contact Management</field>
+            <field name="plan_id" ref="plan_starter"/>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="feature_starter_3" model="salewise.plan.feature">
+            <field name="name">Basic Sales Pipeline</field>
+            <field name="plan_id" ref="plan_starter"/>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="feature_starter_4" model="salewise.plan.feature">
+            <field name="name">Email Integration</field>
+            <field name="plan_id" ref="plan_starter"/>
+            <field name="sequence">40</field>
+        </record>
+        
+        <record id="feature_starter_5" model="salewise.plan.feature">
+            <field name="name">Up to 5 Users</field>
+            <field name="plan_id" ref="plan_starter"/>
+            <field name="sequence">50</field>
+        </record>
+        
+        <!-- Professional Plan Features -->
+        <record id="feature_professional_1" model="salewise.plan.feature">
+            <field name="name">Advanced CRM</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="feature_professional_2" model="salewise.plan.feature">
+            <field name="name">Marketing Automation</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="feature_professional_3" model="salewise.plan.feature">
+            <field name="name">Inventory Management</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="feature_professional_4" model="salewise.plan.feature">
+            <field name="name">Purchase Management</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">40</field>
+        </record>
+        
+        <record id="feature_professional_5" model="salewise.plan.feature">
+            <field name="name">Accounting &amp; Finance</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">50</field>
+        </record>
+        
+        <record id="feature_professional_6" model="salewise.plan.feature">
+            <field name="name">Project Management</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">60</field>
+        </record>
+        
+        <record id="feature_professional_7" model="salewise.plan.feature">
+            <field name="name">Up to 25 Users</field>
+            <field name="plan_id" ref="plan_professional"/>
+            <field name="sequence">70</field>
+        </record>
+        
+        <!-- Enterprise Plan Features -->
+        <record id="feature_enterprise_1" model="salewise.plan.feature">
+            <field name="name">Everything in Professional</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="feature_enterprise_2" model="salewise.plan.feature">
+            <field name="name">Manufacturing</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="feature_enterprise_3" model="salewise.plan.feature">
+            <field name="name">Advanced Reporting</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="feature_enterprise_4" model="salewise.plan.feature">
+            <field name="name">Multi-Company Support</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">40</field>
+        </record>
+        
+        <record id="feature_enterprise_5" model="salewise.plan.feature">
+            <field name="name">Custom Workflows</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">50</field>
+        </record>
+        
+        <record id="feature_enterprise_6" model="salewise.plan.feature">
+            <field name="name">API Access</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">60</field>
+        </record>
+        
+        <record id="feature_enterprise_7" model="salewise.plan.feature">
+            <field name="name">Priority Support</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">70</field>
+        </record>
+        
+        <record id="feature_enterprise_8" model="salewise.plan.feature">
+            <field name="name">Unlimited Users</field>
+            <field name="plan_id" ref="plan_enterprise"/>
+            <field name="sequence">80</field>
+        </record>
+        
+    </data>
+</odoo>
