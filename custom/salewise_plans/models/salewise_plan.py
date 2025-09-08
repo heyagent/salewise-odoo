@@ -13,7 +13,6 @@ class SalewisePlan(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.company.currency_id)
     sequence = fields.Integer(string='Sequence', default=10)
     is_active = fields.Boolean(string='Active', default=True)
-    feature_ids = fields.One2many('salewise.plan.feature', 'plan_id', string='Features')
     company_ids = fields.One2many('res.company', 'plan_id', string='Companies')
     
     @api.depends('name', 'price', 'currency_id')

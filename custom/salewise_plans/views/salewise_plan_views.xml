@@ -39,14 +39,6 @@
                             <field name="description" placeholder="Enter a description for this plan..."/>
                         </group>
                         <notebook>
-                            <page string="Features" name="features">
-                                <field name="feature_ids">
-                                    <list editable="bottom">
-                                        <field name="sequence" widget="handle"/>
-                                        <field name="name"/>
-                                    </list>
-                                </field>
-                            </page>
                             <page string="Companies" name="companies">
                                 <field name="company_ids">
                                     <list>
