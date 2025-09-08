@@ -3,6 +3,7 @@
 import { Component, useState, onWillStart, useEffect } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { session } from "@web/session";
 
 export class SalewisePlanDisplay extends Component {
     static template = "salewise_plans.PlanDisplay";
@@ -11,19 +12,26 @@ export class SalewisePlanDisplay extends Component {
     setup() {
         this.companyService = useService("company");
         this.orm = useService("orm");
+        this.showSaasMenus = session.show_saas_menus || false;
         this.state = useState({
             planName: "",
             loading: true,
         });
         
         onWillStart(async () => {
-            await this.loadPlanName();
+            if (this.showSaasMenus) {
+                await this.loadPlanName();
+            } else {
+                this.state.loading = false;
+            }
         });
         
         // Listen for company changes
         useEffect(
             async () => {
-                await this.loadPlanName();
+                if (this.showSaasMenus) {
+                    await this.loadPlanName();
+                }
             },
             () => [this.companyService.currentCompany.id]
         );
@@ -58,7 +66,6 @@ export class SalewisePlanDisplay extends Component {
                 this.state.planName = "No Plan";
             }
         } catch (error) {
-            console.error("Error loading plan name:", error);
             this.state.planName = "Error";
         } finally {
             this.state.loading = false;
