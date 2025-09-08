@@ -54,8 +54,5 @@ package.json
 # virtual environment
 venv/
 
-# Salewise menu module (temporary/local only)
-custom/salewise_menu/
-
 # Odoo log files
 odoo.log
