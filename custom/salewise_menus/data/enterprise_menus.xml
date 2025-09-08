@@ -1,14 +1,20 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-        <!-- HR Menus -->
+        <!-- Enterprise Plan Menus (HR Functions) -->
+        
+        <record id="menu_saas_hr" model="ir.ui.menu">
+            <field name="name">HR</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">40</field>
+        </record>
         <record id="menu_saas_hr_employees" model="ir.ui.menu">
             <field name="name">Employees</field>
             <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr" />
-            <field name="sequence">10</field>
+            <field name="sequence">60</field>
             <field name="lucide_icon">BadgeCheck</field>
         </record>
+        <!-- Employees Section -->
         <record id="menu_saas_hr_employees_employees" model="ir.ui.menu">
             <field name="name">Employees</field>
             <field name="is_saas">True</field>
@@ -25,6 +31,14 @@
             <field name="action" ref="salewise_actions.salewise_hr_hr_department_kanban_action" />
             <field name="original_menu_id" ref="hr.menu_hr_department_kanban" />
             <field name="groups_id" eval="[(4, ref('base.group_user'))]" />
+        </record>
+        <record id="menu_saas_hr_employees_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_employees" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_hr_contract_action_hr_contract" />
+            <field name="original_menu_id" ref="hr_contract.menu_hr_employee_contracts" />
         </record>
         <record id="menu_saas_hr_employees_skills" model="ir.ui.menu">
             <field name="name">Skills</field>
@@ -44,7 +58,7 @@
             <field name="name">Job Positions</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_action_hr_job" />
             <field name="original_menu_id" ref="hr.menu_view_hr_job" />
         </record>
@@ -52,7 +66,7 @@
             <field name="name">Employment Types</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_contract_type_action" />
             <field name="original_menu_id" ref="hr.menu_view_hr_contract_type" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
@@ -61,7 +75,7 @@
             <field name="name">Working Schedules</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_resource_action_resource_calendar_form" />
             <field name="original_menu_id" ref="resource.menu_resource_calendar" />
         </record>
@@ -69,7 +83,7 @@
             <field name="name">Work Locations</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_work_location_action" />
             <field name="original_menu_id" ref="hr.menu_hr_work_location_tree" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
@@ -78,7 +92,7 @@
             <field name="name">Skill Types</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">50</field>
             <field name="action" ref="salewise_actions.salewise_hr_skills_hr_skill_type_action" />
             <field name="original_menu_id" ref="hr_skills.hr_skill_type_menu" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
@@ -87,18 +101,19 @@
             <field name="name">Departure Reasons</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">60</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_departure_reason_action" />
             <field name="original_menu_id" ref="hr.menu_hr_departure_reason_tree" />
             <field name="groups_id" eval="[(4, ref('hr.group_hr_user'))]" />
         </record>
+        <!-- Recruitment Parent Menu -->
         <record id="menu_saas_hr_recruitment" model="ir.ui.menu">
             <field name="name">Recruitment</field>
             <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr" />
-            <field name="sequence">20</field>
+            <field name="sequence">60</field>
             <field name="lucide_icon">UserPlus</field>
         </record>
+        <!-- Candidates Section -->
         <record id="menu_saas_hr_recruitment_candidates" model="ir.ui.menu">
             <field name="name">Candidates</field>
             <field name="is_saas">True</field>
@@ -125,7 +140,7 @@
             <field name="name">Recruitment Stages</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_hr_recruitment_stage_act" />
             <field name="original_menu_id" ref="hr_recruitment.menu_hr_recruitment_stage" />
             <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
@@ -134,17 +149,18 @@
             <field name="name">Refuse Reasons</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_hr_applicant_refuse_reason_action" />
             <field name="original_menu_id" ref="hr_recruitment.menu_hr_applicant_refuse_reason" />
         </record>
+        <!-- Time Off Parent Menu -->
         <record id="menu_saas_hr_time_off" model="ir.ui.menu">
             <field name="name">Time Off</field>
             <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr" />
-            <field name="sequence">30</field>
+            <field name="sequence">60</field>
             <field name="lucide_icon">Palmtree</field>
         </record>
+        <!-- Time Off Section -->
         <record id="menu_saas_hr_time_off_time_off" model="ir.ui.menu">
             <field name="name">Time Off</field>
             <field name="is_saas">True</field>
@@ -171,7 +187,7 @@
             <field name="name">Time Off Types</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_open_view_holiday_status" />
             <field name="original_menu_id" ref="hr_holidays.hr_holidays_status_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
@@ -180,7 +196,7 @@
             <field name="name">Public Holidays</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_open_view_public_holiday" />
             <field name="original_menu_id" ref="hr_holidays.hr_holidays_public_time_off_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
@@ -189,18 +205,19 @@
             <field name="name">Mandatory Days</field>
             <field name="is_saas">True</field>
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
-            <field name="sequence">100</field>
+            <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_hr_leave_mandatory_day_action" />
             <field name="original_menu_id" ref="hr_holidays.hr_holidays_mandatory_day_menu_configuration" />
             <field name="groups_id" eval="[(4, ref('hr_holidays.group_hr_holidays_manager'))]" />
         </record>
+        <!-- Expenses Parent Menu -->
         <record id="menu_saas_hr_expenses" model="ir.ui.menu">
             <field name="name">Expenses</field>
             <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr" />
-            <field name="sequence">40</field>
+            <field name="sequence">60</field>
             <field name="lucide_icon">Wallet</field>
         </record>
+        <!-- Expense Reports Section -->
         <record id="menu_saas_hr_expenses_expense_reports" model="ir.ui.menu">
             <field name="name">Expense Reports</field>
             <field name="is_saas">True</field>
@@ -226,46 +243,6 @@
             <field name="action" ref="salewise_actions.salewise_hr_expense_hr_expense_product" />
             <field name="original_menu_id" ref="hr_expense.menu_hr_product" />
             <field name="groups_id" eval="[(4, ref('hr_expense.group_hr_expense_manager'))]" />
-        </record>
-        <record id="menu_saas_hr_payroll" model="ir.ui.menu">
-            <field name="name">Payroll</field>
-            <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr" />
-            <field name="sequence">50</field>
-            <field name="lucide_icon">Banknote</field>
-        </record>
-        <record id="menu_saas_hr_payroll_payslips_batches" model="ir.ui.menu">
-            <field name="name">Payslips Batches</field>
-            <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr_payroll" />
-            <field name="sequence">10</field>
-            <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_run_action" />
-            <field name="original_menu_id" ref="payroll.hr_payslip_run_menu" />
-        </record>
-        <record id="menu_saas_hr_payroll_employee_payslips" model="ir.ui.menu">
-            <field name="name">Employee Payslips</field>
-            <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr_payroll" />
-            <field name="sequence">20</field>
-            <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_action" />
-            <field name="original_menu_id" ref="payroll.hr_payslip_menu" />
-            <field name="groups_id" eval="[(4, ref('payroll.group_payroll_user'))]" />
-        </record>
-        <record id="menu_saas_hr_payroll_salary_structures" model="ir.ui.menu">
-            <field name="name">Salary Structures</field>
-            <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr_payroll" />
-            <field name="sequence">30</field>
-            <field name="action" ref="salewise_actions.salewise_payroll_hr_payroll_structure_action" />
-            <field name="original_menu_id" ref="payroll.hr_payroll_structure_menu" />
-        </record>
-        <record id="menu_saas_hr_payroll_salary_rules" model="ir.ui.menu">
-            <field name="name">Salary Rules</field>
-            <field name="is_saas">True</field>
-            <field name="parent_id" ref="menu_saas_hr_payroll" />
-            <field name="sequence">40</field>
-            <field name="action" ref="salewise_actions.salewise_payroll_action_salary_rule_form" />
-            <field name="original_menu_id" ref="payroll.menu_action_hr_salary_rule_form" />
         </record>
     </data>
 </odoo>

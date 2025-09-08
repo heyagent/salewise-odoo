@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- Admin Plan Menus (Payroll and Contracts) -->
+        
+        <record id="menu_saas_hr_payroll" model="ir.ui.menu">
+            <field name="name">Payroll</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">60</field>
+            <field name="lucide_icon">Banknote</field>
+        </record>
+        <!-- Payslips Batches Section -->
+        <record id="menu_saas_hr_payroll_payslips_batches" model="ir.ui.menu">
+            <field name="name">Payslips Batches</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_payroll" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_run_action" />
+            <field name="original_menu_id" ref="payroll.hr_payslip_run_menu" />
+        </record>
+        <record id="menu_saas_hr_payroll_employee_payslips" model="ir.ui.menu">
+            <field name="name">Employee Payslips</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_payroll" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_action" />
+            <field name="original_menu_id" ref="payroll.hr_payslip_menu" />
+            <field name="groups_id" eval="[(4, ref('payroll.group_payroll_user'))]" />
+        </record>
+        <record id="menu_saas_hr_payroll_salary_structures" model="ir.ui.menu">
+            <field name="name">Salary Structures</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_payroll" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_payroll_hr_payroll_structure_action" />
+            <field name="original_menu_id" ref="payroll.hr_payroll_structure_menu" />
+        </record>
+        <record id="menu_saas_hr_payroll_salary_rules" model="ir.ui.menu">
+            <field name="name">Salary Rules</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_hr_payroll" />
+            <field name="sequence">40</field>
+            <field name="action" ref="salewise_actions.salewise_payroll_action_salary_rule_form" />
+            <field name="original_menu_id" ref="payroll.menu_action_hr_salary_rule_form" />
+        </record>
+        <!-- Contracts Parent Menu -->
+        <record id="menu_saas_core_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="sequence">60</field>
+            <field name="lucide_icon">FileSignature</field>
+        </record>
+        <!-- Contracts Section -->
+        <record id="menu_saas_core_contracts_contracts" model="ir.ui.menu">
+            <field name="name">Contracts</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">10</field>
+            <field name="action" ref="salewise_actions.salewise_contract_action_customer_contract" />
+            <field name="original_menu_id" ref="contract_sale.menu_contract_sale" />
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]" />
+        </record>
+        <record id="menu_saas_core_contracts_templates" model="ir.ui.menu">
+            <field name="name">Templates</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">20</field>
+            <field name="action" ref="salewise_actions.salewise_contract_contract_template_action" />
+            <field name="original_menu_id" ref="contract.contract_template_menu" />
+        </record>
+        <record id="menu_saas_core_contracts_termination_reason" model="ir.ui.menu">
+            <field name="name">Termination Reason</field>
+            <field name="is_saas">True</field>
+            <field name="parent_id" ref="menu_saas_core_contracts" />
+            <field name="sequence">30</field>
+            <field name="action" ref="salewise_actions.salewise_contract_termination_contract_terminate_reason_act_window" />
+            <field name="original_menu_id" ref="contract_termination.contract_terminate_reason_menu" />
+        </record>
+    </data>
+</odoo>
