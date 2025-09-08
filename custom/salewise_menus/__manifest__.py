@@ -39,17 +39,17 @@
         'utm',
     ],
     'data': [
-        'data/core_menus.xml',
-        'data/marketing_menus.xml',
-        'data/operations_menus.xml',
-        'data/hr_menus.xml',
-        'data/system_menus.xml',
+        'data/starter_menus.xml',
+        'data/enterprise_menus.xml',
+        'data/admin_menus.xml',
+        'data/professional_menus.xml',
     ],
     'assets': {
         'web.assets_backend': [
             'salewise_menus/static/src/js/navbar_patch.js',
             'salewise_menus/static/src/js/apps_menu_patch.js',
             'salewise_menus/static/src/xml/apps_menu.xml',
+            'salewise_menus/static/src/xml/navbar.xml',
             'salewise_menus/static/src/scss/salewise_menu.scss',
         ],
     },

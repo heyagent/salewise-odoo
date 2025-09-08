@@ -22,11 +22,8 @@ patch(NavBar.prototype, {
         const apps = this.menuService.getApps();
         const salewiseApps = [];
         
-        // Get the 5 Salewise root apps (IDs from your data)
-        const salewiseAppIds = [522, 552, 573, 591, 626]; // Core, Marketing, Operations, HR, System
-        
         for (const app of apps) {
-            if (salewiseAppIds.includes(app.id)) {
+            if (app.is_saas) {
                 // Get full menu tree for this app
                 const appTree = this.menuService.getMenuAsTree(app.id);
                 salewiseApps.push(appTree);

@@ -10,7 +10,6 @@ patch(NavBar.prototype, {
         this.showSaasMenus = session.show_saas_menus || false;
         
         // Override currentAppSectionsExtra directly since it's not a getter
-        const originalSectionsExtra = this.currentAppSectionsExtra;
         if (this.showSaasMenus) {
             this.currentAppSectionsExtra = [];
         }

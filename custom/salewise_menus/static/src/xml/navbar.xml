@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<!-- Override the NavBar template to hide the app/menu name in SaaS mode -->
+<t t-inherit="web.NavBar" t-inherit-mode="extension">
+    <!-- Hide the App Brand section in SaaS mode -->
+    <xpath expr="//DropdownItem[@t-if='!env.isSmall and currentApp']" position="replace">
+        <DropdownItem
+          t-if="!env.isSmall and currentApp and !showSaasMenus"
+          t-esc="currentApp.name"
+          class="'o_menu_brand d-flex'"
+          onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
+          attrs="{ href: getMenuItemHref(currentApp), 'data-menu-xmlid': currentApp.xmlid, 'data-section': currentApp.id }"
+        />
+    </xpath>
+</t>
+
+</templates>
