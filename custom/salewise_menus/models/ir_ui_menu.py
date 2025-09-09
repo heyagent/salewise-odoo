@@ -286,50 +286,50 @@ class IrUiMenu(models.Model):
                 if current_plan_id:
                     # Get all plans up to current tier using helper method
                     available_plan_ids = self._get_available_plan_ids(company)
-                        
-                        # Find menus that should be visible but aren't loaded
-                        all_plan_menus = self.sudo().search([
-                            ('is_saas', '=', True),
-                            ('plan_id', 'in', available_plan_ids)
-                        ])
-                        
-                        search_start = time.time()
-                        _logger.error(f"Found {len(all_plan_menus)} total menus for plans {available_plan_ids} in {time.time() - search_start:.3f}s")
-                        
-                        # Add missing menus
-                        for menu in all_plan_menus:
-                            if menu.id not in web_menus:
-                                _logger.error(f"Adding missing menu: {menu.name} (id: {menu.id}, parent: {menu.parent_id.id if menu.parent_id else None})")
-                                
-                                # Build menu dict like the base method does
-                                menu_dict = {
-                                    'id': menu.id,
-                                    'name': menu.name,
-                                    'appID': menu.parent_id.id if menu.parent_id else False,
-                                    'actionID': menu.action.id if menu.action else False,
-                                    'xmlid': menu.get_external_id()[menu.id] or '',
-                                    'sequence': menu.sequence,
-                                    'children': [],
-                                    'is_saas': menu.is_saas,
-                                    'plan_id': menu.plan_id.id if menu.plan_id else False
-                                }
-                                
-                                # Add webIcon for root menus
-                                if not menu.parent_id and menu.web_icon:
-                                    menu_dict['webIcon'] = menu.web_icon
-                                    menu_dict['webIconData'] = menu.web_icon_data
-                                
-                                web_menus[menu.id] = menu_dict
-                                
-                                # Add to parent's children list
-                                if menu.parent_id and menu.parent_id.id in web_menus:
-                                    parent = web_menus[menu.parent_id.id]
-                                    if 'children' not in parent:
-                                        parent['children'] = []
-                                    if menu.id not in parent['children']:
-                                        parent['children'].append(menu.id)
-                                        parent['children'].sort()  # Keep them sorted by sequence
-                                        _logger.error(f"  -> Added to parent {menu.parent_id.name}'s children")
+                    
+                    # Find menus that should be visible but aren't loaded
+                    all_plan_menus = self.sudo().search([
+                        ('is_saas', '=', True),
+                        ('plan_id', 'in', available_plan_ids)
+                    ])
+                    
+                    search_start = time.time()
+                    _logger.error(f"Found {len(all_plan_menus)} total menus for plans {available_plan_ids} in {time.time() - search_start:.3f}s")
+                    
+                    # Add missing menus
+                    for menu in all_plan_menus:
+                        if menu.id not in web_menus:
+                            _logger.error(f"Adding missing menu: {menu.name} (id: {menu.id}, parent: {menu.parent_id.id if menu.parent_id else None})")
+                            
+                            # Build menu dict like the base method does
+                            menu_dict = {
+                                'id': menu.id,
+                                'name': menu.name,
+                                'appID': menu.parent_id.id if menu.parent_id else False,
+                                'actionID': menu.action.id if menu.action else False,
+                                'xmlid': menu.get_external_id()[menu.id] or '',
+                                'sequence': menu.sequence,
+                                'children': [],
+                                'is_saas': menu.is_saas,
+                                'plan_id': menu.plan_id.id if menu.plan_id else False
+                            }
+                            
+                            # Add webIcon for root menus
+                            if not menu.parent_id and menu.web_icon:
+                                menu_dict['webIcon'] = menu.web_icon
+                                menu_dict['webIconData'] = menu.web_icon_data
+                            
+                            web_menus[menu.id] = menu_dict
+                            
+                            # Add to parent's children list
+                            if menu.parent_id and menu.parent_id.id in web_menus:
+                                parent = web_menus[menu.parent_id.id]
+                                if 'children' not in parent:
+                                    parent['children'] = []
+                                if menu.id not in parent['children']:
+                                    parent['children'].append(menu.id)
+                                    parent['children'].sort()  # Keep them sorted by sequence
+                                    _logger.error(f"  -> Added to parent {menu.parent_id.name}'s children")
         
         # NO FILTERING NEEDED - we already added only the right menus above
         

@@ -8,7 +8,7 @@
             <field name="login">super_admin</field>
             <field name="password">super_admin</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_super_administrator'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_super_administrator'), 'is_enabled': True})]"/>
         </record>
         
         <!-- System Administrator User -->
@@ -17,7 +17,7 @@
             <field name="login">sys_admin</field>
             <field name="password">sys_admin</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_system_administrator'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_system_administrator'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Sales Manager User -->
@@ -26,7 +26,7 @@
             <field name="login">sales_manager</field>
             <field name="password">sales_manager</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_sales_manager'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_sales_manager'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Sales User -->
@@ -35,7 +35,7 @@
             <field name="login">sales_user</field>
             <field name="password">sales_user</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_sales_user'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_sales_user'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Accountant User -->
@@ -44,7 +44,7 @@
             <field name="login">accountant</field>
             <field name="password">accountant</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_accountant'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_accountant'), 'is_enabled': True})]"/>
         </record>
         
         <!-- HR Manager User -->
@@ -53,7 +53,7 @@
             <field name="login">hr_manager</field>
             <field name="password">hr_manager</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_hr_manager'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_hr_manager'), 'is_enabled': True})]"/>
         </record>
         
         <!-- HR Officer User -->
@@ -62,7 +62,7 @@
             <field name="login">hr_officer</field>
             <field name="password">hr_officer</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_hr_officer'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_hr_officer'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Project Manager User -->
@@ -71,7 +71,7 @@
             <field name="login">project_manager</field>
             <field name="password">project_manager</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_project_manager'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_project_manager'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Project User -->
@@ -80,7 +80,7 @@
             <field name="login">project_user</field>
             <field name="password">project_user</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_project_user'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_project_user'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Marketing User -->
@@ -89,7 +89,7 @@
             <field name="login">marketing_user</field>
             <field name="password">marketing_user</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_marketing_user'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_marketing_user'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Employee User -->
@@ -98,7 +98,7 @@
             <field name="login">employee</field>
             <field name="password">employee</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_employee'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_employee'), 'is_enabled': True})]"/>
         </record>
         
         <!-- Team Lead User -->
@@ -107,7 +107,7 @@
             <field name="login">team_lead</field>
             <field name="password">team_lead</field>
             <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
-            <field name="role_ids" eval="[(4, ref('salewise_users.role_team_lead'))]"/>
+            <field name="role_line_ids" eval="[(0, 0, {'role_id': ref('salewise_users.role_team_lead'), 'is_enabled': True})]"/>
         </record>
         
     </data>
