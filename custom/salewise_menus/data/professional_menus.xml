@@ -6,6 +6,7 @@
         <record id="menu_saas_marketing_social_marketing" model="ir.ui.menu">
             <field name="name">Social Marketing</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Share2</field>
         </record>
@@ -13,6 +14,7 @@
         <record id="menu_saas_marketing_social_marketing_posts" model="ir.ui.menu">
             <field name="name">Posts</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_social_action_social_post" />
@@ -21,6 +23,7 @@
         <record id="menu_saas_marketing_social_marketing_feed" model="ir.ui.menu">
             <field name="name">Feed</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_social_action_social_stream_post" />
@@ -29,6 +32,7 @@
         <record id="menu_saas_marketing_social_marketing_campaigns" model="ir.ui.menu">
             <field name="name">Campaigns</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_social_action_view_utm_campaigns" />
@@ -38,6 +42,7 @@
         <record id="menu_saas_marketing_social_marketing_accounts" model="ir.ui.menu">
             <field name="name">Accounts</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_social_marketing" />
             <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_social_action_social_account" />
@@ -48,6 +53,7 @@
         <record id="menu_saas_marketing_marketing_automation" model="ir.ui.menu">
             <field name="name">Marketing Automation</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Zap</field>
         </record>
@@ -55,6 +61,7 @@
         <record id="menu_saas_marketing_marketing_automation_campaigns" model="ir.ui.menu">
             <field name="name">Campaigns</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_marketing_automation_marketing_campaign_action" />
@@ -63,6 +70,7 @@
         <record id="menu_saas_marketing_marketing_automation_participants" model="ir.ui.menu">
             <field name="name">Participants</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_marketing_automation_marketing_participants_action_reporting" />
@@ -72,6 +80,7 @@
         <record id="menu_saas_marketing_marketing_automation_traces" model="ir.ui.menu">
             <field name="name">Traces</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_marketing_marketing_automation" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_marketing_automation_marketing_trace_action" />
@@ -82,6 +91,7 @@
         <record id="menu_saas_operations_project" model="ir.ui.menu">
             <field name="name">Project</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Kanban</field>
         </record>
@@ -89,6 +99,7 @@
         <record id="menu_saas_operations_project_projects" model="ir.ui.menu">
             <field name="name">Projects</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_project_open_view_project_all" />
@@ -97,6 +108,7 @@
         <record id="menu_saas_operations_project_tasks" model="ir.ui.menu">
             <field name="name">Tasks</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_project_action_view_all_task" />
@@ -105,12 +117,14 @@
         <record id="menu_saas_operations_project_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">30</field>
         </record>
         <record id="menu_saas_operations_project_configuration_project_stages" model="ir.ui.menu">
             <field name="name">Project Stages</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project_configuration" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_project_project_project_stage_configure" />
@@ -120,6 +134,7 @@
         <record id="menu_saas_operations_project_configuration_task_stages" model="ir.ui.menu">
             <field name="name">Task Stages</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project_configuration" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_project_open_task_type_form" />
@@ -130,6 +145,7 @@
         <record id="menu_saas_operations_calendar_appointments" model="ir.ui.menu">
             <field name="name">Appointments</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_appointment_appointment_type_action" />
@@ -139,6 +155,7 @@
         <record id="menu_saas_operations_calendar_shared_links" model="ir.ui.menu">
             <field name="name">Shared Links</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">50</field>
             <field name="action" ref="salewise_actions.salewise_appointment_appointment_invite_action" />
@@ -147,6 +164,7 @@
         <record id="menu_saas_operations_calendar_reminders" model="ir.ui.menu">
             <field name="name">Reminders</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_operations_project" />
             <field name="sequence">60</field>
             <field name="action" ref="salewise_actions.salewise_calendar_action_calendar_alarm" />
@@ -157,6 +175,8 @@
         <record id="menu_saas_system_automation" model="ir.ui.menu">
             <field name="name">Automation</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
+            <field name="parent_id" ref="menu_saas_system" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Workflow</field>
         </record>
@@ -164,6 +184,7 @@
         <record id="menu_saas_system_automation_automation_rules" model="ir.ui.menu">
             <field name="name">Automation Rules</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="parent_id" ref="menu_saas_system_automation" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_base_automation_base_automation_act" />

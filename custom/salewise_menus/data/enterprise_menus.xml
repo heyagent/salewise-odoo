@@ -6,11 +6,13 @@
         <record id="menu_saas_hr" model="ir.ui.menu">
             <field name="name">HR</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="sequence">40</field>
         </record>
         <record id="menu_saas_hr_employees" model="ir.ui.menu">
             <field name="name">Employees</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="sequence">60</field>
             <field name="lucide_icon">BadgeCheck</field>
         </record>
@@ -18,6 +20,7 @@
         <record id="menu_saas_hr_employees_employees" model="ir.ui.menu">
             <field name="name">Employees</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_open_view_employee_list_my" />
@@ -26,6 +29,7 @@
         <record id="menu_saas_hr_employees_departments" model="ir.ui.menu">
             <field name="name">Departments</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_department_kanban_action" />
@@ -35,6 +39,7 @@
         <record id="menu_saas_hr_employees_contracts" model="ir.ui.menu">
             <field name="name">Contracts</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_hr_contract_action_hr_contract" />
@@ -43,6 +48,7 @@
         <record id="menu_saas_hr_employees_skills" model="ir.ui.menu">
             <field name="name">Skills</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_hr_skills_hr_employee_skill_report_action" />
@@ -51,12 +57,14 @@
         <record id="menu_saas_hr_employees_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees" />
             <field name="sequence">50</field>
         </record>
         <record id="menu_saas_hr_employees_configuration_job_positions" model="ir.ui.menu">
             <field name="name">Job Positions</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_action_hr_job" />
@@ -65,6 +73,7 @@
         <record id="menu_saas_hr_employees_configuration_employment_types" model="ir.ui.menu">
             <field name="name">Employment Types</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_contract_type_action" />
@@ -74,6 +83,7 @@
         <record id="menu_saas_hr_employees_configuration_working_schedules" model="ir.ui.menu">
             <field name="name">Working Schedules</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_resource_action_resource_calendar_form" />
@@ -82,6 +92,7 @@
         <record id="menu_saas_hr_employees_configuration_work_locations" model="ir.ui.menu">
             <field name="name">Work Locations</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_work_location_action" />
@@ -91,6 +102,7 @@
         <record id="menu_saas_hr_employees_configuration_skill_types" model="ir.ui.menu">
             <field name="name">Skill Types</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">50</field>
             <field name="action" ref="salewise_actions.salewise_hr_skills_hr_skill_type_action" />
@@ -100,6 +112,7 @@
         <record id="menu_saas_hr_employees_configuration_departure_reasons" model="ir.ui.menu">
             <field name="name">Departure Reasons</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_employees_configuration" />
             <field name="sequence">60</field>
             <field name="action" ref="salewise_actions.salewise_hr_hr_departure_reason_action" />
@@ -110,6 +123,7 @@
         <record id="menu_saas_hr_recruitment" model="ir.ui.menu">
             <field name="name">Recruitment</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="sequence">60</field>
             <field name="lucide_icon">UserPlus</field>
         </record>
@@ -117,6 +131,7 @@
         <record id="menu_saas_hr_recruitment_candidates" model="ir.ui.menu">
             <field name="name">Candidates</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_recruitment" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_action_hr_candidate" />
@@ -125,6 +140,7 @@
         <record id="menu_saas_hr_recruitment_all_applications" model="ir.ui.menu">
             <field name="name">All Applications</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_recruitment" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_crm_case_categ0_act_job" />
@@ -133,12 +149,14 @@
         <record id="menu_saas_hr_recruitment_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_recruitment" />
             <field name="sequence">30</field>
         </record>
         <record id="menu_saas_hr_recruitment_configuration_recruitment_stages" model="ir.ui.menu">
             <field name="name">Recruitment Stages</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_hr_recruitment_stage_act" />
@@ -148,6 +166,7 @@
         <record id="menu_saas_hr_recruitment_configuration_refuse_reasons" model="ir.ui.menu">
             <field name="name">Refuse Reasons</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_recruitment_configuration" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_hr_applicant_refuse_reason_action" />
@@ -157,6 +176,7 @@
         <record id="menu_saas_hr_time_off" model="ir.ui.menu">
             <field name="name">Time Off</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Palmtree</field>
         </record>
@@ -164,6 +184,7 @@
         <record id="menu_saas_hr_time_off_time_off" model="ir.ui.menu">
             <field name="name">Time Off</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_hr_leave_action_action_approve_department" />
@@ -172,6 +193,7 @@
         <record id="menu_saas_hr_time_off_allocations" model="ir.ui.menu">
             <field name="name">Allocations</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_hr_leave_allocation_action_approve_department" />
@@ -180,12 +202,14 @@
         <record id="menu_saas_hr_time_off_configuration" model="ir.ui.menu">
             <field name="name">Configuration</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off" />
             <field name="sequence">30</field>
         </record>
         <record id="menu_saas_hr_time_off_configuration_time_off_types" model="ir.ui.menu">
             <field name="name">Time Off Types</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_open_view_holiday_status" />
@@ -195,6 +219,7 @@
         <record id="menu_saas_hr_time_off_configuration_public_holidays" model="ir.ui.menu">
             <field name="name">Public Holidays</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_open_view_public_holiday" />
@@ -204,6 +229,7 @@
         <record id="menu_saas_hr_time_off_configuration_mandatory_days" model="ir.ui.menu">
             <field name="name">Mandatory Days</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_time_off_configuration" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_hr_holidays_hr_leave_mandatory_day_action" />
@@ -214,6 +240,7 @@
         <record id="menu_saas_hr_expenses" model="ir.ui.menu">
             <field name="name">Expenses</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Wallet</field>
         </record>
@@ -221,6 +248,7 @@
         <record id="menu_saas_hr_expenses_expense_reports" model="ir.ui.menu">
             <field name="name">Expense Reports</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_expense_action_hr_expense_sheet_all" />
@@ -230,6 +258,7 @@
         <record id="menu_saas_hr_expenses_expenses_analysis" model="ir.ui.menu">
             <field name="name">Expenses Analysis</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_hr_expense_hr_expense_actions_all" />
@@ -238,6 +267,7 @@
         <record id="menu_saas_hr_expenses_expense_categories" model="ir.ui.menu">
             <field name="name">Expense Categories</field>
             <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="parent_id" ref="menu_saas_hr_expenses" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_hr_expense_hr_expense_product" />

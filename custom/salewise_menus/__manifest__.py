@@ -7,6 +7,7 @@
         'web',
         'web_tour',  # Added to ensure our patches run after web_tour
         'salewise_actions',  # Custom actions module
+        'salewise_plans',  # For plan filtering
         'account',
         'account_payment_mode',
         'appointment',
