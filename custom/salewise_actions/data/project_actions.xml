@@ -10,6 +10,8 @@
             <field name="context">{
                                 'default_composition_mode': 'mass_mail',
                         }, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="search_view_id" ref="salewise_views.salewise_project_project_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_project_project_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_project_project_form')})]" />
         </record>
@@ -26,6 +28,8 @@
                                 'show_project_update': True,
                                 'search_default_open_tasks': 1,
                         }, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="search_view_id" ref="salewise_views.salewise_project_task_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_project_task_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_project_task_form')}), (0, 0, {'view_mode': 'calendar', 'view_id': ref('salewise_views.salewise_project_task_calendar')})]" />
         </record>
@@ -35,6 +39,8 @@
             <field name="view_mode">kanban,form</field>
             <field name="original_action" ref="project.project_project_stage_configure" />
             <field name="original_view_mode">list,kanban,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_project_project_stage_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_project_project_stage_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_project_project_stage_search" />
         </record>
@@ -46,6 +52,8 @@
             <field name="original_view_mode">list,kanban,form</field>
             <field name="domain">[('user_id', '=', False)]</field>
             <field name="context">{"default_user_id": false, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_project_task_type_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_project_task_type_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_project_task_type_search" />
         </record>
@@ -55,6 +63,8 @@
             <field name="view_mode">kanban</field>
             <field name="original_action" ref="documents.document_action" />
             <field name="original_view_mode">kanban,list,activity</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_documents_document_kanban')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_documents_document_search" />
         </record>
@@ -64,6 +74,8 @@
             <field name="view_mode">calendar,list,form</field>
             <field name="original_action" ref="calendar.action_calendar_event" />
             <field name="original_view_mode">calendar,list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="search_view_id" ref="salewise_views.salewise_calendar_event_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'calendar', 'view_id': ref('salewise_views.salewise_calendar_event_calendar')}), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_calendar_event_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_calendar_event_form')})]" />
         </record>
@@ -73,6 +85,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="calendar.action_calendar_alarm" />
             <field name="original_view_mode">list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_calendar_alarm_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_calendar_alarm_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_calendar_alarm_search" />
         </record>
@@ -82,6 +96,8 @@
             <field name="view_mode">kanban,form</field>
             <field name="original_action" ref="appointment.appointment_type_action" />
             <field name="original_view_mode">kanban,list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_appointment_type_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_appointment_type_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_appointment_type_search" />
         </record>
@@ -92,6 +108,8 @@
             <field name="original_action" ref="appointment.appointment_invite_action" />
             <field name="original_view_mode">list</field>
             <field name="context">{'search_default_my_book_urls': 1, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_professional" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_appointment_invite_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_appointment_invite_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_appointment_invite_search" />
         </record>

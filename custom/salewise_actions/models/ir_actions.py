@@ -15,6 +15,24 @@ class IrActionsActWindow(models.Model):
         string='Original View Mode',
         help='The view_mode string from the original action'
     )
+    
+    is_saas = fields.Boolean(
+        string='Is SaaS Action',
+        default=False,
+        help='Indicates if this action is part of the SaaS system'
+    )
+    
+    is_system = fields.Boolean(
+        string='Is System Action',
+        default=False,
+        help='Indicates if this is a system action (available to all plans)'
+    )
+    
+    plan_id = fields.Many2one(
+        'salewise.plan',
+        string='Plan',
+        help='The minimum plan required to access this action'
+    )
 
 
 class IrActionsServer(models.Model):
@@ -24,4 +42,22 @@ class IrActionsServer(models.Model):
         'ir.actions.server', 
         string='Original Action',
         help='Reference to the original action this was cloned from'
+    )
+    
+    is_saas = fields.Boolean(
+        string='Is SaaS Action',
+        default=False,
+        help='Indicates if this action is part of the SaaS system'
+    )
+    
+    is_system = fields.Boolean(
+        string='Is System Action',
+        default=False,
+        help='Indicates if this is a system action (available to all plans)'
+    )
+    
+    plan_id = fields.Many2one(
+        'salewise.plan',
+        string='Plan',
+        help='The minimum plan required to access this action'
     )

@@ -8,6 +8,8 @@
         <field name="model_id" ref="crm.model_crm_team"/>
         <field name="state">code</field>
         <field name="code">action = model.salewise_action_your_pipeline()</field>
+            <field name="is_saas">True</field>
+            <field name="is_system">True</field>
         <field name="original_action" ref="crm.action_your_pipeline"/>
     </record>
     <record id="salewise_crm_action_opportunity_forecast" model="ir.actions.server">
@@ -15,6 +17,8 @@
         <field name="model_id" ref="crm.model_crm_team"/>
         <field name="state">code</field>
         <field name="code">action = model.salewise_action_opportunity_forecast()</field>
+            <field name="is_saas">True</field>
+            <field name="is_system">True</field>
         <field name="original_action" ref="crm.action_opportunity_forecast"/>
     </record>
 

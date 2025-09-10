@@ -8,6 +8,8 @@
             <field name="original_action" ref="contacts.action_contacts" />
             <field name="original_view_mode">kanban,list,form,activity</field>
             <field name="context">{"default_is_company": true, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="search_view_id" ref="salewise_views.salewise_res_partner_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_res_partner_kanban')}), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_res_partner_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_res_partner_form')})]" />
         </record>
@@ -19,6 +21,8 @@
             <field name="original_view_mode">list,kanban,form,activity</field>
             <field name="domain">[('display_type', 'not in', ('line_section', 'line_note'))]</field>
             <field name="context">{"search_default_account_id": ["active_id"], "search_default_posted": 1, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="search_view_id" ref="salewise_views.salewise_account_move_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_account_move_kanban')}), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_move_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_move_form')})]" />
         </record>
@@ -35,6 +39,8 @@
                                 'default_move_journal_types': ('bank', 'cash'),
                                 'display_account_trust': True,
                         }, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_payment_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_account_payment_search" />
         </record>
@@ -44,6 +50,8 @@
             <field name="view_mode">kanban,form</field>
             <field name="original_action" ref="account.action_payment_term_form" />
             <field name="original_view_mode">list,kanban,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="search_view_id" ref="salewise_views.salewise_account_payment_term_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('salewise_views.salewise_account_payment_term_kanban')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_term_form')})]" />
         </record>
@@ -53,6 +61,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="account_payment_mode.account_payment_mode_action" />
             <field name="original_view_mode">list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_account_payment_mode_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_account_payment_mode_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_account_payment_mode_search" />
         </record>
@@ -66,6 +76,8 @@
             <field name="context">{'is_contract':1,
                         'search_default_not_finished':1,
                         'default_contract_type': 'sale'}, 'salewise_mode': True}</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="search_view_id" ref="salewise_views.salewise_contract_contract_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_contract_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_contract_contract_form')})]" />
         </record>
@@ -75,6 +87,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="contract.contract_template_action" />
             <field name="original_view_mode">list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="search_view_id" ref="salewise_views.salewise_contract_template_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_template_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_contract_template_form')})]" />
         </record>
@@ -84,6 +98,8 @@
             <field name="view_mode">list</field>
             <field name="original_action" ref="contract_termination.contract_terminate_reason_act_window" />
             <field name="original_view_mode">list,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_starter" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_contract_terminate_reason_list')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_contract_terminate_reason_search" />
         </record>

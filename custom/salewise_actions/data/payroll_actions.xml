@@ -7,6 +7,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="payroll.hr_payslip_run_action" />
             <field name="original_view_mode">list,kanban,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="search_view_id" ref="salewise_views.salewise_hr_payslip_run_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_hr_payslip_run_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_hr_payslip_run_form')})]" />
         </record>
@@ -16,6 +18,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="payroll.hr_payslip_action" />
             <field name="original_view_mode">list,kanban,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="search_view_id" ref="salewise_views.salewise_hr_payslip_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_hr_payslip_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_hr_payslip_form')})]" />
         </record>
@@ -25,6 +29,8 @@
             <field name="view_mode">list,form</field>
             <field name="original_action" ref="payroll.hr_payroll_structure_action" />
             <field name="original_view_mode">list,kanban,form</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_hr_payroll_structure_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_hr_payroll_structure_form')})]" />
             <field name="search_view_id" ref="salewise_views.salewise_hr_payroll_structure_search" />
         </record>
@@ -35,6 +41,8 @@
             <field name="original_action" ref="payroll.action_salary_rule_form" />
             <field name="original_view_mode">list,kanban,form</field>
             <field name="domain">[('parent_rule_id','=',False)]</field>
+            <field name="is_saas">True</field>
+            <field name="plan_id" ref="salewise_plans.plan_enterprise" />
             <field name="search_view_id" ref="salewise_views.salewise_hr_salary_rule_search" />
             <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('salewise_views.salewise_hr_salary_rule_list')}), (0, 0, {'view_mode': 'form', 'view_id': ref('salewise_views.salewise_hr_salary_rule_form')})]" />
         </record>

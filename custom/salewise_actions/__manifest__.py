@@ -13,6 +13,7 @@
     'depends': [
         'base',
         'salewise_views',  # Must be loaded before salewise_actions
+        'salewise_plans',  # For plan_id field reference
         'contacts',
         'crm',
         'sale',
