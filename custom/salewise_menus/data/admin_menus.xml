@@ -6,6 +6,7 @@
         <record id="menu_saas_hr_payroll" model="ir.ui.menu">
             <field name="name">Payroll</field>
             <field name="is_saas">True</field>
+            <field name="parent_id" ref="salewise_menus.menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Banknote</field>
         </record>
@@ -47,6 +48,7 @@
         <record id="menu_saas_core_contracts" model="ir.ui.menu">
             <field name="name">Contracts</field>
             <field name="is_saas">True</field>
+            <field name="parent_id" ref="salewise_menus.menu_saas_system" />
             <field name="sequence">60</field>
             <field name="lucide_icon">FileSignature</field>
         </record>

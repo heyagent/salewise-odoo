@@ -129,7 +129,6 @@
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_project_project_project_stage_configure" />
             <field name="original_menu_id" ref="project.menu_project_config_project_stage" />
-            <field name="groups_id" eval="[(4, ref('project.group_project_stages'))]" />
         </record>
         <record id="menu_saas_operations_project_configuration_task_stages" model="ir.ui.menu">
             <field name="name">Task Stages</field>
@@ -139,7 +138,6 @@
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_project_open_task_type_form" />
             <field name="original_menu_id" ref="project.menu_project_config_project" />
-            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <!-- Appointments Section -->
         <record id="menu_saas_operations_calendar_appointments" model="ir.ui.menu">
@@ -169,7 +167,6 @@
             <field name="sequence">60</field>
             <field name="action" ref="salewise_actions.salewise_calendar_action_calendar_alarm" />
             <field name="original_menu_id" ref="appointment.menu_appointment_reminders" />
-            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <!-- Automation Parent Menu -->
         <record id="menu_saas_system_automation" model="ir.ui.menu">
@@ -189,7 +186,6 @@
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_base_automation_base_automation_act" />
             <field name="original_menu_id" ref="base_automation.menu_base_automation_form" />
-            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
     </data>
 </odoo>

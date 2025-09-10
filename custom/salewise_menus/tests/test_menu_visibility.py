@@ -34,15 +34,18 @@ class TestMenuVisibility(TransactionCase):
         
         # Users to test
         cls.test_users = [
-            'admin', 'sales_user', 'sales_manager', 'hr_officer', 
-            'hr_manager', 'marketing_user', 'accountant',
-            'project_manager', 'project_user'
+            'admin', 'super_admin', 'sys_admin',
+            'sales_user', 'sales_manager', 
+            'hr_officer', 'hr_manager',
+            'marketing_user', 'accountant',
+            'project_manager', 'project_user',
+            'employee', 'team_lead'
         ]
 
     def _set_company_plan(self, plan):
         """Set the company's plan"""
         self.company.sudo().write({'plan_id': plan.id if plan else False})
-        self.env.cache.clear()  # Clear cache after plan change
+        self.env.invalidate_all()  # Invalidate cache after plan change
 
     def _get_user_menu_xmlids(self, username):
         """Get XML IDs of SaaS menus visible to a user"""
@@ -54,8 +57,12 @@ class TestMenuVisibility(TransactionCase):
         if user.res_users_settings_id:
             user.res_users_settings_id.sudo().write({'show_saas_menus': True})
         
+        # Invalidate cache for the user's environment to ensure fresh menu filtering
+        user_env = self.Menu.with_user(user)
+        user_env.env.invalidate_all()
+        
         # Get menus visible to user
-        menus = self.Menu.with_user(user).search([
+        menus = user_env.search([
             ('is_saas', '=', True)
         ])
         

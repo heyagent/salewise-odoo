@@ -34,9 +34,13 @@ class ResCompany(models.Model):
                     break
             
             if plan_changed:
-                # Clear cache following Odoo's pattern
-                # Using clear_cache() like in base res_company.write()
+                # Clear all caches when plan changes to ensure menu filtering is updated
+                # First clear registry cache (for ormcache decorated methods)
                 self.env.registry.clear_cache()
+                
+                # Then invalidate all environment caches (for computed fields, etc.)
+                # This ensures menu visibility is recalculated with new plan
+                self.env.invalidate_all()
                 
                 # If current company's plan changed, trigger page reload
                 if self.env.company.id in self.ids:

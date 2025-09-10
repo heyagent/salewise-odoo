@@ -48,6 +48,7 @@
         'mass_mailing',
         'marketing_automation',
         'social',
+        'salewise_menus',  # Required for show_saas_menus field
     ],
     'data': [
         'data/res_users_role.xml',

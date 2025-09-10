@@ -254,6 +254,37 @@ class IrUiMenu(models.Model):
         _logger.error("=== NO USER CONTEXT - CALLING SUPER ===")
         return super().get_user_roots()
     
+    @api.model
+    def search_fetch(self, domain, field_names, offset=0, limit=None, order=None):
+        """Override to apply plan-based filtering for SaaS menus"""
+        # First get the records using parent method
+        menus = super().search_fetch(domain, field_names, offset=offset, limit=limit, order=order)
+        
+        # Check if we're searching for SaaS menus
+        if any(term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] == True):
+            # Apply plan-based filtering
+            company = self.env.company
+            if company.plan_id:
+                # Get available plan IDs (current plan and lower tiers)
+                available_plan_ids = self._get_available_plan_ids(company)
+                
+                # Filter menus to only those matching available plans or no plan
+                menus = menus.filtered(lambda m: not m.plan_id or m.plan_id.id in available_plan_ids)
+        
+        return menus
+    
+    @api.model
+    def search_count(self, domain, limit=None):
+        """Override to apply plan-based filtering for count consistency"""
+        # Check if we're counting SaaS menus
+        if any(term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] == True):
+            # Use search_fetch to get filtered menus and count them
+            menus = self.search_fetch(domain, ['id'], limit=limit)
+            return len(menus)
+        
+        # For non-SaaS menus, use parent method
+        return super().search_count(domain, limit=limit)
+    
     def load_web_menus(self, debug):
         """Override to add is_saas field and filter by plan"""
         import logging

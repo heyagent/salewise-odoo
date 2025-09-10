@@ -7,12 +7,14 @@
             <field name="name">HR</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
+            <field name="parent_id" ref="salewise_menus.menu_saas_core" />
             <field name="sequence">40</field>
         </record>
         <record id="menu_saas_hr_employees" model="ir.ui.menu">
             <field name="name">Employees</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
+            <field name="parent_id" ref="menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">BadgeCheck</field>
         </record>
@@ -124,6 +126,7 @@
             <field name="name">Recruitment</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
+            <field name="parent_id" ref="menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">UserPlus</field>
         </record>
@@ -161,7 +164,6 @@
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_hr_recruitment_hr_recruitment_stage_act" />
             <field name="original_menu_id" ref="hr_recruitment.menu_hr_recruitment_stage" />
-            <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
         </record>
         <record id="menu_saas_hr_recruitment_configuration_refuse_reasons" model="ir.ui.menu">
             <field name="name">Refuse Reasons</field>
@@ -177,6 +179,7 @@
             <field name="name">Time Off</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
+            <field name="parent_id" ref="menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Palmtree</field>
         </record>
@@ -241,6 +244,7 @@
             <field name="name">Expenses</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
+            <field name="parent_id" ref="menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Wallet</field>
         </record>
