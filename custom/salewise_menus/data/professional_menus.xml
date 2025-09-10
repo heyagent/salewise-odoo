@@ -7,6 +7,7 @@
             <field name="name">Social Marketing</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_professional" />
+            <field name="parent_id" ref="menu_saas_marketing" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Share2</field>
         </record>
@@ -54,6 +55,7 @@
             <field name="name">Marketing Automation</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_professional" />
+            <field name="parent_id" ref="menu_saas_marketing" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Zap</field>
         </record>
@@ -92,6 +94,7 @@
             <field name="name">Project</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_professional" />
+            <field name="parent_id" ref="menu_saas_operations" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Kanban</field>
         </record>

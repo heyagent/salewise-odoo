@@ -7,7 +7,6 @@
             <field name="name">HR</field>
             <field name="is_saas">True</field>
             <field name="plan_id" ref="salewise_plans.plan_enterprise" />
-            <field name="parent_id" ref="salewise_menus.menu_saas_core" />
             <field name="sequence">40</field>
         </record>
         <record id="menu_saas_hr_employees" model="ir.ui.menu">
