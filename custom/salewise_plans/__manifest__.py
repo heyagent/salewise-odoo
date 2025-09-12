@@ -7,6 +7,7 @@
         'web',
     ],
     'data': [
+        'security/group.xml',
         'security/ir.model.access.csv',
         'data/plans_data.xml',
         'views/salewise_plan_views.xml',
