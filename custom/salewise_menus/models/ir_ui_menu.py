@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
 from odoo import models, fields, api
 from odoo.http import request
 
@@ -14,7 +13,7 @@ class IrUiMenu(models.Model):
     plan_id = fields.Many2one('salewise.plan', string='Required Plan', 
                               help='Plan required to see this menu. Empty means admin/no plan required.')
 
-    _logger = logging.getLogger('salewise.menu.custom')
+    # no module-level logging in production
 
     # --------------------
     # Helpers
@@ -57,10 +56,6 @@ class IrUiMenu(models.Model):
         from odoo.osv import expression
         blacklist_domain = expression.OR(domain_parts) if len(domain_parts) > 1 else domain_parts[0]
         ids = self.sudo().search(blacklist_domain).ids
-        try:
-            self._logger.info('[SALEWISE_TRACE] custom.blacklist uid=%s plans=%s blacklisted=%s', self.env.uid, plan_ids, len(ids))
-        except Exception:
-            pass
         return ids
     
     @api.model
@@ -78,10 +73,6 @@ class IrUiMenu(models.Model):
                         domain += [('is_system', '=', False), ('plan_id', 'in', plan_ids)]
                 # Admin (no plan): all SaaS roots including system
                 recs = self.search(domain)
-                try:
-                    self._logger.info('[SALEWISE_TRACE] custom.roots uid=%s domain=%s count=%s', self.env.uid, domain, len(recs))
-                except Exception:
-                    pass
                 return recs
             # Normal mode: only non-SaaS roots
             return self.search([('parent_id', '=', False), ('is_saas', '=', False)])
@@ -120,10 +111,6 @@ class IrUiMenu(models.Model):
     def load_web_menus(self, debug):
         """Enrich web menus with SaaS metadata; rely on core filtering."""
         web_menus = super().load_web_menus(debug)
-        try:
-            self._logger.info('[SALEWISE_TRACE] custom.load_web_menus enter uid=%s debug=%s in=%s', self.env.uid, debug, len(web_menus) - 1)
-        except Exception:
-            pass
 
         # Add is_saas/plan_id/is_system flags used by client patches and filtering
         menu_ids = [mid for mid in web_menus.keys() if mid != 'root']
@@ -216,14 +203,6 @@ class IrUiMenu(models.Model):
                     # drop nodes
                     for rid in bad:
                         web_menus.pop(rid, None)
-                try:
-                    root_children = len(web_menus.get('root', {}).get('children', []) if isinstance(web_menus.get('root', {}), dict) else [])
-                    self._logger.info('[SALEWISE_TRACE] custom.load_web_menus pruned allowed=%s is_system=%s plan_bad=%s out=%s root_children=%s', sorted(list(allowed)), len(to_remove), len(bad), len(web_menus) - 1, root_children)
-                except Exception:
-                    pass
+                # end plan-based pruning
 
-        try:
-            self._logger.info('[SALEWISE_TRACE] custom.load_web_menus done uid=%s out=%s', self.env.uid, len(web_menus) - 1)
-        except Exception:
-            pass
         return web_menus
