@@ -256,8 +256,13 @@ netstat -tulpn | grep 8069
 ### Before Committing
 1. Check git status
 2. Review changes with `git diff`
-3. Ensure tests pass (if applicable)
-4. Check that Odoo server starts without errors
+3. Run external tests locally (do not push yet):
+   - JSON-RPC menus validator with baselines: `python3 custom/salewise_menus/scripts/test_web_menus.py --check-baselines`
+   - Playwright UI checks (menus + plan switching):
+     - `node custom/salewise_menus/scripts/test_web_menus_playwright.js`
+     - `node custom/salewise_plans/scripts/test_switch_plan_ui_playwright.js`
+4. Manually verify key flows in the browser when feasible
+5. Only after tests pass locally, commit and push
 
 ### Commit Message Format
 ```
@@ -308,4 +313,3 @@ Standard limits for development:
 - Monitor log file for errors and debugging
 - Database credentials: username=salewise, password=salewise, db=salewise
 - Admin credentials: username=admin, password=admin
-

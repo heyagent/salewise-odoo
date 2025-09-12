@@ -1,4 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_salewise_plan_user,access_salewise_plan_user,model_salewise_plan,base.group_user,1,0,0,0
 access_salewise_plan_system,access_salewise_plan_system,model_salewise_plan,base.group_system,1,1,1,1
-access_salewise_plan_switch_wizard,access_salewise_plan_switch_wizard,model_salewise_plan_switch_wizard,base.group_system,1,1,1,0

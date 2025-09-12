@@ -11,7 +11,6 @@
         'data/plans_data.xml',
         'views/salewise_plan_views.xml',
         'views/res_company_views.xml',
-        'views/plan_switch_wizard.xml',
     ],
     'assets': {
         'web.assets_backend': [
