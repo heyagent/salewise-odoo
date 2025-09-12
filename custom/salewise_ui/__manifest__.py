@@ -11,11 +11,13 @@
         'web',
         'web_tour',
         'salewise_menus',  # For session.show_saas_menus
+        'salewise_plans',  # For session.is_switch_plan_user in user dropdown
     ],
     'assets': {
         'web.assets_backend': [
             'salewise_ui/static/src/js/tour_patch.js',
             'salewise_ui/static/src/js/user_menu.esm.js',
+            'salewise_ui/static/src/js/user_menu_plan.esm.js',
             'salewise_ui/static/src/js/favorites_menu_patch.js',
             'salewise_ui/static/src/js/custom_group_by_patch.js',
             'salewise_ui/static/src/js/custom_filter_patch.js',

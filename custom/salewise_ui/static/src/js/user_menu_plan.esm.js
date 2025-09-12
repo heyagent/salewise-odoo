@@ -4,24 +4,17 @@ import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { session } from "@web/session";
 
-console.debug('[SALEWISE_SWITCH_PLAN] user_menu_plan.esm.js loaded', {
-    is_switch_plan_user: session.is_switch_plan_user,
-    impersonate_from_uid: session.impersonate_from_uid,
-});
+// Add a "Switch Plan" entry to the user dropdown.
+// Visibility: only for users in salewise_plans.group_switch_plan and not impersonating.
+// Action: opens current company form to allow changing plan.
 
 export function changePlanMenuItem(env) {
     const hidden = session.impersonate_from_uid || !session.is_switch_plan_user;
-    console.debug('[SALEWISE_SWITCH_PLAN] building menu item', {
-        is_switch_plan_user: session.is_switch_plan_user,
-        impersonate_from_uid: session.impersonate_from_uid,
-        hidden,
-    });
     return {
         type: "item",
         id: "salewise_change_plan",
         description: _t("Switch Plan"),
         sequence: 58,
-        // Visibility mirrors OCA switch_login: hidden when impersonating or not allowed
         hide: hidden,
         callback: async function () {
             const company = env.services.company && env.services.company.currentCompany;
@@ -43,10 +36,8 @@ export function changePlanMenuItem(env) {
 }
 
 try {
-    const cat = registry.category("user_menuitems");
-    console.debug('[SALEWISE_SWITCH_PLAN] before add, user_menuitems keys:', cat.getEntries().map(([k]) => k));
-    cat.add("salewise_change_plan", changePlanMenuItem, { force: true });
-    console.debug('[SALEWISE_SWITCH_PLAN] after add, user_menuitems keys:', cat.getEntries().map(([k]) => k));
-} catch (e) {
-    console.error('[SALEWISE_SWITCH_PLAN] registry add failed', e);
+    registry.category("user_menuitems").add("salewise_change_plan", changePlanMenuItem, { force: true });
+} catch (_) {
+    // ignore if registry not available yet
 }
+

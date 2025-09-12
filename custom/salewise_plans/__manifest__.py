@@ -17,7 +17,6 @@
         'web.assets_backend': [
             'salewise_plans/static/src/js/salewise_plan_display.js',
             'salewise_plans/static/src/js/plan_reload.js',
-            'salewise_plans/static/src/js/user_menu_plan.esm.js',
             'salewise_plans/static/src/xml/salewise_plan_display.xml',
             'salewise_plans/static/src/scss/salewise_plan_display.scss',
         ],
