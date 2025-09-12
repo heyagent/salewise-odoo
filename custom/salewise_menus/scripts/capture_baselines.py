@@ -24,7 +24,7 @@ def set_company_plan(plan_name):
     
     models = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/object')
     
-    if plan_name:
+    if plan_name and plan_name != 'Admin':
         # Find plan
         plan_ids = models.execute_kw(
             db, uid, 'admin',
@@ -37,7 +37,7 @@ def set_company_plan(plan_name):
         
         plan_id = plan_ids[0]
     else:
-        plan_id = False  # No plan
+        plan_id = False  # No plan (Admin mode)
     
     # Update company
     models.execute_kw(
@@ -47,7 +47,7 @@ def set_company_plan(plan_name):
     )
     return True
 
-def get_user_menu_data(username, password):
+def get_user_menu_data(username, password, include_system=False):
     """Get both menu XML IDs and count for a user"""
     uid = authenticate(username, password)
     if not uid:
@@ -71,12 +71,19 @@ def get_user_menu_data(username, password):
             [[settings_id], {'show_saas_menus': True}]
         )
     
-    # Get SaaS menus
-    menu_ids = models.execute_kw(
-        db, uid, password,
-        'ir.ui.menu', 'search',
-        [[['is_saas', '=', True]]]
-    )
+    # Get SaaS menus - include system menus for Admin mode
+    if include_system:
+        menu_ids = models.execute_kw(
+            db, uid, password,
+            'ir.ui.menu', 'search',
+            [[['is_saas', '=', True]]]  # Include ALL SaaS menus (system and non-system)
+        )
+    else:
+        menu_ids = models.execute_kw(
+            db, uid, password,
+            'ir.ui.menu', 'search',
+            [[['is_saas', '=', True], ['is_system', '=', False]]]  # Exclude system menus
+        )
     
     if not menu_ids:
         return [], 0
@@ -106,7 +113,7 @@ def get_user_menu_data(username, password):
 
 def capture_baselines():
     """Capture both baselines for all plans and users"""
-    plans = ['Starter', 'Professional', 'Enterprise']
+    plans = ['Admin', 'Starter', 'Professional', 'Enterprise']
     
     # Updated user list to include ALL users from salewise_users
     users = [
@@ -145,7 +152,9 @@ def capture_baselines():
         
         for username, password in users:
             # Get both XML IDs and count in one pass
-            xmlids, count = get_user_menu_data(username, password)
+            # Include system menus for Admin mode
+            include_system = (plan == 'Admin')
+            xmlids, count = get_user_menu_data(username, password, include_system)
             
             # Store results
             menu_baseline[plan][username] = xmlids

@@ -7,6 +7,24 @@ class ResCompany(models.Model):
     
     plan_id = fields.Many2one('salewise.plan', string='Subscription Plan')
     
+    def get_available_plan_ids(self):
+        """Get available plan IDs based on company's current plan.
+        Returns plan IDs that should be visible (current plan and lower tiers).
+        
+        This is used for filtering menus, actions, views, etc. based on the plan hierarchy.
+        Admin users (no plan) get an empty list which means they see everything.
+        """
+        self.ensure_one()
+        
+        if not self.plan_id:
+            return []  # No plan = admin mode, they see everything
+        
+        # Get current plan and all lower tier plans
+        available_plans = self.env['salewise.plan'].search([
+            ('sequence', '<=', self.plan_id.sequence)
+        ])
+        return available_plans.ids
+    
     def write(self, vals):
         """Override write to clear caches and reload when plan changes.
         

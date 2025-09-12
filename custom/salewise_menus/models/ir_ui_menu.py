@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 from odoo import models, fields, api
 from odoo.http import request
 
@@ -7,374 +8,222 @@ class IrUiMenu(models.Model):
     _inherit = 'ir.ui.menu'
     
     is_saas = fields.Boolean('Is SaaS', default=False)
+    is_system = fields.Boolean('Is System', default=False, help='System/Admin only menu')
     lucide_icon = fields.Char('Lucide Icon')
     original_menu_id = fields.Many2one('ir.ui.menu', string='Original Menu')
     plan_id = fields.Many2one('salewise.plan', string='Required Plan', 
                               help='Plan required to see this menu. Empty means admin/no plan required.')
-    
-    @api.model
-    def _get_available_plan_ids(self, company=None):
-        """Get available plan IDs based on company's current plan.
-        Returns plan IDs that should be visible (current plan and lower tiers).
-        Centralized to avoid duplicate lookups."""
-        if not company:
-            company = request.env.company if request else self.env.company
-        
-        current_plan_id = company.plan_id.id if company.plan_id else False
-        
-        if not current_plan_id:
-            return []  # No plan = admin mode, they see everything
-        
-        # Get current plan and all lower tier plans
-        current_plan = self.env['salewise.plan'].browse(current_plan_id)
-        if current_plan:
-            available_plans = self.env['salewise.plan'].search([
-                ('sequence', '<=', current_plan.sequence)
-            ])
-            return available_plans.ids
-        
-        return [current_plan_id]
-    
-    @api.model_create_multi
-    def create(self, vals_list):
-        """Override create to ensure proper parent_path"""
-        # Create the menus first
-        menus = super().create(vals_list)
-        
-        # Force parent_path recomputation for ALL menus being created
-        # This is needed because XML data loading doesn't trigger it properly
-        if menus:
-            # Get all menus including their ancestors
-            all_menus = menus
-            for menu in menus:
-                if menu.parent_id:
-                    all_menus |= menu.parent_id
-            
-            # Force recomputation of parent_path
-            all_menus._parent_store_compute()
-        
-        return menus
-    
-    def write(self, vals):
-        """Override write to maintain parent_path integrity"""
-        res = super().write(vals)
-        
-        # If parent_id changed, parent_path is automatically updated by Odoo
-        # We just need to ensure it's flushed to DB
-        if 'parent_id' in vals:
-            self.flush_model(['parent_path'])
-        
-        return res
-    
-    @api.model
-    def load_menus(self, debug):
-        """Override to filter menus based on is_saas flag when in SaaS mode"""
-        import logging
-        import time
-        _logger = logging.getLogger(__name__)
-        start_time = time.time()
-        _logger.error(f"=== SALEWISE load_menus CALLED at {start_time} ===")
-        
-        # Check if we're in SaaS mode
-        if request and request.env.user:
-            user_settings = request.env.user.res_users_settings_id
-            if user_settings and user_settings.show_saas_menus:
-                # _logger.error("=== SAAS MODE - FILTERING MENUS ===")
-                
-                # Get company plan
-                company = request.env.company
-                current_plan_id = company.plan_id.id if company.plan_id else False
-                
-                # Call parent method to get base structure
-                fields = ['name', 'sequence', 'parent_id', 'action', 'web_icon', 'is_saas', 'plan_id']
-                menu_roots = self.get_user_roots()
-                menu_roots_data = menu_roots.read(fields) if menu_roots else []
-                menu_root = {
-                    'id': False,
-                    'name': 'root',
-                    'parent_id': [-1, ''],
-                    'children': [menu['id'] for menu in menu_roots_data],
-                }
-                
-                all_menus = {'root': menu_root}
-                
-                if not menu_roots_data:
-                    return all_menus
-                
-                # CRITICAL: Only load menus with is_saas=True
-                menus_domain = [
-                    ('id', 'child_of', menu_roots.ids),
-                    ('is_saas', '=', True)  # ONLY SaaS menus!
-                ]
-                
-                # Add plan filtering if not admin
-                if current_plan_id:
-                    plan_ids = self._get_available_plan_ids(company)
-                    if plan_ids:
-                        menus_domain.append(('plan_id', 'in', plan_ids))
-                        # _logger.error(f"=== Filtering for plans: {plan_ids} ===")
-                
-                blacklisted_menu_ids = self._load_menus_blacklist()
-                if blacklisted_menu_ids:
-                    from odoo.osv import expression
-                    menus_domain = expression.AND([menus_domain, [('id', 'not in', blacklisted_menu_ids)]])
-                
-                menus = self.search(menus_domain)
-                _logger.error(f"=== Found {len(menus)} SaaS child menus ===")
-                _logger.error(f"=== Domain was: {menus_domain} ===")
-                
-                # Check if Automation menu is in the result
-                automation = menus.filtered(lambda m: m.id == 607)
-                if automation:
-                    _logger.error(f"=== Automation menu 607 IS in search result ===")
-                else:
-                    _logger.error(f"=== Automation menu 607 NOT in search result ===")
-                    # Check System menu children
-                    system_children = menus.filtered(lambda m: m.parent_id.id == 544)
-                    _logger.error(f"=== System menu children found: {[(m.id, m.name) for m in system_children]} ===")
-                
-                menu_items = menus.read(fields)
-                xmlids = (menu_roots + menus)._get_menuitems_xmlids()
-                
-                # add roots at the end
-                menu_items.extend(menu_roots_data)
-                
-                # Load attachments for web icons
-                mi_attachments = self.env['ir.attachment'].sudo().search_read(
-                    domain=[('res_model', '=', 'ir.ui.menu'),
-                            ('res_id', 'in', [menu_item['id'] for menu_item in menu_items if menu_item['id']]),
-                            ('res_field', '=', 'web_icon_data')],
-                    fields=['res_id', 'datas', 'mimetype'])
-                
-                mi_attachment_by_res_id = {attachment['res_id']: attachment for attachment in mi_attachments}
-                
-                # set children ids and xmlids
-                menu_items_map = {menu_item["id"]: menu_item for menu_item in menu_items}
-                for menu_item in menu_items:
-                    menu_item.setdefault('children', [])
-                    parent = menu_item['parent_id'] and menu_item['parent_id'][0]
-                    menu_item['xmlid'] = xmlids.get(menu_item['id'], "")
-                    if parent in menu_items_map:
-                        menu_items_map[parent].setdefault(
-                            'children', []).append(menu_item['id'])
-                    attachment = mi_attachment_by_res_id.get(menu_item['id'])
-                    if attachment:
-                        menu_item['web_icon_data'] = attachment['datas'].decode()
-                        menu_item['web_icon_data_mimetype'] = attachment['mimetype']
-                    else:
-                        menu_item['web_icon_data'] = False
-                        menu_item['web_icon_data_mimetype'] = False
-                all_menus.update(menu_items_map)
-                
-                # sort by sequence
-                for menu_id in all_menus:
-                    all_menus[menu_id]['children'].sort(key=lambda id: all_menus[id]['sequence'])
-                
-                # recursively set app ids to related children
-                def _set_app_id(app_id, menu):
-                    menu['app_id'] = app_id
-                    for child_id in menu['children']:
-                        _set_app_id(app_id, all_menus[child_id])
-                
-                for app in menu_roots_data:
-                    app_id = app['id']
-                    _set_app_id(app_id, all_menus[app_id])
-                
-                # filter out menus not related to an app (+ keep root menu)
-                all_menus = {menu['id']: menu for menu in all_menus.values() if menu.get('app_id')}
-                all_menus['root'] = menu_root
-                
-                end_time = time.time()
-                _logger.error(f"=== Returning {len(all_menus)} total menus (SaaS mode) in {end_time - start_time:.3f}s ===")
-                return all_menus
-        
-        # Not in SaaS mode - call parent
-        end_time = time.time()
-        _logger.error(f"=== NOT IN SAAS MODE - calling parent (took {end_time - start_time:.3f}s so far) ===")
-        return super().load_menus(debug)
+
+    _logger = logging.getLogger('salewise.menu.custom')
+
+    # --------------------
+    # Helpers
+    # --------------------
+    def _is_saas_mode(self):
+        """Return True when the current user enabled SaaS menus.
+
+        Works both with and without an HTTP request (e.g., in tests/cron).
+        """
+        if request and request.env and request.env.user:
+            settings = request.env.user.res_users_settings_id
+            return bool(settings and settings.show_saas_menus)
+        # fallback: use env user (e.g., tests using with_user)
+        user = self.env.user
+        settings = getattr(user, 'res_users_settings_id', False)
+        return bool(settings and settings.show_saas_menus)
+
+    def _get_available_plan_ids(self):
+        company = self.env.company
+        return company.get_available_plan_ids() if company else []
+
+    # --------------------
+    # Core integration points
+    # --------------------
+    def _load_menus_blacklist(self):
+        """Return ids to exclude from load_menus when in SaaS mode.
+
+        We leverage core's blacklist hook to avoid re-implementing load_menus.
+        """
+        if not self._is_saas_mode():
+            return []
+
+        domain_parts = [[('is_saas', '=', False)]]  # always exclude non-SaaS in SaaS mode
+        plan_ids = self._get_available_plan_ids()
+        if plan_ids:
+            # Non-admin: exclude system menus and menus outside allowed plans
+            domain_parts.append([('is_system', '=', True)])
+            domain_parts.append([('is_saas', '=', True), ('plan_id', 'not in', plan_ids)])
+
+        from odoo.osv import expression
+        blacklist_domain = expression.OR(domain_parts) if len(domain_parts) > 1 else domain_parts[0]
+        ids = self.sudo().search(blacklist_domain).ids
+        try:
+            self._logger.info('[SALEWISE_TRACE] custom.blacklist uid=%s plans=%s blacklisted=%s', self.env.uid, plan_ids, len(ids))
+        except Exception:
+            pass
+        return ids
     
     @api.model
     def get_user_roots(self):
         """Override to return SaaS root menus when user has SaaS preference"""
-        import logging
-        import time
-        _logger = logging.getLogger(__name__)
-        start_time = time.time()
-        _logger.error(f"=== GET_USER_ROOTS CALLED at {start_time} ===")
-        
         if request and request.env.user:
-            user_settings = request.env.user.res_users_settings_id
-            _logger.error(f"User settings: {user_settings}")
-            _logger.error(f"User settings ID: {user_settings.id if user_settings else 'NONE'}")
-            
-            if user_settings and user_settings.show_saas_menus:
-                _logger.error("=== SAAS MODE ACTIVE ===")
-                # Get current company's plan
+            settings = request.env.user.res_users_settings_id
+            if settings and settings.show_saas_menus:
                 company = request.env.company
-                current_plan_id = company.plan_id.id if company.plan_id else False
-                _logger.error(f"Company: {company.name}, Plan ID: {current_plan_id}")
-                
-                # Return only SaaS root menus for the current plan WITH SUDO
-                domain = [
-                    ('parent_id', '=', False),
-                    ('is_saas', '=', True),
-                ]
-                
-                if current_plan_id:
-                    # If company has a plan, show menus for that plan AND all lower tier plans
-                    plan_ids = self._get_available_plan_ids(company)
+                domain = [('parent_id', '=', False), ('is_saas', '=', True)]
+                if company and company.plan_id:
+                    # Non-admin: only roots within allowed plans and not system
+                    plan_ids = company.get_available_plan_ids()
                     if plan_ids:
-                        _logger.error(f"Current plan ID: {current_plan_id}")
-                        _logger.error(f"Available plan IDs: {plan_ids}")
-                        # ONLY show menus that match available plans - NO menus with null plan_id!
-                        domain.append(('plan_id', 'in', plan_ids))
-                    else:
-                        domain.append(('plan_id', '=', current_plan_id))
-                    _logger.error(f"Looking for menus with plan_id in {plan_ids if plan_ids else [current_plan_id]}")
-                else:
-                    # If no plan (admin mode), show ALL SaaS menus
-                    # Don't add any plan_id filter - admin sees everything
-                    _logger.error("Admin mode - showing ALL SaaS menus")
-                
-                _logger.error(f"Domain: {domain}")
-                saas_roots = self.sudo().search(domain)
-                _logger.error(f"Found {len(saas_roots)} SaaS root menus in {time.time() - start_time:.3f}s: {saas_roots.mapped('name')}")
-                return saas_roots
-            else:
-                _logger.error("=== NORMAL MODE (NOT SAAS) ===")
-                # Return normal root menus excluding SaaS ones
-                normal_roots = self.search([
-                    ('parent_id', '=', False),
-                    ('is_saas', '=', False)
-                ])
-                _logger.error(f"Found {len(normal_roots)} normal root menus")
-                return normal_roots
+                        domain += [('is_system', '=', False), ('plan_id', 'in', plan_ids)]
+                # Admin (no plan): all SaaS roots including system
+                recs = self.search(domain)
+                try:
+                    self._logger.info('[SALEWISE_TRACE] custom.roots uid=%s domain=%s count=%s', self.env.uid, domain, len(recs))
+                except Exception:
+                    pass
+                return recs
+            # Normal mode: only non-SaaS roots
+            return self.search([('parent_id', '=', False), ('is_saas', '=', False)])
         
         # Default behavior when no user context
-        _logger.error("=== NO USER CONTEXT - CALLING SUPER ===")
         return super().get_user_roots()
     
     @api.model
     def search_fetch(self, domain, field_names, offset=0, limit=None, order=None):
         """Override to apply plan-based filtering for SaaS menus"""
-        # First get the records using parent method
         menus = super().search_fetch(domain, field_names, offset=offset, limit=limit, order=order)
-        
-        # Check if we're searching for SaaS menus
-        if any(term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] == True):
-            # Apply plan-based filtering
+
+        # When explicitly querying SaaS menus, apply plan filter for non-admins
+        if any(
+            term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] is True
+        ):
             company = self.env.company
-            if company.plan_id:
-                # Get available plan IDs (current plan and lower tiers)
-                available_plan_ids = self._get_available_plan_ids(company)
-                
-                # Filter menus to only those matching available plans or no plan
-                menus = menus.filtered(lambda m: not m.plan_id or m.plan_id.id in available_plan_ids)
+            if company and company.plan_id:
+                allowed = set(company.get_available_plan_ids())
+                menus = menus.filtered(lambda m: not m.is_system and m.plan_id and m.plan_id.id in allowed)
         
         return menus
     
     @api.model
     def search_count(self, domain, limit=None):
         """Override to apply plan-based filtering for count consistency"""
-        # Check if we're counting SaaS menus
-        if any(term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] == True):
-            # Use search_fetch to get filtered menus and count them
-            menus = self.search_fetch(domain, ['id'], limit=limit)
-            return len(menus)
+        if any(
+            term for term in domain if len(term) == 3 and term[0] == 'is_saas' and term[2] is True
+        ):
+            # Ensure count aligns with search_fetch filtering
+            return len(self.search_fetch(domain, ['id'], limit=limit))
         
         # For non-SaaS menus, use parent method
         return super().search_count(domain, limit=limit)
     
     def load_web_menus(self, debug):
-        """Override to add is_saas field and filter by plan"""
-        import logging
-        import traceback
-        import time
-        _logger = logging.getLogger(__name__)
-        start_time = time.time()
-        _logger.error(f"=== SALEWISE_MENUS LOAD_WEB_MENUS CALLED at {start_time} ===")
-        _logger.error(f"=== DEBUG: {debug} ===")
-        _logger.error(f"=== STACK TRACE: {traceback.format_stack()[-3]} ===")
-        
-        # Call parent method
-        parent_start = time.time()
-        _logger.error("=== CALLING SUPER().LOAD_WEB_MENUS ===")
+        """Enrich web menus with SaaS metadata; rely on core filtering."""
         web_menus = super().load_web_menus(debug)
-        _logger.error(f"=== GOT {len(web_menus)} MENUS FROM PARENT in {time.time() - parent_start:.3f}s ===")
-        
-        # Log root menu details
-        if 'root' in web_menus:
-            _logger.error(f"Root menu: {web_menus['root']}")
-            _logger.error(f"Root children: {web_menus['root'].get('children', [])}")
-        
-        # ADD MISSING PROFESSIONAL/ENTERPRISE MENUS
-        if request and request.env.user:
-            user_settings = request.env.user.res_users_settings_id
-            if user_settings and user_settings.show_saas_menus:
-                company = request.env.company
-                current_plan_id = company.plan_id.id if company.plan_id else False
-                
-                if current_plan_id:
-                    # Get all plans up to current tier using helper method
-                    available_plan_ids = self._get_available_plan_ids(company)
-                    
-                    # Find menus that should be visible but aren't loaded
-                    all_plan_menus = self.sudo().search([
-                        ('is_saas', '=', True),
-                        ('plan_id', 'in', available_plan_ids)
-                    ])
-                    
-                    search_start = time.time()
-                    _logger.error(f"Found {len(all_plan_menus)} total menus for plans {available_plan_ids} in {time.time() - search_start:.3f}s")
-                    
-                    # Add missing menus
-                    for menu in all_plan_menus:
-                        if menu.id not in web_menus:
-                            _logger.error(f"Adding missing menu: {menu.name} (id: {menu.id}, parent: {menu.parent_id.id if menu.parent_id else None})")
-                            
-                            # Build menu dict like the base method does
-                            menu_dict = {
-                                'id': menu.id,
-                                'name': menu.name,
-                                'appID': menu.parent_id.id if menu.parent_id else False,
-                                'actionID': menu.action.id if menu.action else False,
-                                'xmlid': menu.get_external_id()[menu.id] or '',
-                                'sequence': menu.sequence,
-                                'children': [],
-                                'is_saas': menu.is_saas,
-                                'plan_id': menu.plan_id.id if menu.plan_id else False
-                            }
-                            
-                            # Add webIcon for root menus
-                            if not menu.parent_id and menu.web_icon:
-                                menu_dict['webIcon'] = menu.web_icon
-                                menu_dict['webIconData'] = menu.web_icon_data
-                            
-                            web_menus[menu.id] = menu_dict
-                            
-                            # Add to parent's children list
-                            if menu.parent_id and menu.parent_id.id in web_menus:
-                                parent = web_menus[menu.parent_id.id]
-                                if 'children' not in parent:
-                                    parent['children'] = []
-                                if menu.id not in parent['children']:
-                                    parent['children'].append(menu.id)
-                                    parent['children'].sort()  # Keep them sorted by sequence
-                                    _logger.error(f"  -> Added to parent {menu.parent_id.name}'s children")
-        
-        # NO FILTERING NEEDED - we already added only the right menus above
-        
-        # Get the actual menu records from database to add is_saas field
-        menu_ids = [menu_id for menu_id in web_menus.keys() if menu_id != 'root']
-        
+        try:
+            self._logger.info('[SALEWISE_TRACE] custom.load_web_menus enter uid=%s debug=%s in=%s', self.env.uid, debug, len(web_menus) - 1)
+        except Exception:
+            pass
+
+        # Add is_saas/plan_id/is_system flags used by client patches and filtering
+        menu_ids = [mid for mid in web_menus.keys() if mid != 'root']
         if menu_ids:
-            menus = self.browse(menu_ids).read(['id', 'is_saas', 'plan_id'])
-            menu_dict = {menu['id']: {'is_saas': menu['is_saas'], 'plan_id': menu['plan_id']} for menu in menus}
-            
-            for menu_id, menu_data in web_menus.items():
-                if menu_id != 'root' and menu_id in menu_dict:
-                    menu_data['is_saas'] = menu_dict[menu_id]['is_saas']
-                    menu_data['plan_id'] = menu_dict[menu_id]['plan_id']
-        
-        _logger.error(f"=== TOTAL load_web_menus took {time.time() - start_time:.3f}s ===")
+            data = {
+                rec['id']: rec
+                for rec in self.browse(menu_ids).read(['id', 'is_saas', 'plan_id', 'is_system'])
+            }
+            for mid, m in web_menus.items():
+                if mid == 'root':
+                    continue
+                info = data.get(mid)
+                if info:
+                    m['is_saas'] = info['is_saas']
+                    m['plan_id'] = info['plan_id']
+                    m['is_system'] = info['is_system']
+
+        # In SaaS mode, hide admin/system area from the web UI for all users
+        if self._is_saas_mode():
+            system_root = self.env.ref('salewise_menus.menu_saas_system', raise_if_not_found=False)
+            system_root_id = system_root.id if system_root else None
+
+            # collect ids to remove: any is_system=True and the System root subtree
+            to_remove = set(mid for mid, m in web_menus.items()
+                            if mid != 'root' and m.get('is_system'))
+            if system_root_id and system_root_id in web_menus:
+                stack = [system_root_id]
+                while stack:
+                    current = stack.pop()
+                    if current in to_remove:
+                        # already marked, still expand its children
+                        pass
+                    to_remove.add(current)
+                    for child in web_menus.get(current, {}).get('children', []) or []:
+                        if child not in to_remove:
+                            stack.append(child)
+
+            if to_remove:
+                # Remove references from parents first
+                for mid, m in list(web_menus.items()):
+                    if mid == 'root':
+                        # root keeps children as list of ids
+                        if 'children' in m and isinstance(m['children'], list):
+                            m['children'] = [cid for cid in m['children'] if cid not in to_remove]
+                        continue
+                    children = m.get('children')
+                    if isinstance(children, list):
+                        m['children'] = [cid for cid in children if cid not in to_remove]
+
+                # Finally drop the removed nodes
+                for rid in to_remove:
+                    web_menus.pop(rid, None)
+
+            # Additionally enforce plan-based pruning on the client data for non-admin
+            company = self.env.company
+            if company and company.plan_id:
+                allowed = set(company.get_available_plan_ids() or [])
+                # collect all nodes with a plan outside allowed set
+                def menu_plan_id(mid):
+                    pid = web_menus.get(mid, {}).get('plan_id')
+                    if not pid:
+                        return None
+                    # plan_id may be int id, [id, name] or (id, name)
+                    if isinstance(pid, (list, tuple)):
+                        return pid[0]
+                    return pid
+
+                bad = set(
+                    mid for mid, m in web_menus.items()
+                    if mid != 'root' and m.get('is_saas') and (menu_plan_id(mid) is not None) and (menu_plan_id(mid) not in allowed)
+                )
+                # expand to include full subtree under those nodes
+                stack = list(bad)
+                while stack:
+                    current = stack.pop()
+                    for child in web_menus.get(current, {}).get('children', []) or []:
+                        if child not in bad:
+                            bad.add(child)
+                            stack.append(child)
+                if bad:
+                    # detach from parents
+                    for mid, m in list(web_menus.items()):
+                        if mid == 'root':
+                            if 'children' in m and isinstance(m['children'], list):
+                                m['children'] = [cid for cid in m['children'] if cid not in bad and cid not in to_remove]
+                            continue
+                        children = m.get('children')
+                        if isinstance(children, list):
+                            m['children'] = [cid for cid in children if cid not in bad and cid not in to_remove]
+                    # drop nodes
+                    for rid in bad:
+                        web_menus.pop(rid, None)
+                try:
+                    root_children = len(web_menus.get('root', {}).get('children', []) if isinstance(web_menus.get('root', {}), dict) else [])
+                    self._logger.info('[SALEWISE_TRACE] custom.load_web_menus pruned allowed=%s is_system=%s plan_bad=%s out=%s root_children=%s', sorted(list(allowed)), len(to_remove), len(bad), len(web_menus) - 1, root_children)
+                except Exception:
+                    pass
+
+        try:
+            self._logger.info('[SALEWISE_TRACE] custom.load_web_menus done uid=%s out=%s', self.env.uid, len(web_menus) - 1)
+        except Exception:
+            pass
         return web_menus

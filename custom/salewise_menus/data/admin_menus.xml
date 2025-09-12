@@ -6,6 +6,7 @@
         <record id="menu_saas_hr_payroll" model="ir.ui.menu">
             <field name="name">Payroll</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="salewise_menus.menu_saas_hr" />
             <field name="sequence">60</field>
             <field name="lucide_icon">Banknote</field>
@@ -14,6 +15,7 @@
         <record id="menu_saas_hr_payroll_payslips_batches" model="ir.ui.menu">
             <field name="name">Payslips Batches</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_run_action" />
@@ -22,6 +24,7 @@
         <record id="menu_saas_hr_payroll_employee_payslips" model="ir.ui.menu">
             <field name="name">Employee Payslips</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_payroll_hr_payslip_action" />
@@ -31,6 +34,7 @@
         <record id="menu_saas_hr_payroll_salary_structures" model="ir.ui.menu">
             <field name="name">Salary Structures</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_payroll_hr_payroll_structure_action" />
@@ -39,6 +43,7 @@
         <record id="menu_saas_hr_payroll_salary_rules" model="ir.ui.menu">
             <field name="name">Salary Rules</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_hr_payroll" />
             <field name="sequence">40</field>
             <field name="action" ref="salewise_actions.salewise_payroll_action_salary_rule_form" />
@@ -48,6 +53,7 @@
         <record id="menu_saas_core_contracts" model="ir.ui.menu">
             <field name="name">Contracts</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="salewise_menus.menu_saas_system" />
             <field name="sequence">60</field>
             <field name="lucide_icon">FileSignature</field>
@@ -56,6 +62,7 @@
         <record id="menu_saas_core_contracts_contracts" model="ir.ui.menu">
             <field name="name">Contracts</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">10</field>
             <field name="action" ref="salewise_actions.salewise_contract_action_customer_contract" />
@@ -65,6 +72,7 @@
         <record id="menu_saas_core_contracts_templates" model="ir.ui.menu">
             <field name="name">Templates</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">20</field>
             <field name="action" ref="salewise_actions.salewise_contract_contract_template_action" />
@@ -73,6 +81,7 @@
         <record id="menu_saas_core_contracts_termination_reason" model="ir.ui.menu">
             <field name="name">Termination Reason</field>
             <field name="is_saas">True</field>
+            <field name="is_system">True</field>
             <field name="parent_id" ref="menu_saas_core_contracts" />
             <field name="sequence">30</field>
             <field name="action" ref="salewise_actions.salewise_contract_termination_contract_terminate_reason_act_window" />
